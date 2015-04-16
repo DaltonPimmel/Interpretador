@@ -6,7 +6,8 @@ class Sintaxe{
 	Variaveis va = new Variaveis();
 	Logico log = new Logico();
 	
-	public boolean sintaxe(String l){
+	public boolean sintaxe(String l, int lin){
+		System.out.println(l);
 		String[] linhas;
 		boolean te = true;
 		linhas = l.trim().split(" ");
@@ -27,7 +28,7 @@ class Sintaxe{
 								System.out.println("variavel '" + nome + "' foi criada duas vezes"); System.exit(0);
 							}
 						}
-						
+					
 					}else if(linhas.length < 3 && linhas.length > 1 && !testaVariavel(linhas[1])){
 						for(int i = 0; i < v.length; i++){
 							if(v[i] == null){
@@ -55,8 +56,8 @@ class Sintaxe{
 								for(int i = 0; v[i] != null; i++){
 									if(v[i].getNome().equals(linhas[1])){
 										f = v[i].getValor();
-										System.out.println(f);
-										System.out.println(linhas[3]);
+										//System.out.println(f);
+										//System.out.println(linhas[3]);
 										break;
 									}
 								}
@@ -81,7 +82,14 @@ class Sintaxe{
 					}else{
 						System.out.println("variavel nao declaada!!!"); System.exit(0);
 					}
-				break;	
+				break;
+				case "fim":
+					if(linhas.length == 2 && linhas[1].equals("se"));
+				break;
+				
+				default:
+					
+				break;
 			}
 			return te;
 	}
