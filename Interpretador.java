@@ -4,11 +4,11 @@ class Interpretador {
 	private String[] linhas;
     private Sintaxe sinta = new Sintaxe();
     private String[] tok;
-    private int i;
+   
     
     public void interpreta(String l[]) {
 		
-		for(i = 0; i < l.length; i++){
+		for(int i = 0; i < l.length; i++){
 			if(l[i] != null && l[i].equals(" ")){
 				linhas = l[i].split(" ");
 				if(!linhas[0].equals("inicio") && !linhas[1].equals("programa()")){
@@ -21,6 +21,7 @@ class Interpretador {
 		
 		
 		this.linhas = l;
+		int i;
 		for(i = 0; i < linhas.length; i++){
 			if(this.linhas[i] != null && !this.linhas[i].equals(" ")){
 				String token = linhas[i].trim();
@@ -32,14 +33,14 @@ class Interpretador {
 					System.out.println(tok[0]);
 					System.out.println(linhas.length);
 					while(i < linhas.length){
-						if(linhas[i] == null){
-							 i++;
-							 if(i + 1 == linhas.length){
-								 System.out.println("errooooo!!!"); System.exit(0);
-							 }
-							 continue;
-						 }
-						if(tok[0].equals("se") && linhas[i].equals("fim se")){ 
+						//if(linhas[i] == null){
+						//	 i++;
+						//	 if(i + 1 == linhas.length){
+						//		 System.out.println("errooooo!!!"); System.exit(0);
+						//	 }
+						//	 continue;
+						// }
+						if(tok[0].equals("se") && linhas[i].equals("fim se")){ 	// problema no se, testar....
 							System.out.println(tok[0]);
 							break;
 						}
@@ -60,7 +61,7 @@ class Interpretador {
 			}
 				
 		}
-		sinta.imprime();
+		//sinta.imprime();
     }
     
 }
