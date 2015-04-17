@@ -31,6 +31,7 @@ class Interpretador {
 			if(l[cont].length() > 1){
 				tok = l[cont].trim().split(" ");
 				a = tok[0];
+				int teste = 0;
 				switch(a){
 				
 					case "se":
@@ -39,6 +40,8 @@ class Interpretador {
 							if(aux.length > 1 && aux[0].equals("fim") && aux[1].equals("se")){
 								System.out.println("deu certo o se");
 								if(sinta.se(tok)){
+									System.out.println(cont);
+									System.out.println(rec);
 									break;
 								}else{
 									cont = i;
@@ -47,17 +50,17 @@ class Interpretador {
 									break;
 								}				
 							}
-							else{
-								if(cont > rec){
+							teste++;
+						}				
+								if(teste > rec){
 									System.out.println(cont);
 									System.out.println(rec);
 									System.out.println("errooooooooooooooooooo");
 									System.exit(0);
 								}
 								
-							}
 			
-						}
+						//}
 					break;
 					
 					case "imprime":

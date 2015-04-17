@@ -1,7 +1,7 @@
 
 inicio programa()
 	
-	se 1 > 0	
+	se 0 > 0	
 		imprime 'oi'
 		imprime 'teste'
 		imprime 'oi'
