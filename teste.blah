@@ -1,24 +1,40 @@
 
 inicio programa()
-
-	inteiro a = 10
-	inteiro b = 5
-	se a > 100
-		inteiro res
-		res = 5
-		imprime 'ok ola amigo'
-		imprime a + 5
-		imprime res
-		imprime res - 5
-		imprime res * a	
-		imprime res / a
+	
+	se 1 > 0	
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		imprime 'oi'
+		imprime 'teste'
+		
 	fim se
 	
+	imprime 'ola'
+	imprime 'ola'
+	imprime 'ola'
+	imprime 'ola'
+	imprime 'ola'
+	imprime 'ola'
+
 	
-	imprime a
-	imprime 10
-	imprime '2023020345dd'
-	inteiro b
+	
 
 
 
