@@ -8,7 +8,7 @@ class Interpretador {
     private String a, fim;
    	int teste = 0;
     boolean re, ree = false, loc = false, enq = false;
-    int ve = 0, te = 1, tes = 0, q, qe, recs = 1, fi;
+    int ve = 0, te = 1, tes = 0, q, qe, recs = 1, fi, qa;
     private boolean na = true, sn = false, verdadeiro = false;
    
     public void interpreta(String l[]) {
@@ -44,7 +44,13 @@ class Interpretador {
 		
 		for(int cont = 0; cont <= fi && l[cont] != null; cont++){ // cont na linha que esta rodando o programa
 			if(l[cont].length() > 1){
-				recs++;
+				l[cont] = l[cont].trim();
+				if(l[cont].contains("//")){	
+					System.out.println(l[cont]);				// testar os comentarios
+					qa = l[cont].indexOf("//");
+					l[cont] = l[cont].substring(0, qa);
+				}
+				//recs++;
 				tok = l[cont].trim().split(" ");
 				a = tok[0];
 			

@@ -1,12 +1,10 @@
 
 inicio programa()
-	
-	enquanto 1 > 0
-		se 1 > 0
+	//ola
+		se 1 > 0 
 			imprime 'oi'
 		fim se
 		imprime 'ola'
-	fim enquanto
 	
 fim programa
 
