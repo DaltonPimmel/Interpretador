@@ -5,12 +5,17 @@ class Interpretador {
     private Sintaxe sinta = new Sintaxe();
     private String[] tok;
     private String[] aux;
-    private String a;
+    private String a, fim;
+   	int teste = 0;
+    boolean re, ree = false, loc = false, enq = false;
+    int ve = 0, te = 1, tes = 0, q, qe, recs = 1, fi;
+    private boolean na = true, sn = false, verdadeiro = false;
    
-    
     public void interpreta(String l[]) {
 		int rec = 0;
-		for(int i = 0; i < l.length; i++){
+		
+		
+		for(int i = 0; i < l.length; i++){  // testa se a primeira linha é o inicio do programa.
 			if(l[i] != null && l[i].equals(" ")){
 				linhas = l[i].split(" ");
 				if(!linhas[0].equals("inicio") && !linhas[1].equals("programa()")){
@@ -21,46 +26,83 @@ class Interpretador {
 			}
 		}
 		
-		for(int j = 0; j < l.length && l[j] != null; j++){
-			if(l[j].length() > 1){
+		for(int j = 0; j < l.length && l[j] != null; j++){  // testa se a acha o fim do programa.
+			if(l[j].length() > 1){ 
 				rec++;
+				if(l[j].equals("fim programa")){
+					fim = l[j];
+					fi = j;
+					break;
+				}
 			}
 		}
-		//System.out.println(rec);
-		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){
+	//	System.out.println(fi);
+		
+		if(fim == null){
+			System.out.println("nao foi localizado o final do programa!!!"); System.exit(0);
+		}
+		
+		for(int cont = 0; cont <= fi && l[cont] != null; cont++){ // cont na linha que esta rodando o programa
 			if(l[cont].length() > 1){
+				recs++;
 				tok = l[cont].trim().split(" ");
 				a = tok[0];
-				int teste = 0;
+			
 				switch(a){
 				
 					case "se":
-						for(int i = 0; i < l.length && l[i] != null; i++){
-							aux = l[i].trim().split(" ");
-							if(aux.length > 1 && aux[0].equals("fim") && aux[1].equals("se")){
-								System.out.println("deu certo o se");
-								if(sinta.se(tok)){
-									System.out.println(cont);
-									System.out.println(rec);
+						//System.out.println(cont);
+						for(int i = cont + 1; i < fi; i++){
+							l[i] = l[i].trim();
+							if(l[i].equals("fim se")){
+								System.out.println(i);	
+								loc = true; // controla se achou o se.
+								na = false; // controla o senao.
+								if(sinta.se(tok)){	
+									verdadeiro = true;
 									break;
 								}else{
 									cont = i;
-									System.out.println(cont);
-									System.out.println(rec);
+									verdadeiro = false;
 									break;
-								}				
-							}
-							teste++;
-						}				
-								if(teste > rec){
-									System.out.println(cont);
-									System.out.println(rec);
-									System.out.println("errooooooooooooooooooo");
-									System.exit(0);
+								}
+							}	
+						}
+						if(!loc){
+							System.out.println("erro no se!!!"); System.exit(0);
+						}
+						loc = false;
+						
+					break;
+					
+					case "senao":
+						int i;
+						if(na){
+							System.out.println(" testettestet nao he posivel utilizar o senao sem o se antes!!!");
+							System.exit(0);
+						}else{
+						for( i = cont; i < fi && l[i] != null; i++){
+							l[i] = l[i].trim();
+							if(l[i].equals("fim senao")){
+							//	System.out.println(i);
+								sn = true;
+								if(verdadeiro){
+									verdadeiro = false; // se for verdadeiro nao vai para o sena
+									cont = i;	
+									break;
 								}
 								
-			
-						//}
+								break;						
+							}
+						}
+					}
+					if(!sn){
+						System.out.println("nao foi localizado o fim do senao!!!");
+						System.exit(0);
+					}
+					sn = false;
+					na = true;
+					
 					break;
 					
 					case "imprime":
@@ -69,6 +111,60 @@ class Interpretador {
 							}else{
 								System.out.println("erro na impressao!!!"); System.exit(0);
 							}
+					break;
+					
+					case "inteiro":
+						if(sinta.Variavel(tok)){
+							break;
+						}else{
+							System.out.println("Erro na criação da variavel, ou variavel ja foi criada!!!"); System.exit(0);
+						}
+						
+					break;
+					
+					case "enquanto":
+						q = cont;
+						for(int p = cont; p < fi; p++){
+							//System.out.println(p);
+							l[p] = l[p].trim();
+							//System.out.println(l[p]);
+							if(l[p].equals("fim enquanto")){  // o else esta dentro do laço, por isso que esta dando problema.
+								qe = p;
+								enq = true; // controla se achou o final do enquanto.
+								if(sinta.se(tok)){
+									ree = true; // se retornas verdadeiro continua executando.
+									break;
+								}else{
+									ree = false;
+									cont = p;
+									break;
+								}	
+							}
+						}
+						if(!enq){
+							System.out.println("Nao localizado o fim do enquanto"); System.exit(0);
+						}
+						enq = false;
+					break;
+					
+					case "fim":
+						if(l[qe].equals("fim enquanto")){
+							if(ree){
+								cont = q;  // se retornar o verdadeiro o enquanto ele executa para baixo até achar o fim enquando, voltando para a linha do enquanto, pois q tem a posicao do enquanto..
+							}
+							continue;
+						}
+					break;
+					
+					case "escolha":
+					
+					break;
+					
+					default:
+						if(sinta.Variavel(tok)){
+							continue;
+						}
+						System.out.println("Variavel nao declarada na linha " + (cont + 1)); System.exit(0);
 					break;
 				}
 					

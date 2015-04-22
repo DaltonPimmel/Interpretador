@@ -24,12 +24,12 @@ class Variaveis{
 		this.valor = a;
 	}
 	
-	public boolean TestaVariavel(String s, Variaveis[] v){
-		for(int i = 0; v[i] != null; i++){
-			if(v[i].nome.equals(s)) return false;
-		}
-		return true;
-	}
+	//public boolean TestaVariavel(String s, Variaveis[] v){
+	//	for(int i = 0; v[i] != null; i++){
+	//		if(v[i].nome.equals(s)) return false;
+	//	}
+	//	return true;
+	//}
 
 
 }

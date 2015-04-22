@@ -1,40 +1,15 @@
 
 inicio programa()
 	
-	se 0 > 0	
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		imprime 'oi'
-		imprime 'teste'
-		
-	fim se
+	enquanto 1 > 0
+		se 1 > 0
+			imprime 'oi'
+		fim se
+		imprime 'ola'
+	fim enquanto
 	
-	imprime 'ola'
-	imprime 'ola'
-	imprime 'ola'
-	imprime 'ola'
-	imprime 'ola'
-	imprime 'ola'
+fim programa
 
-	
-	
 
 
 

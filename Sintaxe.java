@@ -3,7 +3,6 @@ import java.io.*;
 
 class Sintaxe{
 	Variaveis[] v = new Variaveis[100];
-	Variaveis va = new Variaveis();
 	Logico log = new Logico();
 	Operacoes op = new Operacoes();
 	
@@ -62,19 +61,21 @@ class Sintaxe{
 			String im = r.substring(1, r.length() - 2);
 			System.out.println(im);
 			return true;
-			}
+		}
 			if(linhas.length == 2){ 
-				if(!testaVariavel(linhas[1])){
+				if(!testaVariavel(linhas[1])){ // nao é um numero.
 					for(int i = 0; v[i] != null; i++){
 						if(linhas[1].equals(v[i].getNome())){
 							System.out.println(v[i].getValor());
 							return true;
 						}
+					//return false;
 					}
 				}else if(testaVariavel(linhas[1])){
 					System.out.println(linhas[1]);
 					return true;
 				}
+				return false;
 			}
 			if(linhas.length > 3 && linhas.length < 5 && linhas[2].equals("+") || linhas[2].equals("-") || linhas[2].equals("*") || linhas[2].equals("/")){
 				double num = -1, num1 = -1;
@@ -106,6 +107,81 @@ class Sintaxe{
 			return false;
 					
 	}
+	
+	public boolean Variavel(String[] linhas){
+		// criacao de variavel com atribuicao.
+		//System.out.println(linhas.length);
+		if(linhas.length > 3 && linhas.length < 5 && !testaVariavel(linhas[1]) && linhas[2].equals("=")){
+			for(int i = 0; i < v.length; i++){
+				if(v[i] == null){
+					String nome = linhas[1];
+					double rec = Double.parseDouble(linhas[3]); 
+					for(int t = 0; v[t] != null; t++){
+						if(v[t].getNome().equals(nome)){  // chama o va que é do tipo variavel para testar se ja existe alguma variavel com aquele nome.
+							return false;
+						}
+					}
+					v[i] = new Variaveis();
+					v[i].CriarVariavel(nome, rec);
+					return true;
+				}
+			}
+			// criacao de variavel sem atrubuicao.	
+			}else if(linhas.length < 3 && linhas.length > 1 && !testaVariavel(linhas[1])){
+				for(int i = 0; i < v.length; i++){
+					if(v[i] == null){
+						String nome = linhas[1];
+						for(int t = 0; v[t] != null; t++){
+							if(v[t].getNome().equals(nome)){
+								return false;
+							}
+						}
+						v[i] = new Variaveis();
+						v[i].CriarVariavel(nome);
+						return true;
+					}
+						
+				}
+			}else if(linhas.length > 3 && linhas.length < 6 && !testaVariavel(linhas[0]) && linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/")){
+				double se = -5555, re = -5555 ;
+				boolean ar = false;
+				int k;
+				for(k = 0; v[k] != null; k++){
+					if(v[k].getNome().equals(linhas[0])){
+						ar = true;
+						break;
+					}
+				}
+				if(ar){
+					if(testaVariavel(linhas[2])){ se = Double.parseDouble(linhas[2]);}
+					else{
+						for(int l = 0; v[l] != null; l++){
+							if(v[l].getNome().equals(linhas[2])){
+								se = v[l].getValor();
+							}
+						}
+					}
+					if(testaVariavel(linhas[4])){ re = Double.parseDouble(linhas[4]);}
+					else{
+						for(int l = 0; v[l] != null; l++){
+							if(v[l].getNome().equals(linhas[4])){
+								re = v[l].getValor();
+							}
+						}
+					}
+				}else{
+					return false;
+				}
+				if(se != -5555 && re != -5555){
+					String nome = linhas[3];
+					double rec = op.operacoes(nome, se, re);
+					v[k].setValor(rec); // k tem a posicao da variavel da linha[0], que vai receber o valor.
+					return true;
+				}		
+		}
+		return false;
+	}
+	
 	
 	/*
 	public boolean sintaxe(String[] l){
