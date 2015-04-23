@@ -1,11 +1,17 @@
 
 inicio programa()
+<<<<<<< HEAD
 	
 		se 1 > 0    //ola
 			imprime 'oi'
 		fim se
 		imprime 'ola'
 	
+=======
+	inteiro
+	dedeedede dceded 
+		
+>>>>>>> 27021eb4e070d73e3e247761fdbaf1afa6a85810
 fim programa
 
 
