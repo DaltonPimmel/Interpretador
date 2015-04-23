@@ -176,12 +176,12 @@ class Sintaxe{
 				}
 				if(se != -5555 && re != -5555){
 					String nome = linhas[3];
-					double rec = op.operacoes(nome, se, re);
+					double rec = op.operacoes(nome, se, re); 
 					v[k].setValor(rec); // k tem a posicao da variavel da linha[0], que vai receber o valor.
 					return true;
 				}		
-		}
-		return false;
+			}
+			return false;
 	}
 	
 	

@@ -63,7 +63,6 @@ class Interpretador {
 						for(int i = cont; i <= l.length && l[i] != null; i++){
 							l[i] = l[i].trim();
 							if(l[i].equals("fim se")){	
-									System.out.println(i + "teste");
 								loc = true; // controla se achou o se.
 								na = false; // controla o senao.
 								if(sinta.se(tok)){	
