@@ -1,11 +1,8 @@
 
 inicio programa()
-	//ola
-		se 1 > 0 
-			imprime 'oi'
-		fim se
-		imprime 'ola'
-	
+	inteiro
+	dedeedede dceded 
+		
 fim programa
 
 

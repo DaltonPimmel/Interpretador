@@ -18,6 +18,7 @@ class Sintaxe{
 					for(i = 0; v[i] != null; i++){
 						if(v[i].getNome().equals(linhas[1])){
 							f = v[i].getValor();
+							//System.out.println(f);
 							break;
 						}
 					}
@@ -29,6 +30,7 @@ class Sintaxe{
 					for(i = 0; v[i] != null; i++){
 						if(v[i].getNome().equals(linhas[3])){
 							g = v[i].getValor();
+							//System.out.println(g);
 							break;
 						}
 					}
@@ -110,6 +112,9 @@ class Sintaxe{
 	
 	public boolean Variavel(String[] linhas){
 		// criacao de variavel com atribuicao.
+		//if(!linhas[0].equals("inteiro") && !testaVariavel(){
+			//System.out.println("iiiiinterirrooooooo");
+	//	}
 		//System.out.println(linhas.length);
 		if(linhas.length > 3 && linhas.length < 5 && !testaVariavel(linhas[1]) && linhas[2].equals("=")){
 			for(int i = 0; i < v.length; i++){
@@ -127,9 +132,10 @@ class Sintaxe{
 				}
 			}
 			// criacao de variavel sem atrubuicao.	
-			}else if(linhas.length < 3 && linhas.length > 1 && !testaVariavel(linhas[1])){
+			}else if(linhas.length > 1 && linhas.length < 4 &&  !testaVariavel(linhas[1]) ){
 				for(int i = 0; i < v.length; i++){
 					if(v[i] == null){
+						System.out.println("oioioioioioioioioioioioi");
 						String nome = linhas[1];
 						for(int t = 0; v[t] != null; t++){
 							if(v[t].getNome().equals(nome)){

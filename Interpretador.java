@@ -5,7 +5,7 @@ class Interpretador {
     private Sintaxe sinta = new Sintaxe();
     private String[] tok;
     private String[] aux;
-    private String a, fim;
+    private String a, fim, ch;
    	int teste = 0;
     boolean re, ree = false, loc = false, enq = false;
     int ve = 0, te = 1, tes = 0, q, qe, recs = 1, fi, qa;
@@ -42,26 +42,32 @@ class Interpretador {
 			System.out.println("nao foi localizado o final do programa!!!"); System.exit(0);
 		}
 		
-		for(int cont = 0; cont <= fi && l[cont] != null; cont++){ // cont na linha que esta rodando o programa
-			if(l[cont].length() > 1){
+		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){ // cont na linha que esta rodando o programa
+			if(l[cont].length() > 0){
+			//	System.out.println(l[cont]);
 				l[cont] = l[cont].trim();
 				if(l[cont].contains("//")){	
-					System.out.println(l[cont]);				// testar os comentarios
+					ch = l[cont].substring(0, 2);
+					if(ch.equals("//")){
+						continue;
+					}		// comentarios ok.
 					qa = l[cont].indexOf("//");
 					l[cont] = l[cont].substring(0, qa);
 				}
 				//recs++;
 				tok = l[cont].trim().split(" ");
+				System.out.println(tok);
 				a = tok[0];
-			
+				//System.out.println(a);
+			if(a != null && !a.equals(" ")){
 				switch(a){
 				
 					case "se":
 						//System.out.println(cont);
-						for(int i = cont + 1; i < fi; i++){
+						for(int i = cont + 1; i <= l.length && l[i] != null; i++){
 							l[i] = l[i].trim();
 							if(l[i].equals("fim se")){
-								System.out.println(i);	
+								//System.out.println(i);	
 								loc = true; // controla se achou o se.
 								na = false; // controla o senao.
 								if(sinta.se(tok)){	
@@ -129,8 +135,9 @@ class Interpretador {
 					break;
 					
 					case "enquanto":
+					//	System.out.println(cont);
 						q = cont;
-						for(int p = cont; p < fi; p++){
+						for(int p = cont; p < l.length; p++){
 							//System.out.println(p);
 							l[p] = l[p].trim();
 							//System.out.println(l[p]);
@@ -155,9 +162,12 @@ class Interpretador {
 					
 					case "fim":
 						if(l[qe].equals("fim enquanto")){
+							//System.out.println(q);
 							if(ree){
-								cont = q;  // se retornar o verdadeiro o enquanto ele executa para baixo até achar o fim enquando, voltando para a linha do enquanto, pois q tem a posicao do enquanto..
+								cont = q - 1;  // se retornar o verdadeiro o enquanto ele executa para baixo até achar o fim enquando, voltando para a linha do enquanto, pois q tem a posicao do enquanto..
 							}
+							continue;
+						}else if(l[cont].equals("fim se") || l[cont].equals("fim senao")){
 							continue;
 						}
 					break;
@@ -167,14 +177,23 @@ class Interpretador {
 					break;
 					
 					default:
-						if(sinta.Variavel(tok)){
-							continue;
+						//System.out.println(a);
+						if(tok[0] != null && tok.length > 1 && !l[cont].equals("inicio programa()")){
+							//System.out.println(a);
+							//System.out.println(tok);
+							if(sinta.Variavel(tok)){
+								break;
+							}else{
+								System.out.println("Erro de sintaxe!!!"); System.exit(0);
+							}
+								
+						}else{
+							System.out.println("erroooooooooooooooooooooooo");
 						}
-						System.out.println("Variavel nao declarada na linha " + (cont + 1)); System.exit(0);
-					break;
+						//System.out.println("Variavel nao declarada na linha " + (cont + 1)); System.exit(0);
+						break;
 				}
-					
-				
+			}
 			}
 			
 		}
