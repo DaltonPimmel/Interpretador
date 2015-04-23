@@ -46,7 +46,7 @@ class Interpretador {
 			if(l[cont].length() > 1){
 				l[cont] = l[cont].trim();
 				if(l[cont].contains("//")){	
-					System.out.println(l[cont]);				// testar os comentarios
+					//System.out.println(l[cont]);				// testar os comentarios, esta ok quando o comentario esta em uma linha, quando ele esta sozinho erro...
 					qa = l[cont].indexOf("//");
 					l[cont] = l[cont].substring(0, qa);
 				}

@@ -1,7 +1,7 @@
 
 inicio programa()
-	//ola
-		se 1 > 0 
+	
+		se 1 > 0    //ola
 			imprime 'oi'
 		fim se
 		imprime 'ola'
