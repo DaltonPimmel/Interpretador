@@ -36,34 +36,26 @@ class Interpretador {
 				}
 			}
 		}
-	//	System.out.println(fi);
 		
 		if(fim == null){
 			System.out.println("nao foi localizado o final do programa!!!"); System.exit(0);
 		}
 		
 		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){ // cont na linha que esta rodando o programa
-			if(l[cont].length() > 0){
-			//	System.out.println(l[cont]);
-				l[cont] = l[cont].trim();
+			l[cont] = l[cont].trim();
+			if(l[cont].length() > 1 && l[cont] != null){
+				//System.out.println(l[cont]);
 				if(l[cont].contains("//")){	
-<<<<<<< HEAD
-					//System.out.println(l[cont]);				// testar os comentarios, esta ok quando o comentario esta em uma linha, quando ele esta sozinho erro...
-=======
 					ch = l[cont].substring(0, 2);
 					if(ch.equals("//")){
 						continue;
 					}		// comentarios ok.
->>>>>>> 27021eb4e070d73e3e247761fdbaf1afa6a85810
 					qa = l[cont].indexOf("//");
 					l[cont] = l[cont].substring(0, qa);
 				}
-				//recs++;
 				tok = l[cont].trim().split(" ");
-				System.out.println(tok);
 				a = tok[0];
-				//System.out.println(a);
-			if(a != null && !a.equals(" ")){
+		//	if(a != null && a.equals(" ")){
 				switch(a){
 				
 					case "se":
@@ -139,12 +131,10 @@ class Interpretador {
 					break;
 					
 					case "enquanto":
-					//	System.out.println(cont);
 						q = cont;
-						for(int p = cont; p < l.length; p++){
-							//System.out.println(p);
+						for(int p = cont; p < fi; p++){
+						//	System.out.println(l[p]);
 							l[p] = l[p].trim();
-							//System.out.println(l[p]);
 							if(l[p].equals("fim enquanto")){  // o else esta dentro do laço, por isso que esta dando problema.
 								qe = p;
 								enq = true; // controla se achou o final do enquanto.
@@ -159,20 +149,19 @@ class Interpretador {
 							}
 						}
 						if(!enq){
-							System.out.println("Nao localizado o fim do enquanto"); System.exit(0);
+							System.out.println("Nao localizado o fim do enquanto na linha" + (cont + 1)); System.exit(0);
 						}
 						enq = false;
 					break;
 					
 					case "fim":
 						if(l[qe].equals("fim enquanto")){
-							//System.out.println(q);
 							if(ree){
 								cont = q - 1;  // se retornar o verdadeiro o enquanto ele executa para baixo até achar o fim enquando, voltando para a linha do enquanto, pois q tem a posicao do enquanto..
 							}
 							continue;
 						}else if(l[cont].equals("fim se") || l[cont].equals("fim senao")){
-							continue;
+							break;
 						}
 					break;
 					
@@ -181,23 +170,15 @@ class Interpretador {
 					break;
 					
 					default:
-						//System.out.println(a);
-						if(tok[0] != null && tok.length > 1 && !l[cont].equals("inicio programa()")){
-							//System.out.println(a);
-							//System.out.println(tok);
+						if(!a.equals("inicio")){  // se nao achar nenhum dos case, cai no default, tirando somente o inicio que estava caindo junto no default.
 							if(sinta.Variavel(tok)){
 								break;
 							}else{
-								System.out.println("Erro de sintaxe!!!"); System.exit(0);
+								System.out.println("Erro de sintaxe na linhas!!!" + (cont + 1)); System.exit(0);
 							}
-								
-						}else{
-							System.out.println("erroooooooooooooooooooooooo");
 						}
-						//System.out.println("Variavel nao declarada na linha " + (cont + 1)); System.exit(0);
-						break;
+					break;
 				}
-			}
 			}
 			
 		}

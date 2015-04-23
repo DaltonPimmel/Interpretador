@@ -1,17 +1,28 @@
 
-inicio programa()
-<<<<<<< HEAD
+
+inicio programa()	
+
+	inteiro a = 5
+	inteiro b = 7
 	
-		se 1 > 0    //ola
+	imprime a
+	imprime b
+	
+		se 1 > 0   
 			imprime 'oi'
 		fim se
 		imprime 'ola'
-	
-=======
-	inteiro
-	dedeedede dceded 
 		
->>>>>>> 27021eb4e070d73e3e247761fdbaf1afa6a85810
+		enquanto b > a
+			se a > 2
+				imprime 'teste'
+				a = a - 1
+			fim se
+			b = b - 1
+		fim enquanto
+		
+		
+		
 fim programa
 
 
