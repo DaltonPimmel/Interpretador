@@ -55,19 +55,20 @@ class Interpretador {
 				}
 				tok = l[cont].trim().split(" ");
 				a = tok[0];
-		//	if(a != null && a.equals(" ")){
+				
 				switch(a){
 				
 					case "se":
 						//System.out.println(cont);
-						for(int i = cont + 1; i <= l.length && l[i] != null; i++){
+						for(int i = cont; i <= l.length && l[i] != null; i++){
 							l[i] = l[i].trim();
-							if(l[i].equals("fim se")){
-								//System.out.println(i);	
+							if(l[i].equals("fim se")){	
+									System.out.println(i + "teste");
 								loc = true; // controla se achou o se.
 								na = false; // controla o senao.
 								if(sinta.se(tok)){	
 									verdadeiro = true;
+								
 									break;
 								}else{
 									cont = i;
@@ -85,21 +86,19 @@ class Interpretador {
 					
 					case "senao":
 						int i;
-						if(na){
+						if(na){ // se o na for verdadeiro, ele nao achou um se antes.
 							System.out.println(" testettestet nao he posivel utilizar o senao sem o se antes!!!");
 							System.exit(0);
 						}else{
 						for( i = cont; i < fi && l[i] != null; i++){
 							l[i] = l[i].trim();
 							if(l[i].equals("fim senao")){
-							//	System.out.println(i);
 								sn = true;
 								if(verdadeiro){
-									verdadeiro = false; // se for verdadeiro nao vai para o sena
-									cont = i;	
+									verdadeiro = false; // se for verdadeiro nao vai para o senao
+									cont = i;	// se for verdadeiro ele nao executa o senao ele pula para a linha que encontrou o fim senao
 									break;
-								}
-								
+								}	
 								break;						
 							}
 						}
@@ -155,7 +154,7 @@ class Interpretador {
 					break;
 					
 					case "fim":
-						if(l[qe].equals("fim enquanto")){
+						if(l[cont].equals("fim enquanto")){
 							if(ree){
 								cont = q - 1;  // se retornar o verdadeiro o enquanto ele executa para baixo até achar o fim enquando, voltando para a linha do enquanto, pois q tem a posicao do enquanto..
 							}
