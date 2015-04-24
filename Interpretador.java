@@ -4,15 +4,13 @@ class Interpretador {
 	private String[] linhas;
     private Sintaxe sinta = new Sintaxe();
     private String[] tok;
-    private String[] aux;
     private String a, fim, ch;
-   	int teste = 0;
     boolean re, ree = false, loc = false, enq = false;
-    int ve = 0, te = 1, tes = 0, q, qe, recs = 1, fi, qa;
+    int  q, qe, fi, qa, rec = 0;
     private boolean na = true, sn = false, verdadeiro = false, br = false;
-   
+
     public void interpreta(String l[]) {
-		int rec = 0;
+		
 	
 		for(int i = 0; i < l.length; i++){  // testa se a primeira linha é o inicio do programa.
 			if(l[i] != null && l[i].equals(" ")){
@@ -35,7 +33,6 @@ class Interpretador {
 				}
 			}
 		}
-		
 		if(fim == null){
 			System.out.println("nao foi localizado o final do programa!!!"); System.exit(0);
 		}
@@ -59,14 +56,13 @@ class Interpretador {
 				
 					case "se":
 						//System.out.println(cont);
-						for(int i = cont; i <= l.length && l[i] != null; i++){
+						for(int i = cont; i <= l.length && l[i] != null; i++){ // laço para testar se acha o fim do se.
 							l[i] = l[i].trim();
 							if(l[i].equals("fim se")){	
 								loc = true; // controla se achou o se.
 								na = false; // controla o senao.
 								if(sinta.se(tok)){	
 									verdadeiro = true;
-								
 									break;
 								}else{
 									cont = i;
@@ -119,10 +115,12 @@ class Interpretador {
 					break;
 					
 					case "inteiro":
-						if(sinta.Variavel(tok)){
-							break;
-						}else{
-							System.out.println("Erro na criacao da variavel, ou variavel ja foi criada, na linha " + (cont + 1)); System.exit(0);
+						if(tok.length == 2 || tok.length == 4){
+							if(sinta.Variavel(tok)){
+								break;
+							}else{
+								System.out.println("Erro na criacao da variavel, ou variavel ja foi criada, na linha " + (cont + 1)); System.exit(0);
+							}
 						}
 						
 					break;
@@ -196,7 +194,7 @@ class Interpretador {
 					
 					break;
 					
-					default:
+					default:	
 						if(!a.equals("inicio")){  // se nao achar nenhum dos case, cai no default, tirando somente o inicio que estava caindo junto no default.
 							if(sinta.Variavel(tok)){
 								break;

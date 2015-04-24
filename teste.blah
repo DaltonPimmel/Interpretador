@@ -1,21 +1,33 @@
 
-// testatando a operação da raiz quadrada e a atribuiçao de variaveis, ok.
+// testatando impressões, ok.
 
 
-inicio programa()	
+inicio programa()
 	
-	inteiro a = 25
-	inteiro b 
+	inteiro a = 5
+	inteiro b = 5
+	inteiro c = 12
 	
-	b = # a  // calcculando a raiz quadrada de a.
-	imprime b  // imprime 5.
+	imprime 'teste'
 	
-	a = b
-	imprime a	//imprime 5
+	imprime 'teste + teste + teste'
+	
+	imprime 1 + 1
+	imprime a
+	imprime b
+	imprime a + b
+	
+	a = a + c
+	c = c + 2
+	imprime c
+	imprime a
+	
+	c = # 100
+	imprime c
 	
 fim programa
 
 
 
-
+// continuar no sintaxe em criando variavel com atribuição...
 
