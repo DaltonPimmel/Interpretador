@@ -141,7 +141,54 @@ class Sintaxe{
 	}
 	
 	public boolean Variavel(String[] linhas){
+		double qe = 0;
+		double ses = -5555;
 		
+		// atribuição de uma variavel para outra, ex: a = b
+		if(linhas.length < 4 && linhas[1].equals("=")){
+			if(testaVariavel(linhas[2])){
+				ses = Double.parseDouble(linhas[2]);
+			}else{
+				for(int i = 0; v[i] != null; i++){
+					if(v[i].getNome().equals(linhas[2])){
+						ses = v[i].getValor();
+						break;
+					}
+				}
+			}
+			if(ses != -5555){
+				for(int i = 0; v[i] != null; i++){
+					if(v[i].getNome().equals(linhas[0])){
+						v[i].setValor(ses);
+						return true;
+					}
+				}
+			}
+			return false;		
+		}
+		//chama o metodo para calcular a raiz quadradra.
+		else if(linhas.length < 5 && !testaVariavel(linhas[0]) && linhas[1].equals("=") && linhas[2].equals("#")){
+				if(testaVariavel(linhas[3])){
+					qe = Double.parseDouble(linhas[3]);
+				}else{
+					for(int i = 0; v[i] != null; i++){
+						if(v[i].getNome().equals(linhas[3])){
+							qe = v[i].getValor();
+							break;
+						}
+					}
+				}
+				if(qe != 0){
+					for(int k = 0; v[k] != null; k++){
+						if(v[k].getNome().equals(linhas[0])){
+							v[k].setValor(op.RaizQuadrada(qe));
+							return true;
+						}
+					}
+				}
+				return false;
+		}
+		// criando variavel com atribuição.
 		if(linhas.length > 3 && linhas.length < 5 && !testaVariavel(linhas[1]) && linhas[2].equals("=")){
 			for(int i = 0; i < v.length; i++){
 				if(v[i] == null){
@@ -158,7 +205,7 @@ class Sintaxe{
 				}
 			}
 			// criacao de variavel sem atrubuicao.	
-			}else if(linhas.length > 1 && linhas.length < 4 &&  !testaVariavel(linhas[1]) ){
+			}else if(linhas.length < 3 &&  !testaVariavel(linhas[1]) ){
 				if(!linhas[0].equals("inteiro")) return false;
 				for(int i = 0; i < v.length; i++){
 					if(v[i] == null){
@@ -174,11 +221,13 @@ class Sintaxe{
 					}
 						
 				}
-			}else if(linhas.length > 3 && linhas.length < 6 && !testaVariavel(linhas[0]) && linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/")){
+				return false;
+				//atribuicao para variaveis com operadores.
+			}else if(linhas.length > 3 && linhas.length < 6 && !testaVariavel(linhas[0]) && linhas[3].equals("=") && linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/")){
 				double se = -5555, re = -5555 ;
 				boolean ar = false;
 				int k;
-				for(k = 0; v[k] != null; k++){
+				for(k = 0; v[k] != null; k++){ // testa se existe a variavel.
 					if(v[k].getNome().equals(linhas[0])){
 						ar = true;
 						break;

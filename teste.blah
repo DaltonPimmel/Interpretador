@@ -1,29 +1,18 @@
 
-// testatando a atualizacao do para e continue dentro do laço, ok.
+// testatando a operação da raiz quadrada e a atribuiçao de variaveis, ok.
 
 
 inicio programa()	
 	
-	inteiro a = 1
-	inteiro b = 0
-	inteiro res
+	inteiro a = 25
+	inteiro b 
 	
-	enquanto a != 0   // testando a media de dois numeros, vai lendo teclado até o usuario digitar 0.
-		leia a
-		se a == 0
-			para
-		fim se
-		res = res + a
-		b = b + 1
-	fim enquanto
+	b = # a  // calcculando a raiz quadrada de a.
+	imprime b  // imprime 5.
 	
-	imprime res / b		//imprimindo a media.
+	a = b
+	imprime a	//imprime 5
 	
-	enquanto 1 > 0
-		imprime 'ok'
-		para			// testando utilização do para "break".
-	fim enquanto
-		
 fim programa
 
 

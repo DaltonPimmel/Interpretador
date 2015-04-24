@@ -9,11 +9,9 @@ class Blah {
         Interpretador b;
         String linhas[] = new String[2000]; // arquivo pode ter, no máximo, 2000 linhas.
 
-        // args[0] conterá o caminho para o arquivo que serah interpretado.
         f = new File(args[0]);
-        // Mandamos o Scanner ler a partir do arquivo.
         s = new Scanner(f);
-        // Instanciamos o interpretador.
+
         b = new Interpretador();
 
         // Lemos todas as linhas do arquivo para dentro do

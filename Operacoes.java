@@ -21,5 +21,8 @@ class Operacoes{
 		if(a % b == c)return true;
 		return false;
 	}
+	public double RaizQuadrada(double a){
+		return Math.sqrt(a); 	
+	}
 
 }

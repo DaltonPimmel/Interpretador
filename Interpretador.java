@@ -114,7 +114,7 @@ class Interpretador {
 							if(sinta.Imprime(tok)){
 								break;
 							}else{
-								System.out.println("erro na impressao!!!"); System.exit(0);
+								System.out.println("erro na impressao, na linha " + (cont + 1)); System.exit(0);
 							}
 					break;
 					
@@ -122,7 +122,7 @@ class Interpretador {
 						if(sinta.Variavel(tok)){
 							break;
 						}else{
-							System.out.println("Erro na criação da variavel, ou variavel ja foi criada!!!"); System.exit(0);
+							System.out.println("Erro na criacao da variavel, ou variavel ja foi criada, na linha " + (cont + 1)); System.exit(0);
 						}
 						
 					break;
@@ -190,7 +190,7 @@ class Interpretador {
 							cont = q;
 							break;
 						}else{
-							System.out.println("Erro ao usar o continue, pode ser utilizado somente dentro de um laco");
+							System.out.println("Erro ao usar o continue, pode ser utilizado somente dentro de um laco, erro na linha" + (cont + 1));
 							System.exit(0);
 						}
 					
