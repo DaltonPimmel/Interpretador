@@ -9,7 +9,7 @@ class Interpretador {
    	int teste = 0;
     boolean re, ree = false, loc = false, enq = false;
     int ve = 0, te = 1, tes = 0, q, qe, recs = 1, fi, qa;
-    private boolean na = true, sn = false, verdadeiro = false;
+    private boolean na = true, sn = false, verdadeiro = false, br = false;
    
     public void interpreta(String l[]) {
 		int rec = 0;
@@ -134,6 +134,7 @@ class Interpretador {
 							l[p] = l[p].trim();
 							if(l[p].equals("fim enquanto")){  // o else esta dentro do laço, por isso que esta dando problema.
 								qe = p;
+								br = true; // para ver se pode usuar o break.
 								enq = true; // controla se achou o final do enquanto.
 								if(sinta.se(tok)){
 									ree = true; // se retornas verdadeiro continua executando.
@@ -169,6 +170,30 @@ class Interpretador {
 					case "leia":
 						if(sinta.Leia(tok))break;
 						System.out.println("Erro na hora de ler do teclado"); System.exit(0);
+					break;
+					
+					case "para":
+						int li = cont;
+						if(li > q && li < qe){ // inicio e fim do enquanto.
+							cont = qe;
+							break;
+						}else{
+							System.out.println("Erro ao usar o para, pode ser utilizado somente dentro de um laco");
+							System.exit(0);
+						}
+						
+					break;
+					
+					case "continue":
+						int la = cont; // recebe a posicao que achou o continue, e verifica se esta dentro laço.
+						if(la > q && la < qe){
+							cont = q;
+							break;
+						}else{
+							System.out.println("Erro ao usar o continue, pode ser utilizado somente dentro de um laco");
+							System.exit(0);
+						}
+					
 					break;
 					
 					default:

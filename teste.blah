@@ -1,28 +1,28 @@
 
-// testatando se o numero é primo ou nao. ok
+// testatando a atualizacao do para e continue dentro do laço, ok.
 
 
 inicio programa()	
 	
-	inteiro a
-	inteiro i = 1
+	inteiro a = 1
 	inteiro b = 0
-	leia a
+	inteiro res
 	
-	enquanto a >= i
-		se a % i == 0
-			b = b + 1
+	enquanto a != 0   // testando a media de dois numeros, vai lendo teclado até o usuario digitar 0.
+		leia a
+		se a == 0
+			para
 		fim se
-		i = i + 1
+		res = res + a
+		b = b + 1
 	fim enquanto
 	
-	se b < 3
-		imprime 'primo'
-	fim se
-	senao
-		imprime 'nao'
-	fim senao
-			
+	imprime res / b		//imprimindo a media.
+	
+	enquanto 1 > 0
+		imprime 'ok'
+		para			// testando utilização do para "break".
+	fim enquanto
 		
 fim programa
 
