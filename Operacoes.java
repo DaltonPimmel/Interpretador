@@ -16,5 +16,10 @@ class Operacoes{
 		
 		return 0;
 	}
+	
+	public boolean Mod(double a, double b, double c){
+		if(a % b == c)return true;
+		return false;
+	}
 
 }

@@ -13,8 +13,7 @@ class Interpretador {
    
     public void interpreta(String l[]) {
 		int rec = 0;
-		
-		
+	
 		for(int i = 0; i < l.length; i++){  // testa se a primeira linha é o inicio do programa.
 			if(l[i] != null && l[i].equals(" ")){
 				linhas = l[i].split(" ");
@@ -167,6 +166,11 @@ class Interpretador {
 					
 					break;
 					
+					case "leia":
+						if(sinta.Leia(tok))break;
+						System.out.println("Erro na hora de ler do teclado"); System.exit(0);
+					break;
+					
 					default:
 						if(!a.equals("inicio")){  // se nao achar nenhum dos case, cai no default, tirando somente o inicio que estava caindo junto no default.
 							if(sinta.Variavel(tok)){
@@ -181,59 +185,6 @@ class Interpretador {
 			
 		}
 	}
-		
-	/*	
-		this.linhas = l;
-		int i;
-		for(i = 0; i < linhas.length; i++){
-			if(this.linhas[i] != null && !this.linhas[i].equals(" ")){
-				String token = linhas[i].trim();
-				int ind = i;
-				int rec = 0;
-				//if(sinta.sintaxe(token, ind)){   // na logica vai tem que voltar o verdadeiro o falso, para não executar a linha de baixo, por exemplo se der falso ate nao acar a linha que tem o fim se nao executa
-					tok = linhas[i].trim().split(" ");
-					System.out.println(tok[0]);
-					System.out.println(l.length);
-					
-					for(i = 0; l[i] != null; i++){
-						 rec++;
-					}
-					i = 0;
-					while(i < l.length && l[i] != null){
-					
-						if(tok[0].equals("se") && linhas[i].contains("fim se")){ 	// problema no se, testar....
-							System.out.println("deu certo o se, encontrou o fim");
-							break;
-						}
-						else if(tok[0].equals("enquanto") && linhas[i].equals("fim enquanto")){
-							System.out.println("deu certo logica enquanto...");
-							break;
-						}
-						else if(tok[0].equals("escolha") && linhas[i].equals("fim escolha")){
-							System.out.println("deu certo funcao escolha...");
-							break;
-						}
-							
-						else{
-							i++;
-						}
-						
-					}
-					if(i != rec){
-						if(sinta.sintaxe(token, ind))
-						continue;
-					}
-				
-			//	}
-				//else{
-			//		continue;
-				//}
-			}
-				
-		}
-		//sinta.imprime();
-		*/
-    }
+	
+}
     
-
-

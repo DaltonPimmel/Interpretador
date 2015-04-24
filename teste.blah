@@ -1,39 +1,27 @@
 
-// programa para testar as operações e comentarios e a condicao se dentro do enquanto.
+// testatando se o numero é primo ou nao. ok
 
-// até o momento funcionando.
 
 inicio programa()	
-
-	inteiro a = 5
-	inteiro b = 7
 	
-	imprime a
-	imprime b
+	inteiro a
+	inteiro i = 1
+	inteiro b = 0
+	leia a
 	
-	imprime a + b
-	imprime a * b
-	imprime a / b
-	imprime a - b
-	
-	inteiro c
-	c = a + b
-	
-	imprime c  //vai imprimir 12
-	
-	
-	enquanto c > 0
-		se c > 11
-			imprime c  // imprime 1 vez 12
+	enquanto a >= i
+		se a % i == 0
+			b = b + 1
 		fim se
-	
-		c = c - 1
-		imprime 'oi'   // imprime 12 vezes oi
-		
+		i = i + 1
 	fim enquanto
 	
-	imprime c * 1   // imprime 0 , pois o se foi diminuindo dentro do laco
-	imprime a * 2	// imprime 10
+	se b < 3
+		imprime 'primo'
+	fim se
+	senao
+		imprime 'nao'
+	fim senao
 			
 		
 fim programa
