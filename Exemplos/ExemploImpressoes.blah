@@ -1,0 +1,25 @@
+
+// testatando impressões, ok.
+
+
+inicio programa()
+	
+	inteiro a = 5
+	inteiro b = 5
+	
+	imprime 'teste'
+	
+	imprime 'teste + teste + teste'
+	
+	imprime 1 + 1
+	imprime a
+	imprime b
+	imprime a + b
+	
+	
+fim programa
+
+
+
+
+
