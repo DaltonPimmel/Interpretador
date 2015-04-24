@@ -1,0 +1,27 @@
+
+// testatando se o numero é primo ou nao. ok
+
+
+inicio programa()	
+	
+	inteiro a
+	inteiro i = 1
+	inteiro b = 0
+	leia a
+	
+	enquanto a >= i
+		se a % i == 0
+			b = b + 1
+		fim se
+		i = i + 1
+	fim enquanto
+	
+	se b < 3
+		imprime 'primo'
+	fim se
+	senao
+		imprime 'nao'
+	fim senao
+			
+		
+fim programa
