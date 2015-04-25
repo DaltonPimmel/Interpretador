@@ -2,11 +2,11 @@ class Variaveis{
 	private String nome;
 	private double valor;
 	
-	public void CriarVariavel(String n, double v){
+	public Variaveis(String n, double v){
 		this.valor = v;
 		this.nome = n;
 	}
-	public void CriarVariavel(String n){
+	public Variaveis(String n){
 		this.nome = n;
 		this.valor = 0;
 	}

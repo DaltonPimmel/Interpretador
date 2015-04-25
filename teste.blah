@@ -4,26 +4,20 @@
 
 inicio programa()
 	
-	inteiro a = 5
-	inteiro b = 5
-	inteiro c = 12
+	inteiro a = 25
+	inteiro b = 10
 	
-	imprime 'teste'
+	se a > 1
+		imprime 'oi'
+	fim se
 	
-	imprime 'teste + teste + teste'
+	se 0 > 0
+		imprime 'ola'
+	fim se
+	senao
+		imprime 'erro'
+	fim senao
 	
-	imprime 1 + 1
-	imprime a
-	imprime b
-	imprime a + b
-	
-	a = a + c
-	c = c + 2
-	imprime c
-	imprime a
-	
-	c = # 100
-	imprime c
 	
 fim programa
 
