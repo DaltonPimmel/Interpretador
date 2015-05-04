@@ -24,19 +24,5 @@ class Variaveis{
 		this.valor = a;
 	}
 	
-	
-	// criar um metodo para retornar se existe a variavel, nao precisando toda vez buscar...
-	
-	
-	
-	
-	
-	//public boolean TestaVariavel(String s, Variaveis[] v){
-	//	for(int i = 0; v[i] != null; i++){
-	//		if(v[i].nome.equals(s)) return false;
-	//	}
-	//	return true;
-	//}
-
 
 }

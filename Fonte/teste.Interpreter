@@ -1,0 +1,108 @@
+inicio programa()
+
+	inteiro a = 20
+	inteiro cc
+	
+	enquanto 2 > 2
+
+	se 1 > 1
+		imprime 'oi'
+		se 1 > 0
+			imprime 'oioi'
+		fim se
+		senao
+			imprime 'okokokokokokokokokokok'
+		fim senao
+		se 0 > 0
+			imprime 'oioioioioioioioioio'
+		fim se
+		senao
+			imprime 'ololololololololo'
+		fim senao
+		se 1 > 0
+			imprime 'okok'
+		fim se
+		imprime 'oi oi oi oi' 
+	fim se
+	senao
+		imprime 'nao'
+	fim senao
+	
+	imprime 'ola'
+	imprime 'ola'
+	
+	se 1 > 0
+		imprime 'blz'
+	fim se
+	senao
+		imprime 'a'
+	fim senao
+	
+	se 0 > 0
+		imprime 'a'
+	fim se
+	senao
+		imprime a
+	fim senao
+	se 1 > 0
+		imprime 'oioioioioioiokokook'
+	fim se
+	senao 
+		imprime 'oloco meu'
+	fim senao
+	se 1 > 0
+		imprime ''  //imprime uma linha em branco
+	fim se 
+	
+	
+	
+	se 2 > 1
+	
+		se 2 > 1
+			imprime 'a'
+		fim se
+		senao 
+			imprime a
+		fim senao
+		se 1 == 1
+			imprime 1
+		fim se
+	fim se
+	senao
+		imprime 'testetstetstestetstet'
+	fim senao
+	imprime 'oi'
+	
+	// teste com o mod.
+	se 2 % 2 == 0  
+		imprime 2
+	fim se
+	senao
+		imprime 0
+	fim senao
+	
+	//inteiro b = 2
+	
+	se 1 > a
+		imprime 'o b he maior que o a'
+	fim se
+	senao
+		imprime 'o a he maior que o b'
+	fim senao
+	
+	imprime a 
+	imprime 1
+	
+	a = a  // teste de atribuiçao de variaveis.
+	imprime 12121212121
+	
+	a = 25
+	a = # a  // teste de calculo da raiz quadrada.
+	imprime 212112
+	imprime 1010
+	
+ fim enquanto	
+ 
+	imprime 'oi'
+	
+fim programa

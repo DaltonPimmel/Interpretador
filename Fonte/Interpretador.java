@@ -12,9 +12,10 @@ class Interpretador{
 	Comentarios com;
 	CondicaoSe se;
 	Logico log;
+	Enquanto enq;
 	
-	private boolean con = true, verdadeiro = false;
-	private int cond;
+	private boolean con = true, verdadeiro = false, condd = false;
+	private int cond, p;
 	
 	public Interpretador(){
 		this.d = new Declaracao(this);
@@ -25,6 +26,7 @@ class Interpretador{
 		this.com = new Comentarios();
 		this.se = new CondicaoSe(this);
 		this.log = new Logico();
+		this.enq = new Enquanto(this);
 	}
 	
     public void interpreta(String l[]) {	
@@ -67,7 +69,7 @@ class Interpretador{
 					break;
 					
 					case "senao":
-						if(verdadeiro){
+						if(verdadeiro){ // se verdadeiro for treu, pode-se utilizar o senao
 							cont = se.Se(l, cont, Lfim);
 							verdadeiro = false;
 						}else{
@@ -75,7 +77,7 @@ class Interpretador{
 							System.exit(0);
 						}
 						if(cont == 0){
-							System.out.println("erroooooooo");
+							System.out.println("erroooooooo no senao");
 							System.exit(0);
 						}//else{
 						//	System.out.println("Imposivel usuar o senao antes do se dsddsdsdsdsdeded");
@@ -83,8 +85,25 @@ class Interpretador{
 						//}
 					break;
 					
+					case "enquanto":
+						 p = cont;
+						if(enq.Enquan(l, cont)) condd = true;
+						else{ // se retornar falso, pula as linhas até a achar o fim enquanto.
+							while(!l[cont].equals("fim enquanto")){
+								cont++;
+							}
+						}
+					break;
+					
+					case "fim":
+						if(l[cont].equals("fim enquanto")){
+							if(condd) cont = p; // se for verdadeiro retorna aonde achou o enquanto.
+							continue;
+						}
+					break;
+					
 					default:
-						if(l[cont].equals("inicio programa()") || l[cont].equals("fim se") || l[cont].equals("fim senao")) continue;
+						if(l[cont].equals("inicio programa()") || l[cont].equals("fim se") || l[cont].equals("fim senao") || l[cont].equals("fim enquanto") || l[cont].equals("fim programa")) continue;
 						d.Declarar(tok);
 					
 					break;
@@ -96,11 +115,18 @@ class Interpretador{
 	}
 	
 	
-	public double VerificaVariavel(String n){ 
+	public boolean VerificaVariavel(String n){
+		for(int i = 0; v[i] != null; i++){
+			if(v[i].getNome().equals(n)) return true;
+		}
+		return false;
+	}
+	
+	public double getValor(String n){ 
 		for(int i = 0; v[i] != null; i++){
 			if(v[i].getNome().equals(n)) return v[i].getValor();
 		}
-		return 01010112;
+		return 0;
 	}
 	
 	// testa se existe a variavel e retorna a posicao do vetor.
@@ -121,6 +147,7 @@ class Interpretador{
 		return false;
 	}
 	
+	// teste se é um numero ou um digito
 	public boolean TestaString(String s){  
 		  try {  
             Long.parseLong (s);  

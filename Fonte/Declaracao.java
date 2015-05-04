@@ -9,22 +9,21 @@ class Declaracao{
 
 	public void Declarar(String[] linhas){
 	
-		double qe;
-		double ses;
+		double qe = 0;
+		double ses = 0;
 		
 		// atribuição de uma variavel para outra, ex: a = b
 		if(linhas.length < 4 && linhas[1].equals("=")){
 			if(inter.TestaString(linhas[2])){
 				ses = Double.parseDouble(linhas[2]);
 			}else{
-				ses = inter.VerificaVariavel(linhas[2]);
-				if(ses == 0){
-					System.out.println("Variavel nao existe...");
-					System.exit(0);
+				if(inter.VerificaVariavel(linhas[2])) ses = inter.getValor(linhas[2]);
+				else{
+					System.out.println("problema na hora da atribuicao"); System.exit(0);
 				}
 			}
 			int c = inter.getVariavel(linhas[0]);
-			if(c == 1000){
+			if(c == 1000){ // get variavel verifica se a variavel existe e retorna o indice.
 				System.out.println("Variavel " + linhas[0] + " nao existe");
 				System.exit(0);
 			}	
@@ -39,7 +38,7 @@ class Declaracao{
 			double rec = Double.parseDouble(linhas[3]);
 			int a = inter.getVariavel(nome);		
 			if(a != 1000){ // se retornar outro valor, a variavel nome ja existe.
-				 System.out.println("errooooooooooooooo");
+				 System.out.println("Variavel ja declarada");
 				 System.exit(0);
 			}
 			inter.CriarVariavel(nome, rec); // retorna o primeiro indice de v que esta vazio para criar uma nova variavel.	
@@ -90,10 +89,9 @@ class Declaracao{
 			if(inter.TestaString(linhas[3])){
 				qe = Double.parseDouble(linhas[3]);
 			}else{
-				qe = inter.VerificaVariavel(linhas[3]);
-				if(qe == 0){
-					System.out.println("Variavel " + linhas[3] + " nao existe");
-					System.exit(0);
+				if(inter.VerificaVariavel(linhas[3])) qe = inter.getValor(linhas[3]);
+				else{
+					System.out.println("Problema na hora calcular a raiz quadrada, variavel nao existe");
 				}
 			}
 			int c = inter.getVariavel(linhas[0]);

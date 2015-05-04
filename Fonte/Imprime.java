@@ -25,15 +25,15 @@ class Imprime{
 		}
 		// impressao de variaveis	
 		else if(linhas.length == 2){ 
+			double h = 0;
 			if(in.TestaString(linhas[1])){ // chama o TestaString para verificar se um numero.
 				System.out.println(linhas[1]);
 			}else{
-				double a = in.VerificaVariavel(linhas[1]); // se não for um numero, chama o verificaVariavel que retornar o valor.
-				if(a == 1000){
-					 System.out.println("variavel nao existe");	// se a variavel não existir retorna -010 dando false.
-					 System.exit(0);
-				 }
-				System.out.println(a);
+				if(in.VerificaVariavel(linhas[1]))   h = in.getValor(linhas[1]); // se não for um numero, chama o verificaVariavel que retornar o valor.
+				else{
+					System.out.println("problema na imopressao, variavel nao localizada"); System.exit(0);
+				}
+				System.out.println(h);
 			}
 		}
 		// impressão com operadores.
@@ -42,20 +42,19 @@ class Imprime{
 			if(in.TestaString(linhas[1])){   // testa se é um numero ou uma variavel, se nao for vai verificar nas variaveis se exite.
 				num = Double.parseDouble(linhas[1]);
 			}else{
-				num = in.VerificaVariavel(linhas[1]);
-				if(num == 00000){ // variavel nao existe.
-					System.out.println("Variavel nao existe");
-					System.exit(0);
+				if(in.VerificaVariavel(linhas[1])) num = in.getValor(linhas[1]);
+				else{
+					System.out.println("problema na imopressao, variavel nao localizada"); System.exit(0);
 				}
 			}
 			if(in.TestaString(linhas[3])){
 				num1 = Double.parseDouble(linhas[3]);
 			}else{
-				num1 = in.VerificaVariavel(linhas[3]);
-				if(num1 == 00000){
-					System.out.println("Variavel nao existe");
-					System.exit(0);
+				if(in.VerificaVariavel(linhas[3])) num1 = in.getValor(linhas[3]);
+				else{
+					System.out.println("problema na imopressao, variavel nao localizada"); System.exit(0);
 				}
+				
 			}
 			double res = in.op.operacoes(linhas[2], num, num1); // chama o metodo das operacoes para imprimir.
 			System.out.println(res);
