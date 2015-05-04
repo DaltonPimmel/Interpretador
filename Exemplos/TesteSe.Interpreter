@@ -1,0 +1,86 @@
+
+inicio programa()
+
+	inteiro a = 20
+
+	se 1 > 1
+		imprime 'oi'
+		se 1 > 0
+			imprime 'oioi'
+		fim se
+		senao
+			imprime 'okokokokokokokokokokok'
+		fim senao
+		se 0 > 0
+			imprime 'oioioioioioioioioio'
+		fim se
+		senao
+			imprime 'ololololololololo'
+		fim senao
+		se 1 > 0
+			imprime 'okok'
+		fim se
+		imprime 'oi oi oi oi' 
+	fim se
+	senao
+		imprime 'nao'
+	fim senao
+	
+	imprime 'ola'
+	imprime 'ola'
+	
+	se 1 > 0
+		imprime 'blz'
+	fim se
+	senao
+		imprime 'a'
+	fim senao
+	
+	se 0 > 0
+		imprime 'a'
+	fim se
+	senao
+		imprime a
+	fim senao
+	se 1 > 0
+		imprime 'oioioioioioiokokook'
+	fim se
+	senao 
+		imprime 'oloco meu'
+	fim senao
+	se 1 > 0
+		imprime ''
+	fim se 
+	
+	
+	
+	se 1 > 1
+	
+		se 2 > 1
+			imprime 'a'
+		fim se
+		senao 
+			imprime a
+		fim senao
+		se 1 == 1
+			imprime 1
+		fim se
+	fim se
+	senao
+		imprime 'testetstetstestetstet'
+	fim senao
+	imprime 'oi'
+	
+	se 2 % 2 == 0
+		imprime 2
+	fim se
+	senao
+		imprime 0
+	fim senao
+	
+	
+fim programa
+
+
+
+
