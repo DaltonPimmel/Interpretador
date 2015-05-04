@@ -67,7 +67,6 @@ class Interpretador{
 					break;
 					
 					case "senao":
-						//System.out.println(cont);
 						if(verdadeiro){
 							cont = se.Se(l, cont, Lfim);
 							verdadeiro = false;

@@ -4,6 +4,7 @@ class InicioFim{
 	private Interpretador c;
 	private int fi;
 	private String fim = null;
+	String tok;
 	
 	public InicioFim(Interpretador in){
 		this.c = in;
@@ -14,6 +15,8 @@ class InicioFim{
 		for(int i = 0; i < l.length; i++){  // testa se a primeira linha é o inicio do programa.
 			if(l[i] != null && l[i].length() > 1){
 				l[i] = l[i].trim();
+				tok = l[i].substring(0, 2); // recebe os dois primeiros caracteres, se for //, ignora a linha.
+				if(tok.equals("//")) continue;
 				if(!l[i].equals("inicio programa()")){
 					System.out.println("Nao foi posivel localizar o inicio do programa!!! 'inicio programa()'");
 					System.exit(0);

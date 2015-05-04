@@ -2,7 +2,7 @@
 class CondicaoSe{
 	
 	private Interpretador in;
-	private int fi = 0, c = 0, dd = 0, k, teste = 0, test;
+	private int fi = 0, c = 0, dd = 0, k, teste = 0, test, y;
 	private boolean te;
 	private String[] l, tok;
 	private String[] contro;
@@ -13,21 +13,20 @@ class CondicaoSe{
 	}
 
 	public int Se(String[] linhas, int cont, int fim){
-		//System.out.println(fi);
 		tok = linhas[cont].trim().split(" ");
 		if(tok[0].equals("se")){
 			for(k = cont + 1; k < linhas.length && linhas[k] != null; k++){
 				if(linhas[k].length() > 1 && linhas[k] != null){
 					linhas[k] = linhas[k].trim();
 					contro = linhas[k].trim().split(" ");
-					if(contro[0].equals("se")){
-						dd++;
+					if(contro[0].equals("se")){ // testa se tem um se dentro do outro.
+						dd++; // variaveis de controle.
 						c++;
 					 }
 					if(linhas[k].equals("fim se")){
 						teste++; // para verifcar se achou o final do se.
 						if(c == 0 && dd >= fi){ 
-							fi = k; // zerar o fi no ultimo senao.
+							fi = k; 
 							test = fi;
 							break;
 						}else if(c == 0){
@@ -37,48 +36,37 @@ class CondicaoSe{
 					}
 				}
 			}
-			if(teste == 0) return 0;
+			if(teste == 0) return 0; // não achou o final do se.
 			teste  = 0;
-			dd = 0;
+			dd = 0; // zera as variaveis de controle.
 			c = 0;
 		}else{	
-			for(int y = cont + 1; y < linhas.length; y++){
+			for(y = cont + 1; y < linhas.length; y++){
 				if(linhas[y].length() > 1 && linhas[y] != null){
 					linhas[y] = linhas[y].trim();
 					if(linhas[y].equals("fim senao")){		
-						if(!cond && y < fi){ // se ela achar o senao dentro do loco principal, ele exucuta se o se anterior for falso.
-							System.out.println("teste");
-							cond = true;
-							return cont;
-						}
-						else if(cond && y < fi){  // se o se anterior for verdadeiro, e achar o senao dentro do lsaço principal, ele pula para o fim senao.
-							cond = false;
-							System.out.println("teste1");
-							return y;
-						}else if(!cond){
-							System.out.println("teste1");
-							 return cont;
-						 }
-						else if(y > fi){	
-							if(!verdadeiro){
+						if(!cond && y < fi) return cont; // se ela achar o senao dentro do loco principal, ele exucuta se o se anterior for falso.
+						else if(cond && y > fi) return y;  // se o se anterior for verdadeiro, e achar o senao dentro do lsaço principal, ele pula para o fim senao.
+						else if(cond && y < fi) return y;
+						else if(y > fi && !cond){ 	
+							if(!verdadeiro){ // quando a mais se dentro de outro.
 								fi = 0;
 								dd = 0;
 								teste = 0;
 								verdadeiro = true;
-								cond = false;
 								return cont; 
 							}
-							return y;
-						  }
-							
+						}	
+						return y;
 					 }	
 				}
 			}
-			return 0;
+			return 0; // se nao achar o final do senao retorna 0.
 		}
 		if(fi == 0) return 0;
 		l = linhas[cont].trim().split(" ");
 		double f = 0, g = 0, e = 0;
+		
 		// teste do mod dentro do se.
 		if(l.length > 3 && l.length < 7 && l[2].equals("%")){
 			if(in.TestaString(l[1])){
@@ -99,8 +87,10 @@ class CondicaoSe{
 			}else{
 				e = Double.parseDouble(l[5]);
 			}
-			 if(in.op.Mod(f, g, e)) return (cont + 1);
-			// return 0;		
+			 if(in.op.Mod(f, g, e)) return cont;
+			 cond = false; // caso o mod seja falso.
+			 verdadeiro = false;
+			 return k;		
 		}
 			// verifica se o se é verdade ou nao.
 		else if(l.length > 3 && l.length < 5){ 
@@ -124,22 +114,14 @@ class CondicaoSe{
 			cond = true;
 			return cont; // se for verdadeiro o se.
 		}
-		else if(k > fi){
-			//System.out.println("aqui esta o erro");
-			 return k; // se o fi for maior que o k ele esta no final do ultimo se, e executa o senao.
-		//System.out.println(fi);
+		else if(k > fi){ // caso termine os laços dentro do outro.
+			verdadeiro = false;
+			cond = false;
+			return k; // se o fi for maior que o k ele esta no final do ultimo se, e executa o senao.
 		}
 		cond = false; // se o fi for maior ele ha mais laços dentro para testar, cond recebe falso, podendo exetador algum se nao dentro do laço.
 		return k;
 		
-		
-	//	if(!te && cont >= fi){ // testa nao estar dentro do laco o senao.
-	//		cond = false;
-	//		return fi; // retorna o indice que acgou o fim se.
-	//	}else if(!te && cont < fi){ // testa se esta dentro do laco principal, para poder utilizar o senao, por que se tiver 3 se dentro de um princial se o ultimo fosse falso ele caia no sanao.
-	//		cond = true;
-	//		return fi;
-	//	}
-	//	return 0;
+	
 	}
 }
