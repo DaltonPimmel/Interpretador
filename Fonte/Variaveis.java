@@ -1,4 +1,9 @@
-class Variaveis{
+abstract class Variaveis{
+	
+	abstract public void Varstring();
+	abstract public void Varint();
+	abstract public void Vardouble();
+	
 	private String nome;
 	private double valor;
 	

@@ -12,7 +12,8 @@ class Interpretador{
 	Comentarios com;
 	CondicaoSe se;
 	Logico log;
-	Enquanto enq;
+	//Enquanto enq;
+	LerTeclado ler;
 	
 	private boolean con = true, verdadeiro = false, condd = false;
 	private int cond, p;
@@ -26,7 +27,8 @@ class Interpretador{
 		this.com = new Comentarios();
 		this.se = new CondicaoSe(this);
 		this.log = new Logico();
-		this.enq = new Enquanto(this);
+		//this.enq = new Enquanto(this);
+		this.ler = new LerTeclado(this);
 	}
 	
     public void interpreta(String l[]) {	
@@ -86,20 +88,24 @@ class Interpretador{
 					break;
 					
 					case "enquanto":
-						 p = cont;
-						if(enq.Enquan(l, cont)) condd = true;
-						else{ // se retornar falso, pula as linhas até a achar o fim enquanto.
-							while(!l[cont].equals("fim enquanto")){
-								cont++;
-							}
-						}
+						 //p = cont;
+						//if(enq.Enquan(l, cont)) condd = true;
+						//else{ // se retornar falso, pula as linhas até a achar o fim enquanto.
+						//	while(!l[cont].equals("fim enquanto")){
+								//cont++;
+						//	}
+						//}
 					break;
 					
 					case "fim":
-						if(l[cont].equals("fim enquanto")){
-							if(condd) cont = p; // se for verdadeiro retorna aonde achou o enquanto.
-							continue;
-						}
+					//	if(l[cont].equals("fim enquanto")){
+					//		if(condd) cont = p; // se for verdadeiro retorna aonde achou o enquanto.
+					//		continue;
+					//	}
+					break;
+					
+					case "leia":
+						if(ler.Leia(tok, cont));
 					break;
 					
 					default:
@@ -140,7 +146,7 @@ class Interpretador{
 	public boolean CriarVariavel(String n, double a){
 		for(int i = 0; i < v.length; i++){
 			if(v[i] == null){
-				v[i] = new Variaveis(n, a);
+				v[i] = new Varint(n, a);
 				return true;
 			}
 		}
