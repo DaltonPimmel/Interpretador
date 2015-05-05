@@ -29,69 +29,51 @@ class Declaracao{
 			}	
 			inter.v[c].setValor(ses);
 		}	
-		
-
-		
-		// criando variavel com atribuição. Somente com numeros.
-		if(linhas.length > 3 && linhas.length < 5 && !inter.TestaString(linhas[1]) && linhas[2].equals("=")){
-			if(linhas[0].equals("inteiro")){
-				String nome = linhas[1];
-				if(!inter.isInt(linhas[3])){
-					System.out.println("Declaracao errada!!!");
-					System.exit(0);
-				}
-				int rec = Integer.parseInt(linhas[3]);
-				int a = inter.getVariavel(nome);		
-				if(a != 1000){ // se retornar outro valor, a variavel nome ja existe.
-					System.out.println("Variavel ja declarada");
-					System.exit(0);
-				}
-			
-			tipo = linhas[0];
-			inter.CriarVariavelInt(nome, rec, tipo); // retorna o primeiro indice de v que esta vazio para criar uma nova variavel.	
-			}	
-			// criacao de variavel sem atrubuicao.	
-		}else if(linhas.length < 3 &&  !inter.TestaString(linhas[1]) ){
-			if(!linhas[0].equals("inteiro")) System.exit(0);
-			String nome = linhas[1];
-			int a = inter.getVariavel(nome);
-			if(a != 1000){
-				System.out.println("Variavel ja foi declarada " + nome);
+		else if(linhas[0].equals("inteiro") || linhas[0].equals("double") || linhas[0].equals("string")){
+			inter.CriarVariavelInt(linhas);
+		}
+		//atribuicao para variaveis com operadores.
+		else if(linhas.length > 3 && linhas.length < 6 && !inter.TestaString(linhas[0]) && linhas[3].equals("=") || linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/")){
+			double se = -5555, re = -5555 ;
+			boolean ar = false;
+			int a = inter.getVariavel(linhas[0]); // linha[0] variavel que vai receber o valor, a tem a posicao.
+			if(a == 1000 || inter.v[a].getTipo().equals("string")){ // testa se nao é uma string.
+				System.out.println("Variavel nao existe");
 				System.exit(0);
 			}
-			tipo = linhas[0];
-			inter.CriarVariavelInt(nome, 0, tipo);
-			
-		}
-
-		//atribuicao para variaveis com operadores.
-//		}else if(linhas.length > 3 && linhas.length < 6 && !TestaString(linhas[0]) && linhas[3].equals("=") || linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/")){
-//			double se = -5555, re = -5555 ;
-//			boolean ar = false;
-//			int a = getVariavel(linhas[0]); // linha[0] variavel que vai receber o valor, a tem a posicao.
-//			if(a == 1000) return false; // variavel na linhas[0] nao exite
-//			if(TestaString(linhas[2])){ // se for numero
-//				 se = Double.parseDouble(linhas[2]);
-//			}
-//			else{
-//				int b = getVariavel(linhas[2]);
-//				if(b == 1000) return false; // variavel nao existe.
-//				se = VerificaVariavel(linhas[2]); // recebe o valor da variavel da linha[2]
-//			}
-//			if(TestaString(linhas[4])){
-//				 re = Double.parseDouble(linhas[4]);
-//			}
-//			else{
-//				int b = getVariavel(linhas[4]); // se a variavel existir retorna a posicao do vetor que ela esta.
-//				if(b == 1000) return false; // variavel nao existe
-//				re = VerificaVariavel(linhas[4]); // re recebe o valor da variavel linha[4].
-//			}
-//			String nome = linhas[3]; // linhas[3] tem o operador.
-//			double rec = op.operacoes(nome, se, re); 
-//			v[a].setValor(rec); // a é o indice da variavel que vai receber o valor.
-//			return true;
-//		}
-
+			if(inter.TestaString(linhas[2])){ // se for numero
+				 se = Double.parseDouble(linhas[2]);
+			}
+			else{
+				int b = inter.getVariavel(linhas[2]);
+				if(b == 1000 || inter.v[b].getTipo().equals("string")){
+					System.out.println("Variavel nao existe");
+					System.exit(0);
+				}
+				if(inter.v[b].getTipo().equals("inteiro")) se = inter.v[b].getVint(); // recebe o valor da variavel da linha[2]
+				else{
+					se = inter.v[b].getVdouble();
+				}
+			}
+			if(inter.TestaString(linhas[4])){
+				 re = Double.parseDouble(linhas[4]);
+			}
+			else{
+				int b = inter.getVariavel(linhas[4]); // se a variavel existir retorna a posicao do vetor que ela esta.
+				if(b == 1000 || inter.v[b].getTipo().equals("string")){
+					System.out.println("Variavel nao existe");
+					System.exit(0);
+				}
+				if(inter.v[b].getTipo().equals("inteiro")) re = inter.v[b].getVint(); // re recebe o valor da variavel linha[4].
+				else{
+					re = inter.v[b].getVdouble();
+				}
+			}
+			String nome = linhas[3]; // linhas[3] tem o operador.
+			double rec = inter.op.operacoes(nome, se, re); 
+			inter.v[a].setValor(rec); // a é o indice da variavel que vai receber o valor.
+	
+	}
 			//chama o metodo para calcular a raiz quadradra.
 		else if(linhas.length < 5 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && linhas[2].equals("#")){
 			if(inter.TestaString(linhas[3])){
@@ -109,5 +91,6 @@ class Declaracao{
 			} 
 			inter.v[c].setValor(inter.op.RaizQuadrada(qe)); // v[c] vai receber a valor do calcula da raiz quadrada.
 		}
+	
 	}
 }

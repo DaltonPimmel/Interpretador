@@ -1,10 +1,13 @@
 inicio programa()
 
 	inteiro a = 20
+	double b = 30.5
 	
-	inteiro b = 10
+	string c = oi
+	
+	a = a + 1
 	imprime a
-	imprime b
-	imprime 30
-
+	
+	// verificar
+	
 fim programa

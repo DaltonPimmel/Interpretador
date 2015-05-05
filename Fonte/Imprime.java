@@ -24,18 +24,48 @@ class Imprime{
 			System.out.println(r);
 		}
 		// impressao de variaveis	
-		else if(linhas.length == 2){ 
-			double h = 0;
-			if(in.TestaString(linhas[1])){ // chama o TestaString para verificar se um numero.
-				System.out.println(linhas[1]);
-			}else{
-				if(in.VerificaVariavel(linhas[1]))   h = in.getValor(linhas[1]); // se não for um numero, chama o verificaVariavel que retornar o valor.
-				else{
-					System.out.println("problema na imopressao, variavel nao localizada"); System.exit(0);
+		else if(linhas.length == 2){
+			if(in.TestaString(linhas[1])) System.out.println(linhas[1]);
+			else{
+				//System.out.println(in.getValor(linhas[1]));
+				int d = in.getVariavel(linhas[1]);
+				if(d == 1000){
+					System.out.println("Variavel nao existe!!!");
+					System.exit(0);
 				}
-				System.out.println(h);
+				if(in.v[d].getTipo().equals("inteiro")){
+					int a = in.v[d].getVint();
+					System.out.println(a);
+				}else if(in.v[d].getTipo().equals("double")){
+					double a = in.v[d].getVdouble();
+					System.out.println(a);
+				}else if(in.v[d].getTipo().equals("string")){
+					String a = in.v[d].getVstring();
+					System.out.println(a);
+				}
 			}
+			
+			
+			
+				
 		}
+			//if(linhas[0].equals("string")){
+			//	System.out.pirntln(linhas[1]);
+			//}else if(linhas[0].equals("inteiro")){
+			//	int a = Integer.parseInt(linhas[1]);
+			//	System.out.println()
+			//} 
+			//double h = 0;
+			//if(in.TestaString(linhas[1])){ // chama o TestaString para verificar se um numero.
+			//	System.out.println(linhas[1]);
+			//}else{
+			//	if(in.VerificaVariavel(linhas[1]))   h = in.getValor(linhas[1]); // se não for um numero, chama o verificaVariavel que retornar o valor.
+			//	else{
+				//	System.out.println("problema na imopressao, variavel nao localizada"); System.exit(0);
+				////}
+			//	System.out.println(h);
+			//}
+		//}
 		// impressão com operadores.
 		else if(linhas.length > 3 && linhas.length < 5 && linhas[2].equals("+") || linhas[2].equals("-") || linhas[2].equals("*") || linhas[2].equals("/")){
 			double num = -1, num1 = -1;

@@ -20,7 +20,7 @@ class Enquanto{
 					linha[k] = linha[k].trim();
 					//if(linha[k].equals("enquanto")) c++;
 					if(linha[k].equals("fim enquanto")){
-					//	System.out.println(tok[3]);
+						System.out.println(tok[3]);
 						if(in.TestaString(tok[1])){
 							d = Double.parseDouble(tok[1]);	
 						}
