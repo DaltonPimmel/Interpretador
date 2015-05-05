@@ -53,6 +53,15 @@ public abstract class Variaveis{
 	public double getVdouble(){ // retorna o valor da variavel do tipo double.
 		return this.Vdouble;
 	}
+	public void setIn(int a){
+		this.Vint = a;
+	}
+	public void setDou(double a){
+		this.Vdouble = a;
+	}
+	public void setStrin(String a){
+		this.Vstring = a;
+	}
 	
 
 }

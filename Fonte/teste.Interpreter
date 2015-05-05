@@ -5,8 +5,8 @@ inicio programa()
 	
 	string c = oi
 	
-	a = a + 1
-	imprime a
+	a = b
+	imprime a // imprime 30
 	
 	// verificar
 	

@@ -130,7 +130,7 @@ class Interpretador{
 		}
 	}
 	
-	
+	// verifica se a variavel existe.
 	public boolean VerificaVariavel(String n){
 		for(int i = 0; v[i] != null; i++){
 			if(v[i].getNome().equals(n)) return true;
