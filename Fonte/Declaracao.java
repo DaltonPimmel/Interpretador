@@ -8,7 +8,7 @@ class Declaracao{
 	}
 
 	public void Declarar(String[] linhas){
-	
+		String tipo;
 		double qe = 0;
 		double ses = 0;
 		
@@ -34,15 +34,22 @@ class Declaracao{
 		
 		// criando variavel com atribuição. Somente com numeros.
 		if(linhas.length > 3 && linhas.length < 5 && !inter.TestaString(linhas[1]) && linhas[2].equals("=")){
-			String nome = linhas[1];
-			double rec = Double.parseDouble(linhas[3]);
-			int a = inter.getVariavel(nome);		
-			if(a != 1000){ // se retornar outro valor, a variavel nome ja existe.
-				 System.out.println("Variavel ja declarada");
-				 System.exit(0);
-			}
-			inter.CriarVariavel(nome, rec); // retorna o primeiro indice de v que esta vazio para criar uma nova variavel.	
+			if(linhas[0].equals("inteiro")){
+				String nome = linhas[1];
+				if(!inter.isInt(linhas[3])){
+					System.out.println("Declaracao errada!!!");
+					System.exit(0);
+				}
+				int rec = Integer.parseInt(linhas[3]);
+				int a = inter.getVariavel(nome);		
+				if(a != 1000){ // se retornar outro valor, a variavel nome ja existe.
+					System.out.println("Variavel ja declarada");
+					System.exit(0);
+				}
 			
+			tipo = linhas[0];
+			inter.CriarVariavelInt(nome, rec, tipo); // retorna o primeiro indice de v que esta vazio para criar uma nova variavel.	
+			}	
 			// criacao de variavel sem atrubuicao.	
 		}else if(linhas.length < 3 &&  !inter.TestaString(linhas[1]) ){
 			if(!linhas[0].equals("inteiro")) System.exit(0);
@@ -52,7 +59,8 @@ class Declaracao{
 				System.out.println("Variavel ja foi declarada " + nome);
 				System.exit(0);
 			}
-			inter.CriarVariavel(nome, 0);
+			tipo = linhas[0];
+			inter.CriarVariavelInt(nome, 0, tipo);
 			
 		}
 

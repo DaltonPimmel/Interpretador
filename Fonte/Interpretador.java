@@ -12,8 +12,11 @@ class Interpretador{
 	Comentarios com;
 	CondicaoSe se;
 	Logico log;
-	//Enquanto enq;
+	Enquanto enq;
 	LerTeclado ler;
+	VarInt varint;
+	//VarDouble vardouble;
+	//VarString varstring;
 	
 	private boolean con = true, verdadeiro = false, condd = false;
 	private int cond, p;
@@ -29,6 +32,9 @@ class Interpretador{
 		this.log = new Logico();
 		//this.enq = new Enquanto(this);
 		this.ler = new LerTeclado(this);
+		varint = new VarInt();
+		//vardouble = new VarDouble();
+		//varstring = new VarString();
 	}
 	
     public void interpreta(String l[]) {	
@@ -130,7 +136,11 @@ class Interpretador{
 	
 	public double getValor(String n){ 
 		for(int i = 0; v[i] != null; i++){
-			if(v[i].getNome().equals(n)) return v[i].getValor();
+			if(v[i].getNome().equals(n)){
+				if(v[i].getTipo().equals("inteiro")) return v[i].getVint();
+				if(v[i].getTipo().equals("double")) return v[i].getValor();
+				//if(v[i].getNome().equals("string")) return v[i].getVstring();
+			}
 		}
 		return 0;
 	}
@@ -143,11 +153,18 @@ class Interpretador{
 		return 1000;
 	}
 	// retorna a primeira posicao de v que esta null para criar a variavel, se nao estiver mais espaço retorna 1000.
-	public boolean CriarVariavel(String n, double a){
+	public boolean CriarVariavelInt(String n, int a, String tipo){
+		//System.out.println(a);
 		for(int i = 0; i < v.length; i++){
 			if(v[i] == null){
-				v[i] = new Varint(n, a);
-				return true;
+				if(tipo.equals("inteiro")){
+					v[i] = new VarInt();
+					v[i] = varint.Varint(n, a, tipo);
+					//v[i] = varint.Varint(n, a);
+					//System.out.println(v[i].getVint());
+					//System.out.println(v[i].getValor());
+					return true;
+				}
 			}
 		}
 		return false;
@@ -162,6 +179,17 @@ class Interpretador{
         }  
         return true;  
     }
+    
+    // testa se a variavel é do tipo inteira na hora da declaração.
+    public boolean isInt(String v) {  
+    try {  
+        Integer.parseInt(v);  
+        return true;  
+    } catch (Exception e) {  
+        return false;  
+    }  
+}  
+
 	
 }
     

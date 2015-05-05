@@ -1,18 +1,10 @@
 inicio programa()
 
-	inteiro a
-	leia a
-	imprime a
-	inteiro b
+	inteiro a = 20
 	
-	se 2 > 1
-		leia a
-	fim se
-	senao
-		leia b
-	fim senao
-	
+	inteiro b = 10
 	imprime a
 	imprime b
-	
+	imprime 30
+
 fim programa
