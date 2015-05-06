@@ -1,0 +1,12 @@
+inicio programa()
+
+	inteiro a = 10
+	
+	enquanto a != 0
+		imprime a
+		a--
+	fim enquanto
+	
+	
+fim programa
+
