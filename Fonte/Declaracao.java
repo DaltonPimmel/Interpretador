@@ -14,7 +14,7 @@ class Declaracao{
 		double ses = 0;
 		
 		// atribuição de uma variavel para outra, ex: a = b
-		if(linhas.length < 4 && linhas[1].equals("=")){
+		if(linhas.length < 4 && linhas.length > 1 && linhas[1].equals("=")){
 			if(inter.TestaString(linhas[2])){
 				ses = Double.parseDouble(linhas[2]);
 			}else{
@@ -42,10 +42,99 @@ class Declaracao{
 				inter.v[d].setDou(ses);
 			}
 		}
+		// Atruição de variavel, ex: a--, a++
+		else if(linhas.length > 0 && linhas.length < 2){
+			String n = linhas[0].substring(1, 3);
+			String nome = linhas[0].substring(0, 1); // recebe a variavel
+			int d = inter.getVariavel(nome); // retorna a posicao da variavel.
+			if(d == 1000 || inter.v[d].getTipo().equals("string")) System.exit(0);
+			
+			if(inter.v[d].getTipo().equals("inteiro")){
+				int a = inter.v[d].getVint();
+				if(n.equals("--")) inter.v[d].setIn((a - 1));
+				else if(n.equals("++")) inter.v[d].setIn((a + 1));
+			}else{
+				double a = inter.v[d].getVdouble(); 
+				if(n.equals("--")) inter.v[d].setDou((a - 1));
+				else if(n.equals("++")) inter.v[d].setDou((a + 1));
+			}
+		}
 				
 		// criacao de variaveis.
 		else if(linhas[0].equals("inteiro") || linhas[0].equals("double") || linhas[0].equals("string")){
-			inter.CriarVariavelInt(linhas);
+			//inter.CriarVariavelInt(linhas);
+			
+			if(linhas[0].equals("inteiro")){ // criando variavel do tipo inteiro
+			if(linhas.length > 3 && linhas.length < 5 && !inter.TestaString(linhas[1]) && linhas[2].equals("=")){  //declaracao com atribuição.
+				String nome = linhas[1];
+				tipo = linhas[0];
+				if(!inter.isInt(linhas[3])){  // testa se é um numero inteiro.
+					System.out.println("Declaracao errada!!!");
+					System.exit(0);
+				}
+				int rec = Integer.parseInt(linhas[3]);
+				int a = inter.getVariavel(nome);		
+				if(a != 1000){ // se retornar outro valor, a variavel nome ja existe.
+					System.out.println("Variavel ja declarada");
+					System.exit(0);
+				}
+				int d = inter.PosicaVetor(); // recebe o primeira posicao null.
+				if(d == 1000) System.exit(0);
+				inter.v[d] = new VarInt();
+				inter.v[d] = inter.varint.Varint(nome, rec, tipo);
+				//return true;
+			}else if(linhas.length < 3 &&  !inter.TestaString(linhas[1]) ){ // declaração de variavel sem atribução.
+				String nome = linhas[1];
+				int a = inter.getVariavel(nome);
+				if(a != 1000){
+					System.out.println("Variavel ja foi declarada " + nome);
+					System.exit(0);
+				}
+				tipo = linhas[0];
+				int d = inter.PosicaVetor();
+				if(d == 1000) System.exit(0);
+				inter.v[d] = new VarInt();
+				inter.v[d] = inter.varint.Varint(nome, 0, tipo);
+			//	return true;
+			}
+			
+		}else if(linhas[0].equals("double")){ // criando variavel do tipo double.
+			if(linhas.length > 3 && linhas.length < 5 && !inter.TestaString(linhas[1]) && linhas[2].equals("=")){ 
+				String nome = linhas[1];
+				tipo = linhas[0];
+				double a = Double.parseDouble(linhas[3]);
+				int t = inter.PosicaVetor();
+				if(t == 1000) System.exit(0);
+				inter.v[t] = new VarInt();
+				inter.v[t] = inter.varint.Vardouble(nome, a, tipo);
+				//return true;
+			}else if(linhas.length < 3 && !inter.TestaString(linhas[1])){ // declaração de variavel do tipo double sem atribuição.
+				String nome = linhas[1];
+				tipo = linhas[0];
+				int t = inter.PosicaVetor();
+				if(t == 1000) System.exit(0);
+				inter.v[t] = new VarInt();
+				inter.v[t] = inter.varint.Vardouble(nome, 0.0, tipo);
+			//	return true;
+			}			
+		}else if(linhas[0].equals("string")){
+			if(linhas.length > 3 && linhas.length < 5 && !inter.TestaString(linhas[1]) && linhas[2].equals("=")){
+				String nome = linhas[1];
+				tipo = linhas[0];
+				String a = linhas[3];
+				int t = inter.PosicaVetor();
+				if(t == 1000) System.exit(0);
+				inter.v[t] = new VarInt();
+				inter.v[t] = inter.varint.VarString(nome, a, tipo);
+				//return true;
+			}
+			
+		}
+	//	return false;
+			
+			
+			
+			
 		}
 		//atribuicao para variaveis com operadores.
 		else if(linhas.length > 3 && linhas.length < 6 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") || linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/")){

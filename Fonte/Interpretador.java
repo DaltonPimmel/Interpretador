@@ -34,9 +34,7 @@ class Interpretador{
 		this.enq = new Enquanto(this);
 		this.ler = new LerTeclado(this);
 		this.varint = new VarInt();
-		//this.conp = new CondParada();
-		//this.vard = new VarDouble();
-		//varstring = new VarString();
+		
 	}
 	
     public void interpreta(String l[]) {	
@@ -176,7 +174,8 @@ class Interpretador{
 		}
 		return 1000;
 	}
-
+	/*
+	// Criação de variaveis
 	public boolean CriarVariavelInt(String[] linhas){
 		if(linhas[0].equals("inteiro")){ // criando variavel do tipo inteiro
 			if(linhas.length > 3 && linhas.length < 5 && !TestaString(linhas[1]) && linhas[2].equals("=")){  //declaracao com atribuição.
@@ -247,7 +246,7 @@ class Interpretador{
 		return false;
 	
 	}
-	
+	*/
 	public int PosicaVetor(){
 		for(int i = 0; i < v.length; i++){
 			if(v[i] == null) return i;
