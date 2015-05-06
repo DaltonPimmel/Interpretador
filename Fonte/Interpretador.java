@@ -15,6 +15,7 @@ class Interpretador{
 	Enquanto enq;
 	LerTeclado ler;
 	VarInt varint;
+	Erros erro;
 	//CondParada conp;
 	//VarDouble vard;
 	//VarString varstring;
@@ -34,6 +35,7 @@ class Interpretador{
 		this.enq = new Enquanto(this);
 		this.ler = new LerTeclado(this);
 		this.varint = new VarInt();
+		this.erro = new Erros();
 		
 	}
 	
@@ -63,6 +65,10 @@ class Interpretador{
 					break;
 					
 					case "double":
+						d.Declarar(tok, cont);
+					break;
+					
+					case "string":
 						d.Declarar(tok, cont);
 					break;
 					
@@ -174,79 +180,7 @@ class Interpretador{
 		}
 		return 1000;
 	}
-	/*
-	// Criação de variaveis
-	public boolean CriarVariavelInt(String[] linhas){
-		if(linhas[0].equals("inteiro")){ // criando variavel do tipo inteiro
-			if(linhas.length > 3 && linhas.length < 5 && !TestaString(linhas[1]) && linhas[2].equals("=")){  //declaracao com atribuição.
-				String nome = linhas[1];
-				String tipo = linhas[0];
-				if(!isInt(linhas[3])){  // testa se é um numero inteiro.
-					System.out.println("Declaracao errada!!!");
-					System.exit(0);
-				}
-				int rec = Integer.parseInt(linhas[3]);
-				int a = getVariavel(nome);		
-				if(a != 1000){ // se retornar outro valor, a variavel nome ja existe.
-					System.out.println("Variavel ja declarada");
-					System.exit(0);
-				}
-				int d = PosicaVetor();
-				if(d == 1000) System.exit(0);
-				v[d] = new VarInt();
-				v[d] = varint.Varint(nome, rec, tipo);
-				return true;
-			}else if(linhas.length < 3 &&  !TestaString(linhas[1]) ){ // declaração de variavel sem atribução.
-				String nome = linhas[1];
-				int a = getVariavel(nome);
-				if(a != 1000){
-					System.out.println("Variavel ja foi declarada " + nome);
-					System.exit(0);
-				}
-				String tipo = linhas[0];
-				int d = PosicaVetor();
-				if(d == 1000) System.exit(0);
-				v[d] = new VarInt();
-				v[d] = varint.Varint(nome, 0, tipo);
-				return true;
-			}
-			
-		}else if(linhas[0].equals("double")){ // criando variavel do tipo double.
-			if(linhas.length > 3 && linhas.length < 5 && !TestaString(linhas[1]) && linhas[2].equals("=")){ 
-				String nome = linhas[1];
-				String tipo = linhas[0];
-				double a = Double.parseDouble(linhas[3]);
-				int t = PosicaVetor();
-				if(t == 1000) System.exit(0);
-				v[t] = new VarInt();
-				v[t] = varint.Vardouble(nome, a, tipo);
-				return true;
-			}else if(linhas.length < 3 && !TestaString(linhas[1])){ // declaração de variavel do tipo double sem atribuição.
-				String nome = linhas[1];
-				String tipo = linhas[0];
-				int t = PosicaVetor();
-				if(t == 1000) System.exit(0);
-				v[t] = new VarInt();
-				v[t] = varint.Vardouble(nome, 0.0, tipo);
-				return true;
-			}			
-		}else if(linhas[0].equals("string")){
-			if(linhas.length > 3 && linhas.length < 5 && !TestaString(linhas[1]) && linhas[2].equals("=")){
-				String nome = linhas[1];
-				String tipo = linhas[0];
-				String a = linhas[3];
-				int t = PosicaVetor();
-				if(t == 1000) System.exit(0);
-				v[t] = new VarInt();
-				v[t] = varint.VarString(nome, a, tipo);
-				return true;
-			}
-			
-		}
-		return false;
 	
-	}
-	*/
 	public int PosicaVetor(){
 		for(int i = 0; i < v.length; i++){
 			if(v[i] == null) return i;

@@ -15,21 +15,19 @@ class Declaracao{
 		
 		// atribuição de uma variavel para outra, ex: a = b
 		if(linhas.length < 4 && linhas.length > 1 && linhas[1].equals("=")){
-			if(inter.TestaString(linhas[2])){
-				ses = Double.parseDouble(linhas[2]);
-			}else{
+			if(inter.TestaString(linhas[2])) ses = Double.parseDouble(linhas[2]);
+			else{
 				int d = inter.getVariavel(linhas[2]);
-				if(d == 1000 || inter.v[d].getTipo().equals("string")){
-					System.out.println("Variavel nao declarada, ou tipo de atribuiçao invalida na linha " + (cont + 1)); System.exit(0);
-				}else{
+				if(d == 1000) inter.erro.Erro5(linhas[2], cont);
+				if(inter.v[d].getTipo().equals("string")) inter.erro.Erro2(linhas[2], cont);	
+				else{
 					if(inter.v[d].getTipo().equals("inteiro")) ses = inter.v[d].getVint();
 					else ses = inter.v[d].getVdouble();
 				}
 			}
 			int d = inter.getVariavel(linhas[0]);
-			if(d == 1000 || inter.v[d].getTipo().equals("string")){
-				System.out.println("Problema na hora de fazer a atribuicao!!!"); System.exit(0);
-			}
+			if(d == 1000) inter.erro.Erro5(linhas[0], cont);
+			if(inter.v[d].getTipo().equals("string")) inter.erro.Erro2(linhas[0], cont);
 			if(inter.v[d].getTipo().equals("inteiro")){
 				qe = inter.v[d].getVint();
 				ar = true;
@@ -47,8 +45,8 @@ class Declaracao{
 			String n = linhas[0].substring(1, 3);
 			String nome = linhas[0].substring(0, 1); // recebe a variavel
 			int d = inter.getVariavel(nome); // retorna a posicao da variavel.
-			if(d == 1000 || inter.v[d].getTipo().equals("string")) System.exit(0);
-			
+			if(d == 1000) inter.erro.Erro5(linhas[2], cont);
+			if(inter.v[d].getTipo().equals("string")) inter.erro.Erro2(linhas[0], cont);	
 			if(inter.v[d].getTipo().equals("inteiro")){
 				int a = inter.v[d].getVint();
 				if(n.equals("--")) inter.v[d].setIn((a - 1));
@@ -59,7 +57,7 @@ class Declaracao{
 				else if(n.equals("++")) inter.v[d].setDou((a + 1));
 			}
 		}
-				
+				// continuar ...
 		// criacao de variaveis.
 		else if(linhas[0].equals("inteiro") || linhas[0].equals("double") || linhas[0].equals("string")){
 			//inter.CriarVariavelInt(linhas);
@@ -137,12 +135,12 @@ class Declaracao{
 			
 		}
 		//atribuicao para variaveis com operadores.
-		else if(linhas.length > 3 && linhas.length < 6 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") || linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/")){
+		else if(linhas.length > 3 && linhas.length < 6 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/")){
 			double se = 0, re = 0 ;
 			ar = false;
 			int a = inter.getVariavel(linhas[0]); // linha[0] variavel que vai receber o valor, a tem a posicao.
 			if(a == 1000 || inter.v[a].getTipo().equals("string")){ // testa se nao é uma string.
-				System.out.println("Variavel nao existe");
+				System.out.println("Variavel nao existe1");
 				System.exit(0);
 			}
 			if(inter.v[a].getTipo().equals("inteiro")) ar = true;
@@ -150,7 +148,7 @@ class Declaracao{
 			else{
 				int b = inter.getVariavel(linhas[2]);
 				if(b == 1000 || inter.v[b].getTipo().equals("string")){
-					System.out.println("Variavel nao existe");
+					System.out.println("Variavel nao existe2");
 					System.exit(0);
 				}
 				if(inter.v[b].getTipo().equals("inteiro")){
@@ -162,7 +160,7 @@ class Declaracao{
 			else{
 				int b = inter.getVariavel(linhas[4]); // se a variavel existir retorna a posicao do vetor que ela esta.
 				if(b == 1000 || inter.v[b].getTipo().equals("string")){
-					System.out.println("Variavel nao existe");
+					System.out.println("Variavel nao existe3");
 					System.exit(0);
 				}
 				if(inter.v[b].getTipo().equals("inteiro")){
@@ -184,24 +182,24 @@ class Declaracao{
 		}
 		//chama o metodo para calcular a raiz quadradra.
 		else if(linhas.length < 5 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && linhas[2].equals("#")){
-			if(inter.TestaString(linhas[3])){
-				qe = Double.parseDouble(linhas[3]);
-			}else{
-				if(inter.VerificaVariavel(linhas[3])) qe = inter.getValor(linhas[3]);
-				else{
-					System.out.println("Problema na hora calcular a raiz quadrada, variavel nao existe");
-				}
+			if(inter.TestaString(linhas[3])) qe = Double.parseDouble(linhas[3]);		
+			else{
+				int d = inter.getVariavel(linhas[3]);
+				if(d == 1000) inter.erro.Erro5(linhas[3], cont);
+				if(inter.v[d].getTipo().equals("string")) inter.erro.Erro2(linhas[3], cont);
+				if(inter.v[d].getTipo().equals("inteiro")) qe = inter.v[d].getVint();
+				else qe = inter.v[d].getVdouble();
 			}
-			int c = inter.getVariavel(linhas[0]);
-			if(c == 1000){
-				System.out.println("Variavel " + linhas[0] + " nao existe");
-				System.exit(0);
-			} 
-			inter.v[c].setValor(inter.op.RaizQuadrada(qe)); // v[c] vai receber a valor do calcula da raiz quadrada.
-		}
-		else{
-			System.out.println("Erro de sintaxe na linhas " + (cont + 1));
-			System.exit(0);
+			int d = inter.getVariavel(linhas[0]);
+			if(d == 1000) inter.erro.Erro5(linhas[0], cont);
+			if(inter.v[d].getTipo().equals("inteiro")){
+				double p = inter.op.RaizQuadrada(qe);
+				int a = (int)p; // conversao para int se caso a variavel que vai receber a rais for int.
+				inter.v[d].setIn(a);
+			}
+			else inter.v[d].setDou(inter.op.RaizQuadrada(qe));
+		}else{
+			inter.erro.Erro6(cont);
 		}
 	
 	}

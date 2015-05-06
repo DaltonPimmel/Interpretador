@@ -51,8 +51,7 @@ class CondicaoSe{
 				linhas[t] = linhas[t].trim();
 				if(linhas[t].length() > 1 && linhas[t] != null){
 					if(!linhas[t].equals("fim se")){
-						System.out.println("Problema na hora de utilizar o senao, nao he posivel utilizar o senao separado do se");
-						System.exit(0);
+						in.erro.Erro1(cont); //erros
 					 }
 					break;
 				}
@@ -61,7 +60,6 @@ class CondicaoSe{
 				if(linhas[y].length() > 1 && linhas[y] != null){
 					linhas[y] = linhas[y].trim();
 					if(linhas[y].equals("fim senao")){
-						//System.out.println("y: " + y);
 						if(y <= test) in.verdadeiro = true; // testa se o senao esta dentro do laço principal.
 						else in.verdadeiro = false; // altera a a variavel do interpretador. Caso tenho um senao depois outro, e um senao estiver dentro laço principal.
 						if(!cond && y < test) return cont; // se ela achar o senao dentro do loco principal, ele exucuta se o se anterior for falso.
@@ -91,21 +89,24 @@ class CondicaoSe{
 			if(in.TestaString(l[1])) f = Double.parseDouble(l[1]);	 
 			 else{
 				 int d = in.getVariavel(l[1]);
-				 if(d == 1000 || in.v[d].getTipo().equals("stirng")) System.exit(0);
+				 if(d == 1000) in.erro.Erro5(l[1], cont);
+				 if(in.v[d].getTipo().equals("stirng")) in.erro.Erro2(l[1], cont);
 				 if(in.v[d].getTipo().equals("inteiro")) f = in.v[d].getVint();
 				 else f = in.v[d].getVdouble();
 			 }
 			 if(in.TestaString(l[3])) g = Double.parseDouble(l[3]);		
 			 else{
 				 int d = in.getVariavel(l[3]);
-				 if(d == 1000 || in.v[d].getTipo().equals("stirng")) System.exit(0);
+				 if(d == 1000) in.erro.Erro5(l[3], cont);
+				 if(in.v[d].getTipo().equals("stirng")) in.erro.Erro2(l[1], cont);
 				 if(in.v[d].getTipo().equals("inteiro")) g = in.v[d].getVint();
 				 else g = in.v[d].getVdouble();
 			 }
 			 if(in.TestaString(l[5])) e = Double.parseDouble(l[5]);		 
 			 else{
 				 int d = in.getVariavel(l[5]);
-				 if(d == 1000 || in.v[d].getTipo().equals("string")) System.exit(0);
+				 if(d == 1000) in.erro.Erro5(l[5], cont);
+				 if(in.v[d].getTipo().equals("string")) in.erro.Erro2(l[1], cont);
 				 if(in.v[d].getTipo().equals("inteiro")) e = in.v[d].getVint();
 				 else e = in.v[d].getVdouble();
 			 }
@@ -123,19 +124,21 @@ class CondicaoSe{
 			if(in.TestaString(l[1])) f = Double.parseDouble(l[1]);	
 			else{
 				int d = in.getVariavel(l[1]);
-				if(d == 1000 || in.v[d].getTipo().equals("string")) System.exit(0);
+				if(d == 1000) in.erro.Erro5(l[1], cont);
+				if(in.v[d].getTipo().equals("string")) in.erro.Erro2(l[1], cont);
 				if(in.v[d].getTipo().equals("inteiro")) f = in.v[d].getVint();
 				else f = in.v[d].getVdouble();
 			}
 			if(in.TestaString(l[3])) g = Double.parseDouble(l[3]);	 
 			else{
 				int d = in.getVariavel(l[3]);
-				if(d == 1000 || in.v[d].getTipo().equals("string")) System.exit(0);
+				if(d == 1000) in.erro.Erro5(l[3], cont);
+				if(in.v[d].getTipo().equals("string")) in.erro.Erro2(l[1], cont);
 				if(in.v[d].getTipo().equals("inteiro")) g = in.v[d].getVint();
 				else g = in.v[d].getVdouble();
 			}	
 		}else{
-			System.out.println("erro na hora de utilizar a logica se "); System.exit(0);
+			in.erro.Erro3(cont); // erro
 		}
 		
 		if (in.log.Log(l, f, g)){ //retorna false ou verdade para seguir para a proxima linha. se ele passar por todas as condiçoes retorna verdadeiro.
