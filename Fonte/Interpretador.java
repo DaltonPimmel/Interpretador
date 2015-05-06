@@ -19,7 +19,7 @@ class Interpretador{
 	//VarDouble vard;
 	//VarString varstring;
 	
-	private boolean con = true, verdadeiro = false, condd = false;
+	public boolean con = true, verdadeiro = false, condd = false;
 	private int cond, p, f;
 	
 	public Interpretador(){
@@ -85,9 +85,9 @@ class Interpretador{
 					case "senao":
 						if(verdadeiro){ // se verdadeiro for treu, pode-se utilizar o senao
 							cont = se.Se(l, cont, Lfim);
-							verdadeiro = false;
+							//verdadeiro = false;
 						}else{
-							System.out.println("Problema na hora de utilizar o senao, nao he posivel utilizar antes do se : Linha : " + (cond + 1));
+							System.out.println("111Problema na hora de utilizar o senao, nao he posivel utilizar antes do se : Linha : " + (cond + 1));
 							System.exit(0);
 						}
 						if(cont == 0){

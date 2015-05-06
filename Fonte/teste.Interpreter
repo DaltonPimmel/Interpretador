@@ -1,8 +1,12 @@
 inicio programa()
 
-	inteiro a = 10
-	inteiro b = 5
+	se 1 > 0
+		imprime 'oi'
+	fim se
 	
+	senao
+		imprime 'ok'
+	fim senao
 	
 	
 fim programa
