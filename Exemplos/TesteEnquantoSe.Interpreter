@@ -1,0 +1,24 @@
+inicio programa()
+
+	inteiro a = 5
+	
+	enquanto a != 0
+	
+		se a % 2 == 0
+			imprime 'par'
+		fim se
+		senao 
+			imprime 'impar'
+		fim senao
+		se 1 > 2 
+			imprime 'ok'
+		fim se
+		senao
+			imprime 'ola'
+		fim senao
+		imprime 'oi'
+		a = a - 1
+		
+	fim enquanto
+	
+fim programa
