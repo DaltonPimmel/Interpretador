@@ -1,0 +1,29 @@
+inicio programa()
+
+	inteiro a = 5
+	
+
+	se 1 > 0
+		se 2 > 0
+			imprime 'oi'
+			se 2 > 0
+				imprime 'ola'
+			fim se
+			senao
+				imprime 'ok'
+			fim senao
+		fim se
+	fim se
+	senao
+		imprime 'okok'
+	fim senao
+	
+	
+	se 1 > 1
+		imprime 'oi'
+	fim se
+	senao
+		imprime 'erro'
+	fim senao
+	
+fim programa
