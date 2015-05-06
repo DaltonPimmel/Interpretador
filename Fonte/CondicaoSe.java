@@ -41,7 +41,7 @@ class CondicaoSe{
 			dd = 0; // zera as variaveis de controle.
 			c = 0;
 		}else{	
-			for(y = cont + 1; y < linhas.length; y++){
+			for(y = cont + 1; y < linhas.length && linhas[y] != null; y++){
 				if(linhas[y].length() > 1 && linhas[y] != null){
 					linhas[y] = linhas[y].trim();
 					if(linhas[y].equals("fim senao")){		

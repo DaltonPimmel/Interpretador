@@ -14,35 +14,38 @@ class Enquanto{
 		int c = 0;
 		double e = 0, d = 0;
 		tok = linha[l].trim().split(" ");
-		//System.out.println(linha[1]);
 			for(k = l + 1; k < linha.length && linha[k] != null; k++){
 				if(linha[k].length() > 1 && linha[k] != null){
 					linha[k] = linha[k].trim();
 					//if(linha[k].equals("enquanto")) c++;
 					if(linha[k].equals("fim enquanto")){
-						System.out.println(tok[3]);
 						if(in.TestaString(tok[1])){
 							d = Double.parseDouble(tok[1]);	
 						}
 						else{
-							if(in.VerificaVariavel(tok[1])) d = in.getValor(tok[1]);
+							int a = in.getVariavel(tok[1]);
+							if(a == 1000) System.exit(0);
+							if(in.v[a].getTipo().equals("inteiro"))  d = in.v[a].getVint();
 							else{
-								System.out.println("Variavel nao localizada11111111111!!!"); System.exit(0);
+								d = in.v[a].getVdouble();
+								//d = (int)ce;
 							}
-						
+							
 						}	
 						if(in.TestaString(tok[3])){
 							e = Double.parseDouble(tok[3]);
 						}	
 						else{
-							if(in.VerificaVariavel(tok[3])) e = in.getValor(tok[3]);
+							int a = in.getVariavel(tok[3]);
+							if(a == 1000) System.exit(0);
+							if(in.v[a].equals("inteiro")) e = in.v[a].getVint();
 							else{
-								System.out.println("Variavel nao localizada!!!"); System.exit(0);
-							}		
+								e = in.v[a].getVdouble();
+								//e = (int)de;
+							}
 						}
-						if(in.log.Log(tok, d, e)){
-							return true;
-						}
+						boolean t = in.log.Log(tok, d, e);
+						if(t)return true;
 						return false;
 					}
 				}
@@ -55,6 +58,6 @@ class Enquanto{
 	}
 	
 
-// verificar os operadores, se colocar umoperador que nao existe retorna 0
+// verificar os operadores, se colocar um operador que nao existe retorna 0
 
 }

@@ -7,7 +7,7 @@ class Declaracao{
 		this.inter = i;
 	}
 
-	public void Declarar(String[] linhas){
+	public void Declarar(String[] linhas, int cont){
 		String tipo;
 		boolean ar = false;
 		double qe = 0;
@@ -20,7 +20,7 @@ class Declaracao{
 			}else{
 				int d = inter.getVariavel(linhas[2]);
 				if(d == 1000 || inter.v[d].getTipo().equals("string")){
-					System.out.println("Variavel nao declarada!!!"); System.exit(0);
+					System.out.println("Variavel nao declarada, ou tipo de atribuiçao invalida na linha " + (cont + 1)); System.exit(0);
 				}else{
 					if(inter.v[d].getTipo().equals("inteiro")) ses = inter.v[d].getVint();
 					else ses = inter.v[d].getVdouble();
@@ -36,7 +36,7 @@ class Declaracao{
 			}
 			else qe = inter.v[d].getVdouble();
 			if(ar){
-				int r = (int)ses;
+				int r = (int)ses; // se a primeira variavel for int, ele faz a conversao.
 				inter.v[d].setIn(r);
 			}else{
 				inter.v[d].setDou(ses);
@@ -109,6 +109,10 @@ class Declaracao{
 				System.exit(0);
 			} 
 			inter.v[c].setValor(inter.op.RaizQuadrada(qe)); // v[c] vai receber a valor do calcula da raiz quadrada.
+		}
+		else{
+			System.out.println("Erro de sintaxe na linhas " + (cont + 1));
+			System.exit(0);
 		}
 	
 	}

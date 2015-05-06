@@ -15,11 +15,12 @@ class Interpretador{
 	Enquanto enq;
 	LerTeclado ler;
 	VarInt varint;
+	//CondParada conp;
 	//VarDouble vard;
 	//VarString varstring;
 	
 	private boolean con = true, verdadeiro = false, condd = false;
-	private int cond, p;
+	private int cond, p, f;
 	
 	public Interpretador(){
 		this.d = new Declaracao(this);
@@ -33,6 +34,7 @@ class Interpretador{
 		this.enq = new Enquanto(this);
 		this.ler = new LerTeclado(this);
 		this.varint = new VarInt();
+		//this.conp = new CondParada();
 		//this.vard = new VarDouble();
 		//varstring = new VarString();
 	}
@@ -59,11 +61,11 @@ class Interpretador{
 				switch(a){
 					
 					case "inteiro":	
-						d.Declarar(tok);
+						d.Declarar(tok, cont);
 					break;
 					
 					case "double":
-						d.Declarar(tok);
+						d.Declarar(tok, cont);
 					break;
 					
 					case "imprime":
@@ -89,7 +91,7 @@ class Interpretador{
 							System.exit(0);
 						}
 						if(cont == 0){
-							System.out.println("erroooooooo no senao");
+							System.out.println("Nao foi localizado o fim do senao");
 							System.exit(0);
 						}//else{
 						//	System.out.println("Imposivel usuar o senao antes do se dsddsdsdsdsdeded");
@@ -99,17 +101,23 @@ class Interpretador{
 					
 					case "enquanto":
 						 p = cont;
-						if(enq.Enquan(l, cont)) condd = true;
+						 con = true; // o break ou o continue pode ser usado.
+						if(enq.Enquan(l, cont)){
+							 condd = true;
+							 continue;
+						 }
 						else{ // se retornar falso, pula as linhas até a achar o fim enquanto.
 							while(!l[cont].equals("fim enquanto")){
 								cont++;
 							}
+							condd = false;
 						}
 					break;
 					
 					case "fim":
 						if(l[cont].equals("fim enquanto")){
-							if(condd) cont = p; // se for verdadeiro retorna aonde achou o enquanto.
+							con = false;
+							if(condd) cont = p - 1; // se for verdadeiro retorna aonde achou o enquanto.
 							continue;
 						}
 					break;
@@ -118,9 +126,21 @@ class Interpretador{
 						if(ler.Leia(tok, cont));
 					break;
 					
+					case "break":
+						if(!con) System.exit(0);
+						while(!l[cont].equals("fim enquanto")){
+							cont++;
+						}
+					break;
+					
+					case "continue":
+						if(!con) System.exit(0);
+						cont = p; // aonde começa o enquanto;
+					break;
+					
 					default:
 						if(l[cont].equals("inicio programa()") || l[cont].equals("fim se") || l[cont].equals("fim senao") || l[cont].equals("fim enquanto") || l[cont].equals("fim programa")) continue;
-						d.Declarar(tok);
+						d.Declarar(tok, cont);
 					
 					break;
 					
