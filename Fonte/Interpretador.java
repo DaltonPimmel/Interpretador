@@ -73,7 +73,7 @@ class Interpretador{
 					break;
 					
 					case "imprime":
-						im.Imprimir(tok);
+						im.Imprimir(tok, cont);
 					break;
 						
 					case "se":
@@ -162,16 +162,16 @@ class Interpretador{
 		return false;
 	}
 	
-	public double getValor(String n){ 
-		for(int i = 0; v[i] != null; i++){    // verifcar este metos nas outras classes esta com problema.
-			if(v[i].getNome().equals(n)){
-				if(v[i].getTipo().equals("inteiro")) return v[i].getVint();
-				if(v[i].getTipo().equals("double")) return v[i].getVdouble();
+	//public double getValor(String n){ 
+	//	for(int i = 0; v[i] != null; i++){    // verifcar este metos nas outras classes esta com problema.
+	//		if(v[i].getNome().equals(n)){
+		//		if(v[i].getTipo().equals("inteiro")) return v[i].getVint();
+			//	if(v[i].getTipo().equals("double")) return v[i].getVdouble();
 			//	if(v[i].getTipo().equals("string")) return v[i].getVstring();
-			}
-		}
-		return 0;
-	}
+			//}
+		//}
+	//	return 0;
+//	}
 	
 	// testa se existe a variavel e retorna a posicao do vetor.
 	public int getVariavel(String n){
@@ -200,14 +200,24 @@ class Interpretador{
     
     // testa se a variavel é do tipo inteira na hora da declaração.
     public boolean isInt(String v) {  
-    try {  
-        Integer.parseInt(v);  
-        return true;  
-    } catch (Exception e) {  
-        return false;  
-    }  
-}  
+		try {  
+			Integer.parseInt(v);  
+			return true;  
+		} catch (Exception e) {  
+			return false;  
+		}  
+	} 
+	public boolean isDouble(String n){
+		try{
+			Double.parseDouble(n);
+			return true;
+		} catch (Exception e){
+			return false;
+		}
+	}
+		
+} 
 
 	
-}
+
     

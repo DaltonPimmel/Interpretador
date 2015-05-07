@@ -19,6 +19,19 @@ class Erros{
 	public void Erro6(int cont){
 		System.out.println("Erro de sintaxe na linha " + (cont + 1)); System.exit(0);	
 	}
+	public void Erro7(String n, int cont){
+		System.out.println("Erro na declaracao da variavel ' " + n + " ' valor nao corresponde ao tipo de variavel, linha: " + (cont + 1));
+		System.exit(0);
+	}
+	public void Erro8(String n, int cont){
+		System.out.println("Variavel ' " + n + " ' ja declarada, linha: " + (cont + 1)); System.exit(0);
+	}
+	public void Erro9(){
+		System.out.println("Limetes para declaracao de variaveis esgotado"); System.exit(0);
+	}
+	
+	
+	
 
 
 }

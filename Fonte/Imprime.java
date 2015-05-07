@@ -8,7 +8,7 @@ class Imprime{
 	}
 		
 
-	public void Imprimir(String[] linhas){
+	public void Imprimir(String[] linhas, int cont){
 		// imprimindo Strings.
 		if(linhas.length > 1 && linhas[1].contains("'") ){ 
 			String s = " ";
@@ -29,10 +29,7 @@ class Imprime{
 			else{
 				//System.out.println(in.getValor(linhas[1]));
 				int d = in.getVariavel(linhas[1]);
-				if(d == 1000){
-					System.out.println("Variavel nao existe!!!");
-					System.exit(0);
-				}
+				if(d == 1000) in.erro.Erro5(linhas[1], cont);
 				if(in.v[d].getTipo().equals("inteiro")){
 					int a = in.v[d].getVint();
 					System.out.println(a);
@@ -68,23 +65,22 @@ class Imprime{
 		//}
 		// impressão com operadores.
 		else if(linhas.length > 3 && linhas.length < 5 && linhas[2].equals("+") || linhas[2].equals("-") || linhas[2].equals("*") || linhas[2].equals("/")){
-			double num = -1, num1 = -1;
-			if(in.TestaString(linhas[1])){   // testa se é um numero ou uma variavel, se nao for vai verificar nas variaveis se exite.
-				num = Double.parseDouble(linhas[1]);
-			}else{
-				if(in.VerificaVariavel(linhas[1])) num = in.getValor(linhas[1]);
-				else{
-					System.out.println("problema na imopressao, variavel nao localizada"); System.exit(0);
-				}
+			double num = 0, num1 = 0;
+			if(in.TestaString(linhas[1])) num = Double.parseDouble(linhas[1]);  // testa se é um numero ou uma variavel, se nao for vai verificar nas variaveis se exite.	
+			else{
+				int d = in.getVariavel(linhas[1]);
+				if(d == 1000) in.erro.Erro5(linhas[1], cont);
+				if(in.v[d].getTipo().equals("string")) in.erro.Erro2(linhas[2], cont);
+				if(in.v[d].getTipo().equals("inteiro")) num = in.v[d].getVint();
+				else num = in.v[d].getVdouble();
 			}
-			if(in.TestaString(linhas[3])){
-				num1 = Double.parseDouble(linhas[3]);
-			}else{
-				if(in.VerificaVariavel(linhas[3])) num1 = in.getValor(linhas[3]);
-				else{
-					System.out.println("problema na imopressao, variavel nao localizada"); System.exit(0);
-				}
-				
+			if(in.TestaString(linhas[3])) num1 = Double.parseDouble(linhas[3]);	
+			else{
+				int d = in.getVariavel(linhas[3]);
+				if(d == 1000) in.erro.Erro5(linhas[3], cont);
+				if(in.v[d].getTipo().equals("string")) in.erro.Erro2(linhas[2], cont);
+				if(in.v[d].getTipo().equals("inteiro")) num1 = in.v[d].getVint();
+				else num1 = in.v[d].getVdouble();	
 			}
 			double res = in.op.operacoes(linhas[2], num, num1); // chama o metodo das operacoes para imprimir.
 			System.out.println(res);

@@ -1,20 +1,43 @@
 inicio programa()
 
 	inteiro a = 10
-	double b = 20
+	double b = 20.4
 	string c = ola
+	 imprime a
+	 imprime b
+	 imprime c
+	 
+	 a = b
+	 imprime a
+	 
+	 b = a
+	 b = 2
+	 c = oi
+	 c = 3434jhhdsh
+	 imprime c
+	 imprime b
+	 
+	 se 1 > 0
+		imprime 'oi'
+	fim se
+	senao
+		imprime 'ola'
+	fim senao 
 	
-	enquanto a > 7
+	enquanto a > 2
+		imprime 'teste'
 		imprime a
+		a = b
+	fim enquanto
+	
+	a = 10
+	enquanto a != 0
+		se a % 2 == 0
+			imprime a
+		fim se
 		a--
 	fim enquanto
-	string d = oi
-	imprime d
-	b = # 10
-	imprime b
-	
-	a = c
-	imprime a
+		
 	
 fim programa
 
