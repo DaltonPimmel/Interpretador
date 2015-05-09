@@ -127,17 +127,30 @@ class Declaracao{
 		}
 		//chama o metodo para calcular a raiz quadradra.
 		else if(linhas.length < 5 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && linhas[2].equals("#")){
-			if(inter.TestaString(linhas[3])) qe = Double.parseDouble(linhas[3]);		
-			else{
-				//Variaveis a = inter.getVariavel(linhas[3]);
-				//if(a == null) inter.erro.Erro5(linhas[3], cont);
-				//if(a.getTipo().equals("string")) inter.erro.Erro2(linhas[3], cont);
-				qe = (double)inter.Teste(linhas);
-			}
 			Variaveis b = inter.getVariavel(linhas[0]);
 			if(b == null) inter.erro.Erro5(linhas[0], cont);
 			if(b.getTipo().equals("string")) inter.erro.Erro2(linhas[0], cont);
-			b.setValor(inter.op.RaizQuadrada(qe));	
+			if(inter.isDouble(linhas[3]) || inter.isInt(linhas[3])){
+				 qe = Double.parseDouble(linhas[3]);
+				 if(b.getTipo().equals("int")) b.setValor((int)(inter.op.RaizQuadrada(qe)));
+				 else b.setValor(inter.op.RaizQuadrada(qe));
+			}
+			else{
+				Variaveis a = inter.getVariavel(linhas[3]);
+				if(a == null) inter.erro.Erro5(linhas[3], cont);
+				valor = a.getValor(); // nao sabe o que vai receber.
+				if(valor instanceof Double && b.getTipo().equals("int")){
+					qe = (double)valor;
+					int q = (int)inter.op.RaizQuadrada(qe); // se quem chamou for int, e o object valor for double, ele converte para int
+					b.setValor(q);
+				}else if(valor instanceof Integer && b.getTipo().equals("int")){
+					int p = (int)valor; // se os dois for int.
+					b.setValor((int)inter.op.RaizQuadrada(p)); 
+				}else if(valor instanceof Integer){
+					int p = (int)valor;
+					b.setValor(inter.op.RaizQuadrada(p));
+				}
+			} 
 		}
 		else inter.erro.Erro3(cont);	
 	

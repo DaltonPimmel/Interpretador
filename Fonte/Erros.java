@@ -14,7 +14,7 @@ class Erros{
 		System.out.println("Problema na hora calcular a raiz quadrada, variavel nao existe");
 	}
 	public void Erro5(String n, int cont){
-		System.out.println("Erro na linha" + (cont + 1) + " Variavel '" + n + "'nao existe"); System.exit(0);
+		System.out.println("Erro na linha " + (cont + 1) + " Variavel '" + n + "' nao existe"); System.exit(0);
 	}
 	public void Erro6(){
 		System.out.println("Erro de sintaxe na linha "); System.exit(0);	

@@ -194,10 +194,10 @@ class Interpretador{
 		}
 	}
 	
-	public Object Teste(String[] linhas){
-		Variaveis a = getVariavel(linhas[3]);
-		if(a == null) erro.Erro5(linhas[3], 2);
-		if(a.getTipo().equals("string")) erro.Erro2(linhas[3], 2);
+	public Object Teste(String linhas){
+		Variaveis a = getVariavel(linhas);
+		if(a == null) erro.Erro5(linhas, 2);
+		if(a.getTipo().equals("string")) erro.Erro2(linhas, 2);
 		return a.getValor();
 	}
 		

@@ -27,30 +27,12 @@ class Imprime{
 			if(in.TestaString(linhas[1])) System.out.println(linhas[1]);
 			else{
 				Variaveis a = in.getVariavel(linhas[1]);
-				if(a == null) in.erro.Erro5(nome, cont);
-				o = a.getValor();
-				
+				if(a == null) in.erro.Erro5(linhas[1], cont);
+				o = a.getValor();	
 				System.out.println(o);
 			}
 				
 		}
-			//if(linhas[0].equals("string")){
-			//	System.out.pirntln(linhas[1]);
-			//}else if(linhas[0].equals("inteiro")){
-			//	int a = Integer.parseInt(linhas[1]);
-			//	System.out.println()
-			//} 
-			//double h = 0;
-			//if(in.TestaString(linhas[1])){ // chama o TestaString para verificar se um numero.
-			//	System.out.println(linhas[1]);
-			//}else{
-			//	if(in.VerificaVariavel(linhas[1]))   h = in.getValor(linhas[1]); // se não for um numero, chama o verificaVariavel que retornar o valor.
-			//	else{
-				//	System.out.println("problema na imopressao, variavel nao localizada"); System.exit(0);
-				////}
-			//	System.out.println(h);
-			//}
-		//}
 		// impressão com operadores.
 		else if(linhas.length > 3 && linhas.length < 5 && linhas[2].equals("+") || linhas[2].equals("-") || linhas[2].equals("*") || linhas[2].equals("/")){
 			double num = 0, num1 = 0;
