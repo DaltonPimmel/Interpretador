@@ -14,14 +14,10 @@ class Interpretador{
 	Logico log;
 	Enquanto enq;
 	LerTeclado ler;
-	VarInt varint;
 	Erros erro;
-	//CondParada conp;
-	//VarDouble vard;
-	//VarString varstring;
 	
-	public boolean con = true, verdadeiro = false, condd = false;
-	private int cond, p, f;
+	public boolean con = true, verdadeiro = false, teste = true;
+	private int cond, p, Lfim = 0;
 	
 	public Interpretador(){
 		this.d = new Declaracao(this);
@@ -34,14 +30,13 @@ class Interpretador{
 		this.log = new Logico();
 		this.enq = new Enquanto(this);
 		this.ler = new LerTeclado(this);
-		this.varint = new VarInt();
 		this.erro = new Erros();
 		
 	}
 	
     public void interpreta(String l[]) {	
+		
 		Interpretador in = new Interpretador();
-		int Lfim = 0;
 		
 		while(con){  // testa se avhou o inicio e o fim do programa.
 			Lfim = t.Comeco(l);
@@ -53,6 +48,7 @@ class Interpretador{
 		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){ 
 			l[cont] = l[cont].trim();
 			if(l[cont].length() > 1 && l[cont] != null){
+				if(cont > Lfim) erro.Erro10();
 				l[cont] = com.Comentario(l[cont]);
 				if(l[cont].contains("//")) continue;
 				tok = l[cont].trim().split(" ");
@@ -60,7 +56,7 @@ class Interpretador{
 				
 				switch(a){
 					
-					case "inteiro":	
+					case "int":	
 						d.Declarar(tok, cont);
 					break;
 					
@@ -80,54 +76,36 @@ class Interpretador{
 						verdadeiro = true; // verifica se pode utilizar o senao.
 						cond = cont;
 						cont = se.Se(l, cont, Lfim);
-						if(cont == 0){
-							System.out.println("Problema na hora de utilizar se na linha : " + (cond + 1));
-							System.exit(0);
-						}
+						if(cont == 0) erro.Erro16(cont);
 					break;
 					
 					case "senao":
-						if(verdadeiro){ // se verdadeiro for treu, pode-se utilizar o senao
-							cont = se.Se(l, cont, Lfim);
-							//verdadeiro = false;
-						}else{
-							System.out.println("111Problema na hora de utilizar o senao, nao he posivel utilizar antes do se : Linha : " + (cond + 1));
-							System.exit(0);
-						}
-						if(cont == 0){
-							System.out.println("Nao foi localizado o fim do senao");
-							System.exit(0);
-						}//else{
-						//	System.out.println("Imposivel usuar o senao antes do se dsddsdsdsdsdeded");
-						//	System.exit(0);
-						//}
+						if(verdadeiro) cont = se.Se(l, cont, Lfim); // se verdadeiro for treu, pode-se utilizar o senao	
+						else erro.Erro15(cont);
+						if(cont == 0) erro.Erro14(cont);		
 					break;
 					
 					case "enquanto":
-						 p = cont;
-						 con = true; // o break ou o continue pode ser usado.
-						if(enq.Enquan(l, cont)){
-							 condd = true;
-							 continue;
-						 }
-						else{ // se retornar falso, pula as linhas até a achar o fim enquanto.
-							while(!l[cont].equals("fim enquanto")){
-								cont++;
-							}
-							condd = false;
+						if(teste){
+							p = cont;
+							teste = false;
 						}
+						cont = enq.Enquan(l, cont);
 					break;
 					
 					case "fim":
 						if(l[cont].equals("fim enquanto")){
-							con = false;
-							if(condd) cont = p - 1; // se for verdadeiro retorna aonde achou o enquanto.
+							if(enq.Fim(cont)){
+								cont  = p;
+								teste = true;		
+							}
 							continue;
 						}
+						
 					break;
 					
 					case "leia":
-						if(ler.Leia(tok, cont));
+						ler.Leia(tok, cont);
 					break;
 					
 					case "break":
@@ -162,30 +140,30 @@ class Interpretador{
 		return false;
 	}
 	
-	//public double getValor(String n){ 
-	//	for(int i = 0; v[i] != null; i++){    // verifcar este metos nas outras classes esta com problema.
-	//		if(v[i].getNome().equals(n)){
-		//		if(v[i].getTipo().equals("inteiro")) return v[i].getVint();
-			//	if(v[i].getTipo().equals("double")) return v[i].getVdouble();
-			//	if(v[i].getTipo().equals("string")) return v[i].getVstring();
-			//}
-		//}
-	//	return 0;
-//	}
 	
 	// testa se existe a variavel e retorna a posicao do vetor.
-	public int getVariavel(String n){
+	public Variaveis getVariavel(String n){
 		for(int i = 0; v[i] != null; i++){
-			if(v[i].getNome().equals(n)) return i; 
+			if(v[i].getNome().equals(n)) return v[i]; 
 		}
-		return 1000;
+		return null;
 	}
 	
-	public int PosicaVetor(){
+	public Variaveis PosicaVetor(){
 		for(int i = 0; i < v.length; i++){
-			if(v[i] == null) return i;
+			if(v[i] == null) return v[i];
 		}
-		return 1000;
+		return null;
+	}
+	// cria a variavel.
+	public void AdicionaVar(Variaveis a){
+		for(int i = 0; i < v.length; i++){
+			if(v[i] == null){
+				//v[i] = new Variaveis();
+				v[i] = a;
+				break;
+			}
+		}
 	}
 	
 	// teste se é um numero ou um digito
@@ -214,6 +192,13 @@ class Interpretador{
 		} catch (Exception e){
 			return false;
 		}
+	}
+	
+	public Object Teste(String[] linhas){
+		Variaveis a = getVariavel(linhas[3]);
+		if(a == null) erro.Erro5(linhas[3], 2);
+		if(a.getTipo().equals("string")) erro.Erro2(linhas[3], 2);
+		return a.getValor();
 	}
 		
 } 

@@ -1,43 +1,43 @@
 inicio programa()
 
-	inteiro a = 10
-	double b = 20.4
+	int a = 20
+	double b = 10.5
 	string c = ola
-	 imprime a
-	 imprime b
-	 imprime c
-	 
-	 a = b
-	 imprime a
-	 
-	 b = a
-	 b = 2
-	 c = oi
-	 c = 3434jhhdsh
-	 imprime c
-	 imprime b
-	 
-	 se 1 > 0
-		imprime 'oi'
-	fim se
-	senao
-		imprime 'ola'
-	fim senao 
+	imprime a + b
+	imprime a - b
+	imprime b * 2
+	b = b + 15
+	imprime b
+	b--
+	imprime b
+	imprime c
+	imprime c
+	imprime c
+	imprime c
+	c = oi
+	imprime c
 	
-	enquanto a > 2
-		imprime 'teste'
-		imprime a
-		a = b
-	fim enquanto
+	b = # 25 // calcula a raiz quadrada
+	imprime b
 	
-	a = 10
-	enquanto a != 0
-		se a % 2 == 0
-			imprime a
-		fim se
-		a--
-	fim enquanto
-		
+	c = + ola // concatena duas strings
+	imprime c
+	
+	a = b * 2
+	imprime a
+	double g = 2.3
+	imprime g
+	int h = 3.4
+	imprime h
+	int l
+	l = 3.4556 // converte para int
+	imprime l
+	
+	string v
+	v = fdwefewf343434345rfre4t34g543
+	imprime v
+	
+	
 	
 fim programa
 

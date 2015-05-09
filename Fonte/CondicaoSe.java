@@ -7,6 +7,7 @@ class CondicaoSe{
 	private String[] l, tok;
 	private String[] contro;
 	boolean cond = false, verdadeiro = false, uti = false;;
+	String nome, tipo;
 	
 	public CondicaoSe(Interpretador i){
 		this.in = i;
@@ -15,7 +16,7 @@ class CondicaoSe{
 	public int Se(String[] linhas, int cont, int fim){
 		tok = linhas[cont].trim().split(" ");
 		if(tok[0].equals("se")){
-			uti = true;
+		//	uti = true;
 			for(k = cont + 1; k < linhas.length && linhas[k] != null; k++){
 				if(linhas[k].length() > 1 && linhas[k] != null){
 					linhas[k] = linhas[k].trim();
@@ -31,8 +32,6 @@ class CondicaoSe{
 							fi = k; 
 							if(fi > test){
 								test = fi;
-								//System.out.println("test :" + test);
-								//System.out.println("fi :" + fi);  // o ultimo fim se encontrado.
 								break;
 							}
 						}else if(c == 0){
@@ -51,7 +50,7 @@ class CondicaoSe{
 				linhas[t] = linhas[t].trim();
 				if(linhas[t].length() > 1 && linhas[t] != null){
 					if(!linhas[t].equals("fim se")){
-						in.erro.Erro1(cont); //erros
+						in.erro.Erro1(); //erros
 					 }
 					break;
 				}
@@ -88,27 +87,27 @@ class CondicaoSe{
 		if(l.length > 3 && l.length < 7 && l[2].equals("%")){
 			if(in.TestaString(l[1])) f = Double.parseDouble(l[1]);	 
 			 else{
-				 int d = in.getVariavel(l[1]);
-				 if(d == 1000) in.erro.Erro5(l[1], cont);
-				 if(in.v[d].getTipo().equals("stirng")) in.erro.Erro2(l[1], cont);
-				 if(in.v[d].getTipo().equals("inteiro")) f = in.v[d].getVint();
-				 else f = in.v[d].getVdouble();
+				 nome = linhas[1];
+				 Variaveis a = in.getVariavel(nome);
+				 if(a == null) in.erro.Erro5(nome, cont);
+				 if(a.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+				 f = (double)(a.getValor());
 			 }
 			 if(in.TestaString(l[3])) g = Double.parseDouble(l[3]);		
 			 else{
-				 int d = in.getVariavel(l[3]);
-				 if(d == 1000) in.erro.Erro5(l[3], cont);
-				 if(in.v[d].getTipo().equals("stirng")) in.erro.Erro2(l[1], cont);
-				 if(in.v[d].getTipo().equals("inteiro")) g = in.v[d].getVint();
-				 else g = in.v[d].getVdouble();
+				 nome = linhas[3];
+				 Variaveis b = in.getVariavel(nome);
+				 if(b == null) in.erro.Erro10();
+				 if(b.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+				 g = (double)(b.getValor());
 			 }
 			 if(in.TestaString(l[5])) e = Double.parseDouble(l[5]);		 
 			 else{
-				 int d = in.getVariavel(l[5]);
-				 if(d == 1000) in.erro.Erro5(l[5], cont);
-				 if(in.v[d].getTipo().equals("string")) in.erro.Erro2(l[1], cont);
-				 if(in.v[d].getTipo().equals("inteiro")) e = in.v[d].getVint();
-				 else e = in.v[d].getVdouble();
+				nome = linhas[5];
+				Variaveis c = in.getVariavel(nome);
+				if(c == null) in.erro.Erro5(nome, cont);
+				if(c.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+				e = (double)(c.getValor());
 			 }
 			 if(in.op.Mod(f, g, e)){
 				verdadeiro = true;
@@ -123,19 +122,19 @@ class CondicaoSe{
 		else if(l.length > 3 && l.length < 5){ 
 			if(in.TestaString(l[1])) f = Double.parseDouble(l[1]);	
 			else{
-				int d = in.getVariavel(l[1]);
-				if(d == 1000) in.erro.Erro5(l[1], cont);
-				if(in.v[d].getTipo().equals("string")) in.erro.Erro2(l[1], cont);
-				if(in.v[d].getTipo().equals("inteiro")) f = in.v[d].getVint();
-				else f = in.v[d].getVdouble();
+				 nome = linhas[1];
+				 Variaveis a = in.getVariavel(nome);
+				 if(a == null) in.erro.Erro5(nome, cont);
+				 if(a.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+				 f = (double)a.getValor();
 			}
 			if(in.TestaString(l[3])) g = Double.parseDouble(l[3]);	 
 			else{
-				int d = in.getVariavel(l[3]);
-				if(d == 1000) in.erro.Erro5(l[3], cont);
-				if(in.v[d].getTipo().equals("string")) in.erro.Erro2(l[1], cont);
-				if(in.v[d].getTipo().equals("inteiro")) g = in.v[d].getVint();
-				else g = in.v[d].getVdouble();
+				 nome = linhas[3];
+				 Variaveis b = in.getVariavel(nome);
+				 if(b == null) in.erro.Erro5(nome, cont);
+				 if(b.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+				 g = (double) b.getValor();
 			}	
 		}else{
 			in.erro.Erro3(cont); // erro

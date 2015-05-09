@@ -17,10 +17,7 @@ class InicioFim{
 				l[i] = l[i].trim();
 				tok = l[i].substring(0, 2); // recebe os dois primeiros caracteres, se for //, ignora a linha.
 				if(tok.equals("//")) continue;
-				if(!l[i].equals("inicio programa()")){
-					System.out.println("Nao foi posivel localizar o inicio do programa!!! 'inicio programa()'");
-					System.exit(0);
-				}
+				if(!l[i].equals("inicio programa()")) c.erro.Erro12();
 				break;
 			}
 		}
@@ -34,9 +31,7 @@ class InicioFim{
 			}
 		}
 
-		if(fim == null){
-			System.out.println("nao foi localizado o final do programa!!! 'fim programa'"); System.exit(0);
-		}
+		if(fim == null) c.erro.Erro13();	
 		return fi; // fi aonde encontrou o final do programa;
 	}
 }

@@ -1,67 +1,28 @@
-public abstract class Variaveis{
-	
-	
-	public abstract VarInt Varint(String n, int b, String t);
-	public abstract VarInt Vardouble(String f, double v, String t);
-	public abstract VarInt VarString(String n, String a, String t);
+public class Variaveis{
 	
 	
 	private String nome;
-	private double Vdouble;
-	private int Vint;
-	private double valor;
-	private String Vstring;
 	private String tipo;
+	private Object valor;
 	
-	public void setInt(String n, int v, String t){ // cria variavel do tipo int.
-		this.Vint = v;
+	public void setNome(String n){
 		this.nome = n;
+	}
+	public void setTipo(String t){
 		this.tipo = t;
 	}
-	public void setString(String n, String a, String t){
-		this.nome = n;
-		this.Vstring = a;
-		this.tipo = t;
+	public void setValor(Object v){
+		this.valor = v;
 	}
-	public void setDouble(String a, double b, String t){ // cria variavel do tipo double.
-		this.nome = a;
-		this.Vdouble = b;
-		this.tipo = t;
-	}
-
-	public String getNome(){ // retorna o nome da variavel
+	
+	public String getNome(){
 		return this.nome;
 	}
-	//public double getValor(){
-	//	return this.valor;
-	//}
-	public int getVint(){ // retorna o valor da variavel do tipo int.
-		return this.Vint;
-	}
-	public String getTipo(){ // retorna o tipo da variavel.
+	public String getTipo(){
 		return this.tipo;
 	}
-	public String getVstring(){ // retorna o valor da variavel do tipo String.
-		return this.Vstring;
+	public Object getValor(){
+		return this.valor;
 	}
-	public void setNome(String n){ 
-		this.nome = n;
-	}
-	public void setValor(double a){ 
-		this.valor = a;
-	}
-	public double getVdouble(){ // retorna o valor da variavel do tipo double.
-		return this.Vdouble;
-	}
-	public void setIn(int a){
-		this.Vint = a;
-	}
-	public void setDou(double a){
-		this.Vdouble = a;
-	}
-	public void setStrin(String a){
-		this.Vstring = a;
-	}
-	
 
 }

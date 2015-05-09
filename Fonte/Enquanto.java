@@ -4,56 +4,83 @@ class Enquanto{
 	Interpretador in;
 	private int k;
 	private String[] tok;
+	private int cont;
+	boolean h = false;
+	int c = 0, test = 0;
 	
 	public Enquanto(Interpretador i){
 		this.in = i;
 	}
 	
-	public boolean Enquan(String[] linha, int l){
-		k = l + 1;
-		int c = 0;
+	public int Enquan(String[] linha, int l){
+		String nome;
 		double e = 0, d = 0;
-		tok = linha[l].trim().split(" ");
+		//int test = 0;
+		
 			for(k = l + 1; k < linha.length && linha[k] != null; k++){
 				if(linha[k].length() > 1 && linha[k] != null){
 					linha[k] = linha[k].trim();
-					//if(linha[k].equals("enquanto")) c++;
+					tok = linha[k].trim().split(" ");
+					//System.out.println(linha[k]);
+					if(tok[0].equals("enquanto")){  // verificar ........................
+						//System.out.println("teste04");
+						c++;
+					}
 					if(linha[k].equals("fim enquanto")){
-						if(in.TestaString(tok[1])){
-							d = Double.parseDouble(tok[1]);	
-						}
-						else{
-							int a = in.getVariavel(tok[1]);
-							if(a == 1000) System.exit(0);
-							if(in.v[a].getTipo().equals("inteiro"))  d = in.v[a].getVint();
-							else{
-								d = in.v[a].getVdouble();
-								//d = (int)ce;
+						if(c != 0){
+							cont = k;
+							test = cont;
+							c--;
+							continue;
+						}else if(c == 0){
+							cont = k;
+							if(k > cont){
+								test = k; // tem a ultima ocorrencia.
 							}
-							
-						}	
-						if(in.TestaString(tok[3])){
-							e = Double.parseDouble(tok[3]);
-						}	
-						else{
-							int a = in.getVariavel(tok[3]);
-							if(a == 1000) System.exit(0);
-							if(in.v[a].equals("inteiro")) e = in.v[a].getVint();
-							else{
-								e = in.v[a].getVdouble();
-								//e = (int)de;
-							}
+							break;
 						}
-						boolean t = in.log.Log(tok, d, e);
-						if(t)return true;
-						return false;
 					}
 				}
+			}
+					//	c = 0;
+					//System.out.println(tok[1]);
+						if(in.TestaString(tok[1])) d = Double.parseDouble(tok[1]);				
+						else{
+							nome = linha[3];
+							Variaveis a = in.getVariavel(nome);
+							if(a == null) in.erro.Erro5(nome, cont);
+							if(a.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+							d = (double) a.getValor();
+							
+						}	
+						if(in.TestaString(tok[3])) e = Double.parseDouble(tok[3]);		
+						else{
+							nome = linha[3];
+							Variaveis b = in.getVariavel(nome);
+							if(b == null) in.erro.Erro5(nome, cont);
+							if(b.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+							e = (double) b.getValor();
+							}
+						boolean t = in.log.Log(tok, d, e);
+						if(t){
+						//	System.out.println("teste");
+							 return l;
+						 }
+						if(k < test) return k;
+						return test;
+						
+						
+	}
+
+	
+	public boolean Fim(int con){
+		//System.out.println(con);
+		if(con == test){
+		//	System.out.println("teste21");
+		//	c = 0;
+			return true;
 		}
-		
-			System.out.println("Erro de sintaxe no hora de utilizar o enquanto na linha " + l + " , verificar manual da linguagem!!!");
-			System.exit(0);
-		
+		System.out.println(tok);
 		return false;
 	}
 	

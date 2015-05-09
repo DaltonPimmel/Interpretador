@@ -2,6 +2,8 @@
 class Imprime{
 	
 	Interpretador in;
+	String nome;
+	Object o = new Object();
 	
 	public Imprime(Interpretador i){
 		this.in = i;
@@ -16,10 +18,7 @@ class Imprime{
 				s = s + linhas[i] + " ";
 			}
 			int a = s.trim().length();
-			if(s.charAt(a) != '\''){ // teste se na ultima posicao tem aspas.
-				System.out.println("Erro na impressao da String, Para impressao de String utiliza-se ' String ' ");
-				System.exit(0);
-			}
+			if(s.charAt(a) != '\'') in.erro.Erro11(cont); // teste se na ultima posicao tem aspas.
 			String r = s.substring(2, (s.length() - 2)); // eliminando as ''
 			System.out.println(r);
 		}
@@ -27,23 +26,12 @@ class Imprime{
 		else if(linhas.length == 2){
 			if(in.TestaString(linhas[1])) System.out.println(linhas[1]);
 			else{
-				//System.out.println(in.getValor(linhas[1]));
-				int d = in.getVariavel(linhas[1]);
-				if(d == 1000) in.erro.Erro5(linhas[1], cont);
-				if(in.v[d].getTipo().equals("inteiro")){
-					int a = in.v[d].getVint();
-					System.out.println(a);
-				}else if(in.v[d].getTipo().equals("double")){
-					double a = in.v[d].getVdouble();
-					System.out.println(a);
-				}else if(in.v[d].getTipo().equals("string")){
-					String a = in.v[d].getVstring();
-					System.out.println(a);
-				}
+				Variaveis a = in.getVariavel(linhas[1]);
+				if(a == null) in.erro.Erro5(nome, cont);
+				o = a.getValor();
+				
+				System.out.println(o);
 			}
-			
-			
-			
 				
 		}
 			//if(linhas[0].equals("string")){
@@ -66,21 +54,26 @@ class Imprime{
 		// impressão com operadores.
 		else if(linhas.length > 3 && linhas.length < 5 && linhas[2].equals("+") || linhas[2].equals("-") || linhas[2].equals("*") || linhas[2].equals("/")){
 			double num = 0, num1 = 0;
+			int ds = 0;
 			if(in.TestaString(linhas[1])) num = Double.parseDouble(linhas[1]);  // testa se é um numero ou uma variavel, se nao for vai verificar nas variaveis se exite.	
 			else{
-				int d = in.getVariavel(linhas[1]);
-				if(d == 1000) in.erro.Erro5(linhas[1], cont);
-				if(in.v[d].getTipo().equals("string")) in.erro.Erro2(linhas[2], cont);
-				if(in.v[d].getTipo().equals("inteiro")) num = in.v[d].getVint();
-				else num = in.v[d].getVdouble();
+				nome = linhas[1];
+				Variaveis a = in.getVariavel(nome);
+				if(a == null) in.erro.Erro5(nome, cont);
+				if(a.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+				if(a.getValor() instanceof Integer){
+					ds = (int) a.getValor();
+					num = (double)ds;
+				}
+				else num = (double) a.getValor();
 			}
 			if(in.TestaString(linhas[3])) num1 = Double.parseDouble(linhas[3]);	
 			else{
-				int d = in.getVariavel(linhas[3]);
-				if(d == 1000) in.erro.Erro5(linhas[3], cont);
-				if(in.v[d].getTipo().equals("string")) in.erro.Erro2(linhas[2], cont);
-				if(in.v[d].getTipo().equals("inteiro")) num1 = in.v[d].getVint();
-				else num1 = in.v[d].getVdouble();	
+				nome = linhas[3];
+				Variaveis b = in.getVariavel(nome);
+				if(b == null) in.erro.Erro5(nome, cont);
+				if(b.getTipo().equals("string")) in.erro.Erro2(nome, cont);
+				num1 = (double) b.getValor();	
 			}
 			double res = in.op.operacoes(linhas[2], num, num1); // chama o metodo das operacoes para imprimir.
 			System.out.println(res);
