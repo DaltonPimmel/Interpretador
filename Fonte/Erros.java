@@ -45,10 +45,15 @@ class Erros{
 		System.out.println("Erro na linha " + (cont + 1) + " nao foi localizado o final do senao"); System.exit(0);
 	}
 	public void Erro15(int cont){
-		System.out.println("Erro na linha " + (cont + 1) + "nao he posivel utilizar o senao antes do se"); System.exit(0);
+		System.out.println("Erro na linha " + (cont + 1) + " nao he posivel utilizar o senao antes do se"); System.exit(0);
 	}
 	public void Erro16(int cont){
 		System.out.println("Erro na linha " + (cont + 1) + "nao foi localizado o final do se"); System.exit(0);
+	}
+	public void Erro17(int cont){
+		System.exit(-1);
+		//for(int i = 1000; i > 0; i--) System.out.println(" ");
+		System.out.println("Erro na atribuicao de Variaveis na linha " + (cont + 1) + " , variaveis de tipos diferentes"); System.exit(0);
 	}
 
 }

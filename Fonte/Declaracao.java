@@ -27,31 +27,28 @@ class Declaracao{
 						int p = (int)qe; // se o tipo for int converte para int.
 						valor = p;
 					}else if(a.getTipo().equals("double")) valor = qe;	 // se for um double	
-					else valor = linhas[2];	 // se for uma string
+					else valor = linhas[2];	 // se for uma string recebe qualquer valor.
 					a.setValor(valor);
 			}else {
 				Variaveis b = inter.getVariavel(linhas[2]);
-				if(b == null){ // se b for null, se o tio da variavel for != de int ou double, ele é umastring, aceita qualquer valor.
-					if(a.getTipo().equals("int") || a.getTipo().equals("double")) inter.erro.Erro3(cont);
-					valor = linhas[2]; //caso o b nao seje uma variavel, ele é uma string.
-					a.setValor(valor);
-				}
+				if(b == null) inter.erro.Erro5(nome, cont); // string, aceita qualquer valor.
 				else if(a.getTipo().equals(b.getTipo())) valor = b.getValor(); // teste para ver os parametros de atribuicao,
 				else if(a.getTipo().equals("int") && b.getTipo().equals("double")) valor = b.getValor();
 				else if(a.getTipo().equals("double") && b.getTipo().equals("int")) valor = b.getValor();
-				else if(a.getTipo().equals("stirng")) valor = b.getValor(); // rece quanquer coisa
-				else inter.erro.Erro1(); 
-				if(valor instanceof Integer && a.getTipo().equals("int")) a.setValor(valor);
+				else if(a.getTipo().equals("string")) valor = b.getValor(); // rece quanquer coisa
+				else inter.erro.Erro17(cont);  // se nao for esses parametros da erro.
+				if(valor instanceof Integer && a.getTipo().equals("int")) a.setValor(valor); 
 				if(valor instanceof Double && a.getTipo().equals("double")) a.setValor(valor);
-				if(valor instanceof Integer && a.getTipo().equals("double")){
+				if(valor instanceof Integer && a.getTipo().equals("double")){ // conversões de valores para tipos diferentes.
 					int rr = (int)valor;
 					qe = (double)rr; a.setValor(qe);
 				}else if(valor instanceof Double && a.getTipo().equals("int")){
 					qe = (double)valor;
 					int rr = (int)qe; a.setValor(rr);
-				}else if(valor instanceof String){
-					String ss = (String)valor;
-					a.setValor(ss);
+				}else if(a.getTipo().equals("string")){ // uma string recebe qualquer valor, nao precisa de parametros.
+					//System.out.println("teste");
+					//String ss = ObjectString(valor);
+					a.setValor(valor);
 				}
 			}
 		}
@@ -72,6 +69,7 @@ class Declaracao{
 		else if(linhas[0].equals("int") || linhas[0].equals("double") || linhas[0].equals("string")){
 			double teste = 0;
 			if(linhas.length > 1 && linhas.length < 5 && !inter.TestaString(linhas[1])){
+				System.out.println(linhas[2]);
 				nome = linhas[1];
 				tipo = linhas[0];
 				Variaveis a = inter.getVariavel(nome);
@@ -96,6 +94,7 @@ class Declaracao{
 					inter.AdicionaVar(a); // criando a variavel.			
 				}		
 			}else {  //declaracao de strings.
+				System.out.println(linhas[2]);
 				if(!inter.TestaString(linhas[1]) && linhas[2].equals("=")){
 					nome = linhas[1];
 					String lin = " ";
@@ -104,6 +103,8 @@ class Declaracao{
 					lin = lin.trim();
 					String ch = lin.substring(0, 1); int d = lin.length();
 					String ch1 = lin.substring((d - 1), d);
+					System.out.println(ch);
+					System.out.println(ch1);
 					if(ch.equals("\'") && ch1.equals("\'")){
 						Variaveis a = inter.getVariavel(nome);
 						if(a != null) inter.erro.Erro8(nome, cont); // variavel existe.
@@ -126,19 +127,14 @@ class Declaracao{
 			if(a.getTipo().equals("int") || a.getTipo().equals("double")){
 				if(inter.TestaString(linhas[2])) se = Double.parseDouble(linhas[2]);
 				else{
-					Variaveis b = inter.getVariavel(linhas[2]);
-					if(b == null) inter.erro.Erro5(linhas[2], cont);
-					if(b.getTipo().equals("string")) inter.erro.Erro2(linhas[2], cont);
-					se = (double) b.getValor();
+					se = inter.RetornaValor(linhas[2], cont);
 				}
 				if(inter.TestaString(linhas[4])) re = Double.parseDouble(linhas[4]);
 				else{
-					Variaveis c = inter.getVariavel(linhas[4]);
-					if(c == null) inter.erro.Erro5(linhas[4], cont);
-					if(c.getTipo().equals("string")) inter.erro.Erro2(linhas[4], cont);
-					re = (double) c.getValor();
+					re = inter.RetornaValor(linhas[4], cont);
 				}
 				double res = inter.op.operacoes(op, se, re);
+				
 				a.setValor(res);
 			}else if(a.getTipo().equals("string") && linhas[2].equals("+")){ // juntando duas strings
 				String h = (String)a.getValor();

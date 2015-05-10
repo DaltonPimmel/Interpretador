@@ -1,10 +1,9 @@
 inicio programa()
 
-	string a = 'ola oi ola'
-	imprime a 
+
+	string a = 'oi'
+	imprime a
 	
-	string b = 'ola oi ola teste ola ' 
-	imprime b
 	
 	
 fim programa
