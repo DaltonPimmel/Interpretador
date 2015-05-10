@@ -36,14 +36,19 @@ class Declaracao{
 					valor = linhas[2]; //caso o b nao seje uma variavel, ele é uma string.
 					a.setValor(valor);
 				}
-				else if(a.getTipo().equals(b.getTipo())) valor = b.getValor();
+				else if(a.getTipo().equals(b.getTipo())) valor = b.getValor(); // teste para ver os parametros de atribuicao,
 				else if(a.getTipo().equals("int") && b.getTipo().equals("double")) valor = b.getValor();
 				else if(a.getTipo().equals("double") && b.getTipo().equals("int")) valor = b.getValor();
-				else if(a.getTipo().equals("stirng")) valor = b.getValor();
+				else if(a.getTipo().equals("stirng")) valor = b.getValor(); // rece quanquer coisa
 				else inter.erro.Erro1(); 
-				if(valor instanceof Integer || valor instanceof Double){
-					double rr = (double)valor;
-					 a.setValor(rr);
+				if(valor instanceof Integer && a.getTipo().equals("int")) a.setValor(valor);
+				if(valor instanceof Double && a.getTipo().equals("double")) a.setValor(valor);
+				if(valor instanceof Integer && a.getTipo().equals("double")){
+					int rr = (int)valor;
+					qe = (double)rr; a.setValor(qe);
+				}else if(valor instanceof Double && a.getTipo().equals("int")){
+					qe = (double)valor;
+					int rr = (int)qe; a.setValor(rr);
 				}else if(valor instanceof String){
 					String ss = (String)valor;
 					a.setValor(ss);
@@ -84,15 +89,32 @@ class Declaracao{
 							  valor = y; 
 						  }
 						 else valor = tt; // se o a string linhas[3] for um numero, o objeto valor recebe Double.
-					}else{
-						 String jj = linhas[3]; // se a linhas[3] for uma string.
-						 valor = jj;
-					 }
+					}
 					a.setNome(nome); // setando os valores.
 					a.setTipo(tipo);
 					a.setValor(valor);
 					inter.AdicionaVar(a); // criando a variavel.			
 				}		
+			}else {  //declaracao de strings.
+				if(!inter.TestaString(linhas[1]) && linhas[2].equals("=")){
+					nome = linhas[1];
+					String lin = " ";
+					int f = linhas.length;
+					for(int y = 3; y < f; y++) lin += " " + linhas[y].trim();	
+					lin = lin.trim();
+					String ch = lin.substring(0, 1); int d = lin.length();
+					String ch1 = lin.substring((d - 1), d);
+					if(ch.equals("\'") && ch1.equals("\'")){
+						Variaveis a = inter.getVariavel(nome);
+						if(a != null) inter.erro.Erro8(nome, cont); // variavel existe.
+						a = new Variaveis();
+						lin = lin.replace("\'", " "); lin = lin.trim();
+						a.setNome(nome);
+						a.setTipo(linhas[0]);
+						a.setValor(lin);
+						inter.AdicionaVar(a);
+					}	
+				}else inter.erro.Erro3(cont);
 			}
 		}
 		//atribuicao para variaveis com operadores.

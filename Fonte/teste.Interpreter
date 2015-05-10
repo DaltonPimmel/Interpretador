@@ -1,10 +1,11 @@
 inicio programa()
 
-	double a = 3.4
-	int b = 9
+	string a = 'ola oi ola'
+	imprime a 
 	
-	a = # b
-	imprime a
+	string b = 'ola oi ola teste ola ' 
+	imprime b
+	
 	
 fim programa
 
