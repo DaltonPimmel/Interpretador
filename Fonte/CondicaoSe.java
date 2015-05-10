@@ -37,7 +37,7 @@ class CondicaoSe{
 					}
 				}
 			}
-			if(teste == 0) return 0; // não achou o final do se.
+			if(teste == 0) in.erro.Erro16(cont);; // não achou o final do se.
 			teste = 0; dd = 0; c = 0; // zera as variaveis de controle.
 		}else{	
 			for(y = cont + 1; y < linhas.length && linhas[y] != null; y++){
@@ -60,7 +60,7 @@ class CondicaoSe{
 					 }	
 				}
 			}
-			return 0; // se nao achar o final do senao retorna 0.
+			in.erro.Erro14(cont); // se nao achar o final do senao retorna 0.
 		}
 		if(fi == 0) return 0;
 		l = linhas[cont].trim().split(" ");

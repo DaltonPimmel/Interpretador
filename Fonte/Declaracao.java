@@ -13,8 +13,8 @@ class Declaracao{
 		String nome;
 		Object valor = new Object();
 		boolean ar = false;
-		double qe = 0;
-		double ses = 0;
+		double qe = 0, ses = 0;
+		int p = 0;
 		
 		// atribuição de uma variavel para outra, ex: a = b
 		if(linhas.length < 4 && linhas.length > 1 && linhas[1].equals("=")){
@@ -24,7 +24,7 @@ class Declaracao{
 				if(inter.isInt(linhas[2]) || inter.isDouble(linhas[2])){
 					 qe = Double.parseDouble(linhas[2]); // se for um numero ele recebe em um double, depois testa para fazer a conversao.
 					if(a.getTipo().equals("int")){
-						int p = (int)qe; // se o tipo for int converte para int.
+						p = (int)qe; // se o tipo for int converte para int.
 						valor = p;
 					}else if(a.getTipo().equals("double")) valor = qe;	 // se for um double	
 					else valor = linhas[2];	 // se for uma string recebe qualquer valor.
@@ -40,16 +40,13 @@ class Declaracao{
 				if(valor instanceof Integer && a.getTipo().equals("int")) a.setValor(valor); 
 				if(valor instanceof Double && a.getTipo().equals("double")) a.setValor(valor);
 				if(valor instanceof Integer && a.getTipo().equals("double")){ // conversões de valores para tipos diferentes.
-					int rr = (int)valor;
-					qe = (double)rr; a.setValor(qe);
+					p = (int)valor;
+					qe = (double)p; a.setValor(qe);
 				}else if(valor instanceof Double && a.getTipo().equals("int")){
 					qe = (double)valor;
-					int rr = (int)qe; a.setValor(rr);
-				}else if(a.getTipo().equals("string")){ // uma string recebe qualquer valor, nao precisa de parametros.
-					//System.out.println("teste");
-					//String ss = ObjectString(valor);
-					a.setValor(valor);
-				}
+					p = (int)qe; a.setValor(p);
+				}else if(a.getTipo().equals("string")) a.setValor(valor);// uma string recebe qualquer valor, nao precisa de parametros.
+						
 			}
 		}
 		// Atruição de variavel, ex: a--, a++
@@ -59,83 +56,91 @@ class Declaracao{
 			Variaveis a = inter.getVariavel(nome);
 			if(a == null) inter.erro.Erro5(nome, cont);
 			if(a.getTipo().equals("string")) inter.erro.Erro2(nome, cont);
-			double yy = (double)(a.getValor());
-			if(n.equals("--")) a.setValor((yy - 1));
-			else if(n.equals("++")) a.setValor((yy + 1));
+			ses = (double)(a.getValor());
+			if(n.equals("--")) a.setValor((ses - 1));
+			else if(n.equals("++")) a.setValor((ses + 1));
 			else inter.erro.Erro1();
 		}
 			
 		// criacao de variaveis.
 		else if(linhas[0].equals("int") || linhas[0].equals("double") || linhas[0].equals("string")){
 			double teste = 0;
-			if(linhas.length > 1 && linhas.length < 5 && !inter.TestaString(linhas[1])){
-				System.out.println(linhas[2]);
-				nome = linhas[1];
-				tipo = linhas[0];
-				Variaveis a = inter.getVariavel(nome);
-				if(a != null) inter.erro.Erro8(nome, cont); // variavel existe.
-				a = new Variaveis();
-				if(linhas.length == 2){ // variavel sem atribuição
-					a.setNome(nome);
-					a.setTipo(tipo);
-					inter.AdicionaVar(a);
-				}else if(linhas.length > 2 && linhas[2].equals("=") && linhas.length < 5){ // variavel com atribuição,
-					if(inter.isInt(linhas[3]) || inter.isDouble(linhas[3])){
-						 double tt = Double.parseDouble(linhas[3]);
-						 if(linhas[0].equals("int")){
-							  int y = (int)tt;  // caso a variavel seja int ele converte.
-							  valor = y; 
-						  }
-						 else valor = tt; // se o a string linhas[3] for um numero, o objeto valor recebe Double.
+			if(!linhas[0].equals("string")){
+				if(linhas.length > 1 && linhas.length < 5 && !inter.TestaString(linhas[1])){
+					nome = linhas[1];
+					tipo = linhas[0];
+					Variaveis a = inter.getVariavel(nome);
+					if(a != null) inter.erro.Erro8(nome, cont); // variavel existe.
+					a = new Variaveis();
+					if(linhas.length == 2){ // variavel sem atribuição
+						a.setNome(nome);
+						a.setTipo(tipo);
+						inter.AdicionaVar(a);
+					}else if(linhas.length > 2 && linhas[2].equals("=") && linhas.length < 5){ // variavel com atribuição,
+						if(inter.isInt(linhas[3]) || inter.isDouble(linhas[3])){
+							ses = Double.parseDouble(linhas[3]);
+							if(linhas[0].equals("int")){
+								p = (int)ses;  // caso a variavel seja int ele converte.
+								valor = p; 
+							}else valor = ses;
+						}
+						a.setNome(nome); // setando os valores.
+						a.setTipo(tipo);
+						a.setValor(valor);
+						inter.AdicionaVar(a); // criando a variavel.			
 					}
-					a.setNome(nome); // setando os valores.
-					a.setTipo(tipo);
-					a.setValor(valor);
-					inter.AdicionaVar(a); // criando a variavel.			
 				}		
 			}else {  //declaracao de strings.
-				System.out.println(linhas[2]);
-				if(!inter.TestaString(linhas[1]) && linhas[2].equals("=")){
+				if(!inter.TestaString(linhas[1])){
 					nome = linhas[1];
-					String lin = " ";
-					int f = linhas.length;
-					for(int y = 3; y < f; y++) lin += " " + linhas[y].trim();	
-					lin = lin.trim();
-					String ch = lin.substring(0, 1); int d = lin.length();
-					String ch1 = lin.substring((d - 1), d);
-					System.out.println(ch);
-					System.out.println(ch1);
-					if(ch.equals("\'") && ch1.equals("\'")){
-						Variaveis a = inter.getVariavel(nome);
-						if(a != null) inter.erro.Erro8(nome, cont); // variavel existe.
-						a = new Variaveis();
-						lin = lin.replace("\'", " "); lin = lin.trim();
-						a.setNome(nome);
-						a.setTipo(linhas[0]);
-						a.setValor(lin);
-						inter.AdicionaVar(a);
+					tipo = linhas[0];
+					Variaveis a = inter.getVariavel(nome);
+					if(a != null) inter.erro.Erro8(nome, cont); // variavel existe.
+					a = new Variaveis();
+					if(linhas.length > 2 && linhas[2].equals("=")){
+						String lin = " ";
+						int f = linhas.length;
+						for(int y = 3; y < f; y++) lin += " " + linhas[y].trim();	
+						lin = lin.trim();
+						String ch = lin.substring(0, 1); int d = lin.length();
+						String ch1 = lin.substring((d - 1), d);
+						if(ch.equals("\'") && ch1.equals("\'")){		
+							lin = lin.replace("\'", " "); lin = lin.trim();
+							a.setNome(nome);
+							a.setTipo(linhas[0]);
+							a.setValor(lin);
+							inter.AdicionaVar(a);
+						}else inter.erro.Erro3(cont);
 					}	
+					else if(linhas.length == 2 && !inter.TestaString(linhas[1])){
+						a.setNome(nome);
+						a.setTipo(tipo);
+						inter.AdicionaVar(a);
+					}
 				}else inter.erro.Erro3(cont);
 			}
 		}
 		//atribuicao para variaveis com operadores.
 		else if(linhas.length > 2 && linhas.length < 6 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && ( linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/") || linhas[2].equals("+"))){
-			double se = 0, re = 0 ; // poderia calcular chamandos os metodos com os valores, porem nao tem como saber se é uma variavel ou não.
+			//double se = 0, re = 0 ; // poderia calcular chamandos os metodos com os valores, porem nao tem como saber se é uma variavel ou não.
 			String op = linhas[3];
 			Variaveis a = inter.getVariavel(linhas[0]);
 			if(a == null) inter.erro.Erro1();
 			if(a.getTipo().equals("int") || a.getTipo().equals("double")){
-				if(inter.TestaString(linhas[2])) se = Double.parseDouble(linhas[2]);
+				if(inter.TestaString(linhas[2])) ses = Double.parseDouble(linhas[2]);
 				else{
-					se = inter.RetornaValor(linhas[2], cont);
+					ses = inter.RetornaValor(linhas[2], cont);
 				}
-				if(inter.TestaString(linhas[4])) re = Double.parseDouble(linhas[4]);
+				if(inter.TestaString(linhas[4])) qe = Double.parseDouble(linhas[4]);
 				else{
-					re = inter.RetornaValor(linhas[4], cont);
+					qe = inter.RetornaValor(linhas[4], cont);
 				}
-				double res = inter.op.operacoes(op, se, re);
+				double res = inter.op.operacoes(op, ses, qe);
+				if(a.getValor() instanceof Integer){
+					 p = (int)res;
+					 a.setValor(p);
+				 }else a.setValor(res);
 				
-				a.setValor(res);
 			}else if(a.getTipo().equals("string") && linhas[2].equals("+")){ // juntando duas strings
 				String h = (String)a.getValor();
 				h += " " + linhas[3];
@@ -159,13 +164,13 @@ class Declaracao{
 				valor = a.getValor(); // nao sabe o que vai receber.
 				if(valor instanceof Double && b.getTipo().equals("int")){
 					qe = (double)valor;
-					int q = (int)inter.op.RaizQuadrada(qe); // se quem chamou for int, e o object valor for double, ele converte para int
-					b.setValor(q);
+					p = (int)inter.op.RaizQuadrada(qe); // se quem chamou for int, e o object valor for double, ele converte para int
+					b.setValor(p);
 				}else if(valor instanceof Integer && b.getTipo().equals("int")){
-					int p = (int)valor; // se os dois for int.
+					p = (int)valor; // se os dois for int.
 					b.setValor((int)inter.op.RaizQuadrada(p)); 
 				}else if(valor instanceof Integer){
-					int p = (int)valor;
+					p = (int)valor;
 					b.setValor(inter.op.RaizQuadrada(p));
 				}
 			} 

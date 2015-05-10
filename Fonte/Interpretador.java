@@ -76,13 +76,11 @@ class Interpretador{
 						verdadeiro = true; // verifica se pode utilizar o senao.
 						cond = cont;
 						cont = se.Se(l, cont, Lfim);
-						if(cont == 0) erro.Erro16(cont);
 					break;
 					
 					case "senao":
 						if(verdadeiro) cont = se.Se(l, cont, Lfim); // se verdadeiro for treu, pode-se utilizar o senao	
-						else erro.Erro15(cont);
-						if(cont == 0) erro.Erro14(cont);		
+						else erro.Erro15(cont);		
 					break;
 					
 					case "enquanto":
@@ -204,16 +202,17 @@ class Interpretador{
 	// testa se a variavel existe e faz as conversao e retorna um double.
 	public double RetornaValor(String nome, int cont){
 		int p;
-		double g;
+		double g = 0;
 		Variaveis b = getVariavel(nome);
 		if(b == null) erro.Erro5(nome, cont);
 		if(b.getTipo().equals("string")) erro.Erro2(nome, cont);
+		if(b.getValor() == null) erro.Erro18(nome, cont);
 		if(b.getValor() instanceof Integer){
 			p = (int)b.getValor();
 			g = p;
 		}
-		 else g = (double) b.getValor();
-		 return g;	
+		else if(b.getValor() instanceof Double) g = (double)b.getValor();
+		return g;	
 	}
 		
 } 
