@@ -13,8 +13,8 @@ class Enquanto{
 	}
 	
 	public int Enquan(String[] linha, int l){
-		String rec = " ";
 		
+		String rec = " ";
 		rec = in.EspacoEmBranco(linha[l]); // metodo para tirar os espaços em branco
 		
 		String nome;

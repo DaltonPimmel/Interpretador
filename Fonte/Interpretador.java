@@ -18,6 +18,8 @@ class Interpretador{
 	
 	public boolean con = true, verdadeiro = false;
 	private int cond, p, Lfim = 0;
+	private String[] tok;
+	private String a;
 	
 	public Interpretador(){
 		this.d = new Declaracao(this);
@@ -31,7 +33,6 @@ class Interpretador{
 		this.enq = new Enquanto(this);
 		this.ler = new LerTeclado(this);
 		this.erro = new Erros();
-		
 	}
 	
     public void interpreta(String l[]) {	
@@ -43,8 +44,6 @@ class Interpretador{
 			con = false;
 		}
 		
-		String[] tok;
-		String a;
 		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){ 
 			l[cont] = l[cont].trim();
 			if(l[cont].length() > 1 && l[cont] != null){
@@ -85,8 +84,8 @@ class Interpretador{
 					
 					case "enquanto":
 						con = true;
-						p = cont;
 						cont = enq.Enquan(l, cont);
+						p = cont;
 					break;
 					
 					case "fim":
@@ -97,14 +96,12 @@ class Interpretador{
 					break;
 					
 					case "leia":
-						ler.Leia(tok, cont);
+						ler.Leia(l, cont);
 					break;
 					
 					case "break":
 						if(!con) erro.Erro20("break", cont);
-						while(!l[cont].equals("fim enquanto")){
-							cont++;
-						}
+						cont = enq.Fim(cont);
 					break;
 					
 					case "continue":

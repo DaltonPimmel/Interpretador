@@ -1,39 +1,43 @@
-// testes de laço e condição
+//  recebe um numero e vai dizendo se é primo ou nao, até que o usuario digite 0
 
 inicio programa()
-
-
-	imprime            'oi'
 	
-	enquanto  1          >             0
+	int k = 1
+	int i = 1
+	int p = 0
 	
-		imprime            1
-		imprime            2
+	imprime '' // pula uma linha
+	imprime 'Numeros Primos, precione 0 para sair:'
+
+	
+	enquanto k != 0  // dado um numero ele testa todos os numeros até 0 os que são primos e imprime na tela.
+	
+		leia k
 		
-		imprime            3
-		break
-	fim                  enquanto
+		se k == 0
+			break
+		fim se
+		enquanto i <= k
+			se k % i == 0
+				p++
+			fim se
+			i++
+		fim enquanto
+		
+		se p < 3
+			imprime 'numero he primo'
+		fim se
+		senao
+			imprime 'Nao he primo'
+		fim    senao
+		imprime ''
+		p = 0
+		i = 0
+		
+	fim enquanto
 	
-	int     a =     20
-	double b            =               10
-	imprime    a    +                 b
-	imprime    b            -                   20
-	
-	
-	se 0           >              0
-		imprime                   1
-	fim                        se
-	senao
-		imprime 'ola'
-	fim       senao
-	
-	b =  a
-	b--
-	b =   b  - 2
-	imprime  b
 	
 	
 	
 fim programa
 	
-
