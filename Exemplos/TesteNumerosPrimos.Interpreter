@@ -1,0 +1,43 @@
+//  recebe um numero e vai dizendo se é primo ou nao, até que o usuario digite 0
+
+inicio programa()
+	
+	int k = 1
+	int i = 1
+	int p = 0
+	
+	imprime '' // pula uma linha
+	imprime 'Numeros Primos, precione 0 para sair:'
+
+	
+	enquanto k != 0  // dado um numero ele testa todos os numeros até 0 os que são primos e imprime na tela.
+	
+		leia k
+		
+		se k == 0
+			break
+		fim se
+		enquanto i <= k
+			se k % i == 0
+				p++
+			fim se
+			i++
+		fim enquanto
+		
+		se p < 3
+			imprime 'numero he primo'
+		fim se
+		senao
+			imprime 'Nao he primo'
+		fim    senao
+		imprime ''
+		p = 0
+		i = 0
+		
+	fim enquanto
+	
+	
+	
+	
+fim programa
+	
