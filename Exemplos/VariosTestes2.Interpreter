@@ -1,0 +1,84 @@
+// testes de laço e condição
+
+inicio programa()
+
+	imprime 'oi'
+	int a = 20
+	double f = 2
+	
+	// teste de uma laço dentro de outro laço
+	enquanto a > 0
+		imprime a
+		enquanto f > 0
+			imprime 'a'
+			f--
+		fim enquanto
+		a--
+		
+	fim enquanto
+	
+	int r
+	r = 30
+	double t
+	t = r
+	imprime r
+	imprime t
+	
+	se t > r
+		imprime 1
+	fim se
+	senao
+		imprime 2
+	fim senao
+	
+	// teste daq condicao se dentro do enquanto
+	enquanto r != 0
+		se 2 > 1
+			imprime 'mais um teste'
+		fim se
+		senao
+			imprime 'ok'
+		fim senao
+		r = r - 5
+	fim enquanto
+	
+	// teste que le um numero do teclado até que seja digitado 0, e informa se o numero lido é par ou impar.
+	int g = 1
+	enquanto g != 0
+		leia g
+		se g % 2 == 0
+			imprime 'par'
+		fim se
+		senao
+			imprime 'impar'
+		fim senao
+	fim enquanto
+	
+	int k = 20
+	int i = 2
+	int p = 0
+	
+	imprime '' // pula uma linha
+	imprime 'Numeros Primos:'
+	
+	enquanto k != 0  // dado um numero ele testa todos os numeros até 0 os que são primos e imprime na tela.
+		enquanto i <= k
+			se k % i == 0
+				p++
+			fim se
+			i++
+		fim enquanto
+		
+		se p < 3
+			imprime k
+		fim se
+		p = 0
+		i = 0
+		k--
+	fim enquanto
+	
+	
+	
+fim programa
+	
+
