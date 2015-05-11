@@ -7,7 +7,7 @@ class Declaracao{
 		this.inter = i;
 	}
 
-	public void Declarar(String[] linhas, int cont){
+	public void Declarar(String[] linh, int cont){
 
 		String tipo;
 		String nome;
@@ -15,8 +15,12 @@ class Declaracao{
 		boolean ar = false;
 		double qe = 0, ses = 0;
 		int p = 0;
+		String linha = " ";
+		String[] linhas;
 		
-		// atribuição de uma variavel para outra, ex: a = b
+		linha = inter.EspacoEmBranco(linh);
+		linhas = linha.trim().split(" ");
+		
 		if(linhas.length < 4 && linhas.length > 1 && linhas[1].equals("=")){
 			nome = linhas[0];
 			Variaveis a = inter.getVariavel(nome);
@@ -45,8 +49,7 @@ class Declaracao{
 				}else if(valor instanceof Double && a.getTipo().equals("int")){
 					qe = (double)valor;
 					p = (int)qe; a.setValor(p);
-				}else if(a.getTipo().equals("string")) a.setValor(valor);// uma string recebe qualquer valor, nao precisa de parametros.
-						
+				}else if(a.getTipo().equals("string")) a.setValor(valor);// uma string recebe qualquer valor, nao precisa de parametros.		
 			}
 		}
 		// Atruição de variavel, ex: a--, a++
@@ -127,21 +130,21 @@ class Declaracao{
 			}
 		}
 		//atribuicao para variaveis com operadores.
-		else if(linhas.length > 2 && linhas.length < 6 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && ( linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/") || linhas[2].equals("+"))){
+		else if(linhas.length > 2 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && ( linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/") || linhas[2].equals("+"))){
 			//double se = 0, re = 0 ; // poderia calcular chamandos os metodos com os valores, porem nao tem como saber se é uma variavel ou não.
 			String op = linhas[3];
 			Variaveis a = inter.getVariavel(linhas[0]);
 			if(a == null) inter.erro.Erro1();
 			if(a.getTipo().equals("int") || a.getTipo().equals("double")){
+				
 				if(inter.TestaString(linhas[2])) ses = Double.parseDouble(linhas[2]);
-				else{
-					ses = inter.RetornaValor(linhas[2], cont);
-				}
+				else ses = inter.RetornaValor(linhas[2], cont);
+
 				if(inter.TestaString(linhas[4])) qe = Double.parseDouble(linhas[4]);
-				else{
-					qe = inter.RetornaValor(linhas[4], cont);
-				}
+				else qe = inter.RetornaValor(linhas[4], cont);
+	
 				double res = inter.op.operacoes(op, ses, qe);
+				
 				if(a.getValor() instanceof Integer){
 					 p = (int)res;
 					 a.setValor(p);
@@ -149,10 +152,23 @@ class Declaracao{
 				
 			}else if(a.getTipo().equals("string") && linhas[2].equals("+")){ // juntando duas strings
 				String h = (String)a.getValor();
-				h += " " + linhas[3];
-				a.setValor(h); 
-			} else inter.erro.Erro3(cont);
-	
+				Variaveis b = inter.getVariavel(linhas[3]);
+				if(inter.isInt(linhas[3]) || inter.isDouble(linhas[3])) a.setValor(h + linhas[3]);	
+				else if(b != null) a.setValor(h += " " + (b.getValor())); // junta duas variaveis
+				else{
+					String j = " "; // se não for uma variavel, testas os parametros.
+					for(int y = 3; y < linhas.length; y++) j += " " + linhas[y]; 
+					j = j.trim();
+					String ch = j.substring(0, 1); int d = j.length();
+					String ch1 = j.substring((d - 1), d);
+					if(ch.equals("\'") && ch1.equals("\'")){
+						j = j.replace("\'", " "); 
+						a.setValor((a.getValor() + j));
+					}else inter.erro.Erro3(cont);
+					
+				}
+				
+			}
 		}
 		//chama o metodo para calcular a raiz quadradra.
 		else if(linhas.length < 5 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && linhas[2].equals("#")){

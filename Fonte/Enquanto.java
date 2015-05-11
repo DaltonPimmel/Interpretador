@@ -12,12 +12,16 @@ class Enquanto{
 		this.in = i;
 	}
 	
-	public int Enquan(String[] linha, int l){
+	public int Enquan(String[] linhas, int l, String[] tok){
+		String rec = " ";
+		rec = in.EspacoEmBranco(tok); // metodo para tirar os espaços em branco
+		String[] linha = rec.trim().split(" "); 
+		
 		
 		String nome;
 		double e = 0, d = 0;
 		String[] aux;
-		aux = linha[l].trim().split(" ");
+		aux = rec.trim().split(" ");
 		ly = l;
 			for(k = l + 1; k < linha.length && linha[k] != null; k++){
 				if(linha[k].length() > 1 && linha[k] != null){

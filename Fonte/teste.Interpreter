@@ -1,18 +1,27 @@
+// testes de laço e condição
+
 inicio programa()
 
-	imprime 'oi'
-	int a = 20
-	double f = 2
+	string a                                   = 'oi'
+	string b =           'ola'
+	a = +     b
+	imprime  a
+	string   c
+	c =     a
+	imprime    c
+	c =    +        'teste'
+	imprime                c
+	int y        =             0
+	imprime          y
 	
-	enquanto a > 0
-		imprime a
-		enquanto f > 0
-			imprime 'a'
-			f--
-		fim enquanto
-		a--
-		
-	fim enquanto
+//	enquanto      1     >           0
+//		imprime           'teste'
+//		break
+//	fim         enquanto
+	
+	se 1 > 0
+		imprime 'ok'
+	fim se
 	
 fim programa
 	

@@ -2,19 +2,17 @@
 class CondicaoSe{
 	
 	private Interpretador in;
-	private int fi = 0, c = 0, dd = 0, k, teste = 0, test = 0, y;
-	private boolean te;
-	private String[] l, tok;
-	private String[] contro;
-	boolean cond = false, verdadeiro = false, uti = false;;
+	private int fi = 0, c = 0, k, teste = 0, test = 0, y;
+	private String[] l, tok, contro;
+	boolean cond = false, verdadeiro = false, te;
 	String nome, tipo;
-	Object valor;
 	
 	public CondicaoSe(Interpretador i){
 		this.in = i;
 	}
 
 	public int Se(String[] linhas, int cont, int fim){
+		
 		tok = linhas[cont].trim().split(" ");
 		if(tok[0].equals("se")){
 			for(k = cont + 1; k < linhas.length && linhas[k] != null; k++){
@@ -38,7 +36,7 @@ class CondicaoSe{
 				}
 			}
 			if(teste == 0) in.erro.Erro16(cont);; // não achou o final do se.
-			teste = 0; dd = 0; c = 0; // zera as variaveis de controle.
+			teste = 0; c = 0; // zera as variaveis de controle.
 		}else{	
 			for(y = cont + 1; y < linhas.length && linhas[y] != null; y++){
 				if(linhas[y].length() > 1 && linhas[y] != null){
@@ -69,17 +67,14 @@ class CondicaoSe{
 		// teste do mod dentro do se.
 		if(l.length > 3 && l.length < 7 && l[2].equals("%")){
 			if(in.TestaString(l[1])) f = Double.parseDouble(l[1]);	 
-			 else{
-				 f = in.RetornaValor(l[1], cont);
-			 }
+			 else f = in.RetornaValor(l[1], cont);
+			 
 			 if(in.TestaString(l[3])) g = Double.parseDouble(l[3]);		
-			 else{
-				 g = in.RetornaValor(l[3], cont);
-			 }
+			 else g = in.RetornaValor(l[3], cont);
+			 
 			 if(in.TestaString(l[5])) e = Double.parseDouble(l[5]);		 
-			 else{
-				 e = in.RetornaValor(l[5], cont);
-			 }
+			 else e = in.RetornaValor(l[5], cont);
+			 
 			 if(in.op.Mod(f, g, e)){
 				verdadeiro = true;
 				cond = true;
@@ -90,18 +85,14 @@ class CondicaoSe{
 			 return k;		
 		}
 		// verifica se o se é verdade ou nao.
-		else if(l.length > 3 && l.length < 5){ 
+		else if(l.length > 3 && l.length < 5 && l[2].equals("==") || l[2].equals(">=") || l[2].equals("<=") || l[2].equals(">") || l[2].equals("<") || l[2].equals("!=")){ 
 			if(in.TestaString(l[1])) f = Double.parseDouble(l[1]);	
-			else{
-				 f = in.RetornaValor(l[1], cont);
-			}
+			else f = in.RetornaValor(l[1], cont);
+			
 			if(in.TestaString(l[3])) g = Double.parseDouble(l[3]);	 
-			else{
-				 g = in.RetornaValor(l[3], cont);
-			}	
-		}else{
-			in.erro.Erro3(cont); // erro
-		}
+			else g = in.RetornaValor(l[3], cont);
+	
+		}else in.erro.Erro3(cont); // erro
 		
 		if(in.log.Log(l, f, g)){ //retorna false ou verdade para seguir para a proxima linha. se ele passar por todas as condiçoes retorna verdadeiro.
 			verdadeiro = true;

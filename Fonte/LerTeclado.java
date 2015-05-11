@@ -15,7 +15,7 @@ class LerTeclado{
 			if(a == null) i.erro.Erro5(linhas[1], cont);
 			if(a.getTipo().equals("int")){
 				 double f = (in.nextDouble()); // se for um int, e receber um double ele converte para int.
-				 int p = (int)f;
+				 int p = (int)f;  // no caso de digitar um double em uma variavel que é do tipo int, ele converte para int
 				 a.setValor(p);
 			 }
 			else if(a.getTipo().equals("double")) a.setValor(in.nextDouble());

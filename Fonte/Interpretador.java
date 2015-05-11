@@ -85,7 +85,7 @@ class Interpretador{
 					
 					case "enquanto":
 				//	System.out.println("teste");
-						cont = enq.Enquan(l, cont);
+						cont = enq.Enquan(l, cont, tok);
 					break;
 					
 					case "fim":
@@ -205,6 +205,17 @@ class Interpretador{
 		}
 		else if(b.getValor() instanceof Double) g = (double)b.getValor();
 		return g;	
+	}
+	
+	// metodo que elemina os espaços em branco
+	public String EspacoEmBranco(String[] linh){
+		String linha = " ";
+		for(int l = 0; l < linh.length; l++){
+			if(linh[l].length() != 0){		
+				linha += " " + linh[l]; 
+			}
+		}
+		return linha;
 	}
 		
 } 

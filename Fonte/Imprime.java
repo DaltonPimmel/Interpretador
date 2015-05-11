@@ -9,8 +9,11 @@ class Imprime{
 		this.in = i;
 	}
 		
-
-	public void Imprimir(String[] linhas, int cont){
+	public void Imprimir(String[] linha, int cont){
+		
+		String rec = in.EspacoEmBranco(linha);
+		String[] linhas = rec.trim().split(" ");
+		
 		// imprimindo Strings.
 		if(linhas.length > 1 && linhas[1].contains("'") ){ 
 			String s = " ";
@@ -37,26 +40,13 @@ class Imprime{
 		else if(linhas.length > 3 && linhas.length < 5 && linhas[2].equals("+") || linhas[2].equals("-") || linhas[2].equals("*") || linhas[2].equals("/")){
 			double num = 0, num1 = 0;
 			int ds = 0;
+			
 			if(in.TestaString(linhas[1])) num = Double.parseDouble(linhas[1]);  // testa se é um numero ou uma variavel, se nao for vai verificar nas variaveis se exite.	
-			else{
-				nome = linhas[1];
-				Variaveis a = in.getVariavel(nome);
-				if(a == null) in.erro.Erro5(nome, cont);
-				if(a.getTipo().equals("string")) in.erro.Erro2(nome, cont);
-				if(a.getValor() instanceof Integer){
-					ds = (int) a.getValor();
-					num = (double)ds;
-				}
-				else num = (double) a.getValor();
-			}
+			else num = in.RetornaValor(linhas[1], cont);
+				
 			if(in.TestaString(linhas[3])) num1 = Double.parseDouble(linhas[3]);	
-			else{
-				nome = linhas[3];
-				Variaveis b = in.getVariavel(nome);
-				if(b == null) in.erro.Erro5(nome, cont);
-				if(b.getTipo().equals("string")) in.erro.Erro2(nome, cont);
-				num1 = (double) b.getValor();	
-			}
+			else num1 = in.RetornaValor(linhas[3],cont);	
+			
 			double res = in.op.operacoes(linhas[2], num, num1); // chama o metodo das operacoes para imprimir.
 			System.out.println(res);
 									
