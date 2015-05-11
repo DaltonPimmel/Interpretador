@@ -56,9 +56,15 @@ class Declaracao{
 			Variaveis a = inter.getVariavel(nome);
 			if(a == null) inter.erro.Erro5(nome, cont);
 			if(a.getTipo().equals("string")) inter.erro.Erro2(nome, cont);
-			ses = (double)(a.getValor());
-			if(n.equals("--")) a.setValor((ses - 1));
-			else if(n.equals("++")) a.setValor((ses + 1));
+			ses = inter.RetornaValor(nome, cont); 
+			if(a.getValor() instanceof Integer){ // testa os tipos de variaveis para posiveis conversoes.
+				p = (int)ses;
+				if(n.equals("--")) a.setValor((p - 1));
+				else if(n.equals("++")) a.setValor((p + 1));
+			}else if (a.getValor() instanceof Double){
+				if(n.equals("--")) a.setValor((ses - 1));
+				else if(n.equals("++")) a.setValor((ses + 1));
+			}
 			else inter.erro.Erro1();
 		}
 			

@@ -1,28 +1,18 @@
 inicio programa()
 
-
-	string a = 'oi'
-	imprime a
-	int c = 10
-	double b
-	b = c 
-	imprime b
-	int g = 10
-	double h = 2
-	imprime h
-	g = h + g // atribuicao de variaveis com operadores, do tipo int e double
-	imprime g
+	imprime 'oi'
+	int a = 20
+	double f = 2
 	
-	int v 
-	v = # 25 //calculo da raiz quadrada
-	imprime v
-	
-	se v % 5 == 0  // calculo mod
-		imprime 'ok'
-	fim se
-	senao
-		imprime 'okok'
-	fim senao
+	enquanto a > 0
+		imprime a
+		enquanto f > 0
+			imprime 'a'
+			f--
+		fim enquanto
+		a--
+		
+	fim enquanto
 	
 fim programa
 	

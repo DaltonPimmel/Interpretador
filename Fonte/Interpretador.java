@@ -84,22 +84,14 @@ class Interpretador{
 					break;
 					
 					case "enquanto":
-						if(teste){
-							p = cont;
-							teste = false;
-						}
+				//	System.out.println("teste");
 						cont = enq.Enquan(l, cont);
 					break;
 					
 					case "fim":
 						if(l[cont].equals("fim enquanto")){
-							if(enq.Fim(cont)){
-								cont  = p;
-								teste = true;		
-							}
-							continue;
+							cont = enq.Fim(cont);	
 						}
-						
 					break;
 					
 					case "leia":
