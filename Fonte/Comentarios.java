@@ -9,7 +9,7 @@ class Comentarios{
 			ch = l.substring(0, 2);
 			if(ch.equals("//")){
 				return l ;
-			}		// comentarios ok.
+			}	
 			qa = l.indexOf("//"); // se o comentario estiver no meio da linha.
 			l = l.substring(0, qa);
 			return l;

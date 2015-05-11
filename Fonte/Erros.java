@@ -1,3 +1,5 @@
+import java.io.IOException; 
+import java.util.Scanner;
 
 class Erros{
 
@@ -16,9 +18,9 @@ class Erros{
 	public void Erro5(String n, int cont){
 		System.out.println("Erro na linha " + (cont + 1) + " Variavel '" + n + "' nao existe"); System.exit(0);
 	}
-	public void Erro6(){
-		System.out.println("Erro de sintaxe na linha "); System.exit(0);	
-	}
+	//public void Erro6(){
+	//	System.out.println("Erro de sintaxe na linha "); System.exit(0);	
+	//}
 	public void Erro7(){
 		System.out.println("Erro na declaracao da varivalor nao corresponde ao tipo de variavel, linha: ");
 		System.exit(0);
@@ -55,5 +57,11 @@ class Erros{
 	}
 	public void Erro18(String n, int cont){
 		System.out.println("Erro na linha " + (cont + 1) + " Variavel '" + n + "' he null"); System.exit(0);
+	}
+	public void Erro19(int cont){
+		System.out.println("Erro na linha " + (cont + 1) + " , nao foi localizado o fim do enqunanto"); System.exit(0);
+	}
+	public void Erro20(String n, int cont){
+		System.out.println("Erro na linha " + (cont + 1) + " , Imposivel atilizar o " + n + " fora de um laco"); System.exit(0);
 	}
 }

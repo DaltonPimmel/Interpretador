@@ -10,8 +10,8 @@ class Imprime{
 	}
 		
 	public void Imprimir(String[] linha, int cont){
-		
-		String rec = in.EspacoEmBranco(linha);
+
+		String rec = in.EspacoEmBranco(linha[cont]);
 		String[] linhas = rec.trim().split(" ");
 		
 		// imprimindo Strings.
@@ -37,10 +37,9 @@ class Imprime{
 				
 		}
 		// impressão com operadores.
-		else if(linhas.length > 3 && linhas.length < 5 && linhas[2].equals("+") || linhas[2].equals("-") || linhas[2].equals("*") || linhas[2].equals("/")){
+		else if(linhas.length > 3 && linhas.length < 5 && ( linhas[2].equals("+") ||  linhas[2].equals("-") || linhas[2].equals("*") || linhas[2].equals("/"))){
 			double num = 0, num1 = 0;
 			int ds = 0;
-			
 			if(in.TestaString(linhas[1])) num = Double.parseDouble(linhas[1]);  // testa se é um numero ou uma variavel, se nao for vai verificar nas variaveis se exite.	
 			else num = in.RetornaValor(linhas[1], cont);
 				
@@ -50,7 +49,7 @@ class Imprime{
 			double res = in.op.operacoes(linhas[2], num, num1); // chama o metodo das operacoes para imprimir.
 			System.out.println(res);
 									
-		}
+		}else in.erro.Erro5(linhas[0], cont);
 					
 	}
 }

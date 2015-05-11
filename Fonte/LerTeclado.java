@@ -10,6 +10,11 @@ class LerTeclado{
 
 	public void Leia(String[] linhas, int cont){
 		Scanner in = new Scanner(System.in);
+		
+		String rec = i.EspacoEmBranco(linhas[cont]);
+		linhas = rec.trim().split(" ");
+	
+		
 		if(linhas.length > 1 && linhas.length < 3 && !i.TestaString(linhas[1])){ //testa se nao é um numero;
 			Variaveis a = i.getVariavel(linhas[1]);
 			if(a == null) i.erro.Erro5(linhas[1], cont);

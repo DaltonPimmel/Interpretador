@@ -2,26 +2,37 @@
 
 inicio programa()
 
-	string a                                   = 'oi'
-	string b =           'ola'
-	a = +     b
-	imprime  a
-	string   c
-	c =     a
-	imprime    c
-	c =    +        'teste'
-	imprime                c
-	int y        =             0
-	imprime          y
+
+	imprime            'oi'
 	
-//	enquanto      1     >           0
-//		imprime           'teste'
-//		break
-//	fim         enquanto
+	enquanto  1          >             0
 	
-	se 1 > 0
-		imprime 'ok'
-	fim se
+		imprime            1
+		imprime            2
+		
+		imprime            3
+		break
+	fim                  enquanto
+	
+	int     a =     20
+	double b            =               10
+	imprime    a    +                 b
+	imprime    b            -                   20
+	
+	
+	se 0           >              0
+		imprime                   1
+	fim                        se
+	senao
+		imprime 'ola'
+	fim       senao
+	
+	b =  a
+	b--
+	b =   b  - 2
+	imprime  b
+	
+	
 	
 fim programa
 	

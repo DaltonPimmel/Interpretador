@@ -7,19 +7,16 @@ class Declaracao{
 		this.inter = i;
 	}
 
-	public void Declarar(String[] linh, int cont){
+	public void Declarar(String[] linha, int cont){
 
-		String tipo;
-		String nome;
+		String tipo, nome;
 		Object valor = new Object();
-		boolean ar = false;
 		double qe = 0, ses = 0;
 		int p = 0;
-		String linha = " ";
 		String[] linhas;
-		
-		linha = inter.EspacoEmBranco(linh);
-		linhas = linha.trim().split(" ");
+
+		linha[cont] = inter.EspacoEmBranco(linha[cont]); // retirando os espaços em branco.
+		linhas = linha[cont].trim().split(" ");
 		
 		if(linhas.length < 4 && linhas.length > 1 && linhas[1].equals("=")){
 			nome = linhas[0];
@@ -39,7 +36,7 @@ class Declaracao{
 				else if(a.getTipo().equals(b.getTipo())) valor = b.getValor(); // teste para ver os parametros de atribuicao,
 				else if(a.getTipo().equals("int") && b.getTipo().equals("double")) valor = b.getValor();
 				else if(a.getTipo().equals("double") && b.getTipo().equals("int")) valor = b.getValor();
-				else if(a.getTipo().equals("string")) valor = b.getValor(); // rece quanquer coisa
+				else if(a.getTipo().equals("string")) valor = b.getValor(); // recebe quanquer coisa
 				else inter.erro.Erro17(cont);  // se nao for esses parametros da erro.
 				if(valor instanceof Integer && a.getTipo().equals("int")) a.setValor(valor); 
 				if(valor instanceof Double && a.getTipo().equals("double")) a.setValor(valor);
@@ -54,26 +51,29 @@ class Declaracao{
 		}
 		// Atruição de variavel, ex: a--, a++
 		else if(linhas.length > 0 && linhas.length < 2){
-			String n = linhas[0].substring(1, 3);
+			p = linhas[0].length(); // recebe o tamanho da string.
+			String n = linhas[0].substring(1, p);
 			nome = linhas[0].substring(0, 1); // recebe a variavel
 			Variaveis a = inter.getVariavel(nome);
-			if(a == null) inter.erro.Erro5(nome, cont);
+			if(a == null) inter.erro.Erro5(linhas[0], cont);
 			if(a.getTipo().equals("string")) inter.erro.Erro2(nome, cont);
-			ses = inter.RetornaValor(nome, cont); 
+			ses = inter.RetornaValor(nome, cont); // recebe um valor double.
 			if(a.getValor() instanceof Integer){ // testa os tipos de variaveis para posiveis conversoes.
 				p = (int)ses;
 				if(n.equals("--")) a.setValor((p - 1));
 				else if(n.equals("++")) a.setValor((p + 1));
+				else inter.erro.Erro3(cont); 
 			}else if (a.getValor() instanceof Double){
 				if(n.equals("--")) a.setValor((ses - 1));
 				else if(n.equals("++")) a.setValor((ses + 1));
+				else inter.erro.Erro3(cont); 
 			}
 			else inter.erro.Erro1();
 		}
 			
 		// criacao de variaveis.
 		else if(linhas[0].equals("int") || linhas[0].equals("double") || linhas[0].equals("string")){
-			double teste = 0;
+		
 			if(!linhas[0].equals("string")){
 				if(linhas.length > 1 && linhas.length < 5 && !inter.TestaString(linhas[1])){
 					nome = linhas[1];
@@ -129,7 +129,7 @@ class Declaracao{
 				}else inter.erro.Erro3(cont);
 			}
 		}
-		//atribuicao para variaveis com operadores.
+		//atribuicao para variaveis com operadores, ex: a = a + b.
 		else if(linhas.length > 2 && !inter.TestaString(linhas[0]) && linhas[1].equals("=") && ( linhas[3].equals("+") || linhas[3].equals("-") || linhas[3].equals("*") || linhas[3].equals("/") || linhas[2].equals("+"))){
 			//double se = 0, re = 0 ; // poderia calcular chamandos os metodos com os valores, porem nao tem como saber se é uma variavel ou não.
 			String op = linhas[3];

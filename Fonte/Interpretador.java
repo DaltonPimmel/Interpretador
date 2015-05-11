@@ -16,7 +16,7 @@ class Interpretador{
 	LerTeclado ler;
 	Erros erro;
 	
-	public boolean con = true, verdadeiro = false, teste = true;
+	public boolean con = true, verdadeiro = false;
 	private int cond, p, Lfim = 0;
 	
 	public Interpretador(){
@@ -57,19 +57,19 @@ class Interpretador{
 				switch(a){
 					
 					case "int":	
-						d.Declarar(tok, cont);
+						d.Declarar(l, cont);
 					break;
 					
 					case "double":
-						d.Declarar(tok, cont);
+						d.Declarar(l, cont);
 					break;
 					
 					case "string":
-						d.Declarar(tok, cont);
+						d.Declarar(l, cont);
 					break;
 					
 					case "imprime":
-						im.Imprimir(tok, cont);
+						im.Imprimir(l, cont);
 					break;
 						
 					case "se":
@@ -84,13 +84,15 @@ class Interpretador{
 					break;
 					
 					case "enquanto":
-				//	System.out.println("teste");
-						cont = enq.Enquan(l, cont, tok);
+						con = true;
+						p = cont;
+						cont = enq.Enquan(l, cont);
 					break;
 					
 					case "fim":
 						if(l[cont].equals("fim enquanto")){
-							cont = enq.Fim(cont);	
+							cont = enq.Fim(cont);
+							con = false;	
 						}
 					break;
 					
@@ -99,20 +101,20 @@ class Interpretador{
 					break;
 					
 					case "break":
-						if(!con) System.exit(0);
+						if(!con) erro.Erro20("break", cont);
 						while(!l[cont].equals("fim enquanto")){
 							cont++;
 						}
 					break;
 					
 					case "continue":
-						if(!con) System.exit(0);
+						if(!con) erro.Erro20("continue", cont);
 						cont = p; // aonde começa o enquanto;
 					break;
 					
 					default:
 						if(l[cont].equals("inicio programa()") || l[cont].equals("fim se") || l[cont].equals("fim senao") || l[cont].equals("fim enquanto") || l[cont].equals("fim programa")) continue;
-						d.Declarar(tok, cont);
+						d.Declarar(l, cont);
 					
 					break;
 					
@@ -184,13 +186,6 @@ class Interpretador{
 		}
 	}
 	
-	public Object Teste(String linhas){
-		Variaveis a = getVariavel(linhas);
-		if(a == null) erro.Erro5(linhas, 2);
-		if(a.getTipo().equals("string")) erro.Erro2(linhas, 2);
-		return a.getValor();
-	}
-	
 	// testa se a variavel existe e faz as conversao e retorna um double.
 	public double RetornaValor(String nome, int cont){
 		int p;
@@ -208,18 +203,15 @@ class Interpretador{
 	}
 	
 	// metodo que elemina os espaços em branco
-	public String EspacoEmBranco(String[] linh){
-		String linha = " ";
-		for(int l = 0; l < linh.length; l++){
-			if(linh[l].length() != 0){		
-				linha += " " + linh[l]; 
+	public String EspacoEmBranco(String linh){
+		String lin = " ";
+		String[] linha = linh.trim().split(" ");
+		for(int l = 0; l < linha.length; l++){
+			if(linha[l].length() != 0){		
+				lin += " " + linha[l]; 
 			}
 		}
-		return linha;
+		return lin;
 	}
 		
 } 
-
-	
-
-    

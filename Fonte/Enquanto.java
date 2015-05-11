@@ -6,17 +6,16 @@ class Enquanto{
 	private String[] tok;
 	private int cont;
 	boolean h = false;
-	int c = 0, test = 0, fi = 0, lt, ly;
+	int c = 0, test = 0, fi = 0, lt, ly, r = 0;
 	
 	public Enquanto(Interpretador i){
 		this.in = i;
 	}
 	
-	public int Enquan(String[] linhas, int l, String[] tok){
+	public int Enquan(String[] linha, int l){
 		String rec = " ";
-		rec = in.EspacoEmBranco(tok); // metodo para tirar os espaços em branco
-		String[] linha = rec.trim().split(" "); 
 		
+		rec = in.EspacoEmBranco(linha[l]); // metodo para tirar os espaços em branco
 		
 		String nome;
 		double e = 0, d = 0;
@@ -25,10 +24,12 @@ class Enquanto{
 		ly = l;
 			for(k = l + 1; k < linha.length && linha[k] != null; k++){
 				if(linha[k].length() > 1 && linha[k] != null){
+					linha[k] = in.EspacoEmBranco(linha[k]); // passa no laço retirando os espaçoes em branco.
 					linha[k] = linha[k].trim();
 					tok = linha[k].trim().split(" ");
 					if(tok[0].equals("enquanto")) c++;
 					if(linha[k].equals("fim enquanto")){
+						r++;
 						if(c != 0){
 							c--;
 							continue;
@@ -42,7 +43,8 @@ class Enquanto{
 					}
 				}
 			}
-					
+			if(r == 0) in.erro.Erro19(l);	
+			r = 0;	
 			if(in.isInt(aux[1]) || in.isDouble(aux[1])) d = Double.parseDouble(aux[1]);		
 			else d = in.RetornaValor(aux[1], l);
 				
@@ -72,8 +74,5 @@ class Enquanto{
 		else if(cont < test && !h) return (lt - 1);
 		return (cont - 1);
 	}
-	
-
-// verificar os operadores, se colocar um operador que nao existe retorna 0
 
 }

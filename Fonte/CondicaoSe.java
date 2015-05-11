@@ -13,10 +13,13 @@ class CondicaoSe{
 
 	public int Se(String[] linhas, int cont, int fim){
 		
-		tok = linhas[cont].trim().split(" ");
-		if(tok[0].equals("se")){
+		String lin = in.EspacoEmBranco(linhas[cont]); // retirando os espaços em branco
+		l = lin.trim().split(" ");
+		
+		if(l[0].equals("se")){
 			for(k = cont + 1; k < linhas.length && linhas[k] != null; k++){
 				if(linhas[k].length() > 1 && linhas[k] != null){
+					linhas[k] = in.EspacoEmBranco(linhas[k]);
 					linhas[k] = linhas[k].trim();
 					contro = linhas[k].trim().split(" ");
 					if(contro[0].equals("se")) c++;
@@ -40,6 +43,7 @@ class CondicaoSe{
 		}else{	
 			for(y = cont + 1; y < linhas.length && linhas[y] != null; y++){
 				if(linhas[y].length() > 1 && linhas[y] != null){
+					linhas[y] = in.EspacoEmBranco(linhas[y]);
 					linhas[y] = linhas[y].trim();
 					if(linhas[y].equals("fim senao")){
 						if(y < test) in.verdadeiro = true; // testa se o senao esta dentro do laço principal.
@@ -61,7 +65,7 @@ class CondicaoSe{
 			in.erro.Erro14(cont); // se nao achar o final do senao retorna 0.
 		}
 		if(fi == 0) return 0;
-		l = linhas[cont].trim().split(" ");
+		//l = linhas[cont].trim().split(" ");
 		double f = 0, g = 0, e = 0;
 		
 		// teste do mod dentro do se.
@@ -107,7 +111,6 @@ class CondicaoSe{
 		cond = false; // se o fi for maior ele ha mais laços dentro para testar, cond recebe falso, podendo exetador algum se nao dentro do laço.
 		return test;
 		
-	
 	}
 	
 	
