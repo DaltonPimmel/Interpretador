@@ -90,7 +90,8 @@ class Interpretador{
 					case "fim":
 						if(l[cont].equals("fim enquanto")){
 							cont = enq.Fim(cont);
-							con = false;	
+							con = false;
+							System.out.println(l[cont]);
 						}
 					break;
 					
