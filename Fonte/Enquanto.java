@@ -72,6 +72,13 @@ class Enquanto{
 	public int Fim(int con){
 		if(con < test && h) return (ly - 1);
 		else if(cont < test && !h) return (lt - 1);
+		else if(con > test) return cont;
+		return (cont - 1);
+	}
+	public int Break(){
+		return (k + 1);
+	}
+	public int Continue(){
 		return (cont - 1);
 	}
 

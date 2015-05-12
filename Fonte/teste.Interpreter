@@ -15,7 +15,7 @@ inicio programa()
 		leia k
 		
 		se k == 0
-			break
+			continue
 		fim se
 		enquanto i <= k
 			se k % i == 0
@@ -34,6 +34,12 @@ inicio programa()
 		p = 0
 		i = 0
 		
+	fim enquanto
+	
+	
+	enquanto 1 > 0
+		imprime 'ola ola'
+		break
 	fim enquanto
 	
 	

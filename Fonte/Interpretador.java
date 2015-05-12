@@ -85,7 +85,6 @@ class Interpretador{
 					case "enquanto":
 						con = true;
 						cont = enq.Enquan(l, cont);
-						p = cont;
 					break;
 					
 					case "fim":
@@ -101,12 +100,12 @@ class Interpretador{
 					
 					case "break":
 						if(!con) erro.Erro20("break", cont);
-						cont = enq.Fim(cont);
+						cont = enq.Break();	
 					break;
 					
 					case "continue":
 						if(!con) erro.Erro20("continue", cont);
-						cont = p; // aonde começa o enquanto;
+						cont = enq.Continue();
 					break;
 					
 					default:
