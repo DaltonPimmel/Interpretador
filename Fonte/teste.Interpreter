@@ -13,14 +13,46 @@ inicio programa()
 		imprime p
 	fim enquanto
 	
+	
 	imprime 1
 	imprime 2
 	
 	
+	imprime 22
+	int q = 5
 	
+	enquanto q != 0 
+		imprime 'ola'
+		q--
+	fim enquanto
 	
+	int y = 2
+	enquanto y != 0
+		imprime 'esta funcionado uhu'
+		y--
+	fim enquanto
+	int w = 2
+	enquanto w != 0
+		se w % 2 == 0
+			imprime 'par'
+		fim se
+		senao
+			imprime 'impar'
+		fim senao
+		w--
+	fim enquanto
 	
+	int h = 2
+	int m = 1
 	
+	enquanto h != 0
+		imprime 'h'
+		enquanto m != 0
+			imprime 'm'
+			m--
+		fim enquanto
+		h--
+	fim enquanto	
 	
 	
 	
