@@ -99,7 +99,7 @@ inicio programa()
 				enquanto  a < 2
 					imprime 'aa'
 					
-					enquanto yyy < 2   // quando voltar volta para o enquanto yyy != 0
+					enquanto yyy < 2
 						se yyy % 2 == 0
 							imprime 'yyy'
 						fim se
