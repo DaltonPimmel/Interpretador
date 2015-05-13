@@ -7,14 +7,14 @@ class Enquanto{
 	private int cont;
 	boolean h = false;
 	int c = 0, test = 0, fi = 0, lt, ly, r = 0;
-	LogEnq[] log = new LogEnq[1000]; 
+	LogEnq[] log = new LogEnq[5000]; 
 	
 	public Enquanto(Interpretador i){
 		this.in = i;
 	}
 	
 	public int Enquan(String[] linha, int l){
-
+		
 		String rec = " ";
 		rec = in.EspacoEmBranco(linha[l]); // metodo para tirar os espaços em branco
 		c = 0;
@@ -27,8 +27,8 @@ class Enquanto{
 			for(k = l + 1; k < linha.length && linha[k] != null; k++){
 				linha[k] = in.EspacoEmBranco(linha[k]); // passa no laço retirando os espaçoes em branco.
 				linha[k] = linha[k].trim();
-				if(linha[k].length() > 1 && linha[k] != null){
-					pp++;
+				pp++;
+				if(linha[k].length() > 1 && linha[k] != null){	
 					tok = linha[k].trim().split(" ");
 					if(tok[0].equals("enquanto")) c++;
 					if(linha[k].equals("fim enquanto")){
@@ -50,7 +50,7 @@ class Enquanto{
 			else e = in.RetornaValor(aux[3], l);
 		
 			boolean t = in.log.Log(aux, d, e);
-			// cria um novo objeto da classe LogEnq, com o inicio o fim e a condição
+
 			for(int gg = 0; gg < log.length; gg++){
 				if(log[gg] == null){
 					log[gg] = new LogEnq(l, r, t);
@@ -69,6 +69,7 @@ class Enquanto{
 				return (log[i].getFim());
 			}
 		}
+		in.erro.Erro19(con);
 		return 0;
 	}
 	public int Break(){

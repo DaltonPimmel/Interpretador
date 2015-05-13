@@ -7,16 +7,16 @@ class Declaracao{
 		this.inter = i;
 	}
 
-	public void Declarar(String[] linha, int cont){
+	public void Declarar(String[] linhas, int cont){
 
 		String tipo, nome;
 		Object valor = new Object();
 		double qe = 0, ses = 0;
 		int p = 0;
-		String[] linhas;
+		//String[] linhas;
 
-		linha[cont] = inter.EspacoEmBranco(linha[cont]); // retirando os espaços em branco.
-		linhas = linha[cont].trim().split(" ");
+		//linha[cont] = inter.EspacoEmBranco(linha[cont]); // retirando os espaços em branco.
+		linhas = linhas[cont].trim().split(" ");
 		
 		if(linhas.length < 4 && linhas.length > 1 && linhas[1].equals("=")){
 			nome = linhas[0];
@@ -153,8 +153,8 @@ class Declaracao{
 			}else if(a.getTipo().equals("string") && linhas[2].equals("+")){ // juntando duas strings
 				String h = (String)a.getValor();
 				Variaveis b = inter.getVariavel(linhas[3]);
-				if(inter.isInt(linhas[3]) || inter.isDouble(linhas[3])) a.setValor(h + linhas[3]);	
-				else if(b != null) a.setValor(h += " " + (b.getValor())); // junta duas variaveis
+				if(inter.isInt(linhas[3]) || inter.isDouble(linhas[3])) a.setValor(h + " " + linhas[3]);	
+				else if(b != null) a.setValor(h += "" + (b.getValor())); // junta duas variaveis
 				else{
 					String j = " "; // se não for uma variavel, testas os parametros.
 					for(int y = 3; y < linhas.length; y++) j += " " + linhas[y]; 

@@ -45,7 +45,10 @@ class Interpretador{
 		}
 		
 		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){ 
+			
+			l[cont] = EspacoEmBranco(l[cont]);
 			l[cont] = l[cont].trim();
+			
 			if(l[cont].length() > 1 && l[cont] != null){
 				if(cont > Lfim) erro.Erro10();
 				l[cont] = com.Comentario(l[cont]);

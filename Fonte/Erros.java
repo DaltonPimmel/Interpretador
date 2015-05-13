@@ -1,6 +1,7 @@
 import java.io.IOException; 
 import java.util.Scanner;
 
+
 class Erros{
 
 	public void Erro1(){
@@ -18,9 +19,6 @@ class Erros{
 	public void Erro5(String n, int cont){
 		System.out.println("Erro na linha " + (cont + 1) + " Variavel '" + n + "' nao existe"); System.exit(0);
 	}
-	//public void Erro6(){
-	//	System.out.println("Erro de sintaxe na linha "); System.exit(0);	
-	//}
 	public void Erro7(){
 		System.out.println("Erro na declaracao da varivalor nao corresponde ao tipo de variavel, linha: ");
 		System.exit(0);

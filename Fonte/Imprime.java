@@ -10,7 +10,7 @@ class Imprime{
 	}
 		
 	public void Imprimir(String[] linha, int cont){
-
+		
 		String rec = in.EspacoEmBranco(linha[cont]);
 		String[] linhas = rec.trim().split(" ");
 		
