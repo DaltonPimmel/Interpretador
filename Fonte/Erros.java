@@ -6,8 +6,8 @@
 
 class Erros{
 
-	public void Erro1(){
-		System.out.println("Problema na hora de utilizar o senao, nao he posivel utilizar o senao separado do se, erro na linhas "); System.exit(0);	
+	public void Erro1(int cont, String l){
+		System.out.println("Erro na linha " + (cont + 1) + " , Imposivel usar o " + l + " fora de uma laco"); System.exit(0);	
 	}
 	public void Erro2(String n, int cont){
 		System.out.println("Erro na linha " + (cont + 1) + " variavel '" + n + "' he uma string"); System.exit(0);

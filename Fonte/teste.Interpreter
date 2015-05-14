@@ -89,7 +89,7 @@ inicio programa()
 	//		imprime 'ooo'
 	//	fim senao
 	fim senao
-	
+	break
 	enquanto 1 > 0
 		imprime 1566554544
 		enquanto 1 > 0
@@ -102,9 +102,6 @@ inicio programa()
 	int n
 	n = # 100
 	imprime n
-	
-	
-	
-	
+
 fim programa
 

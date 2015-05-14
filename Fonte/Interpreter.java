@@ -1,6 +1,8 @@
 //Dalton Luiz Pimmel
 //dalton.cco1@gmail.com
 
+// Interpreter uma nova é uma linguagem de programação, aonde pode - se fazer diversos tipos de programas.
+
 // Classe Interpreter, lê todas as informações do aquivo .interpreter, arquivo em uma string.
 
 import java.util.Scanner;

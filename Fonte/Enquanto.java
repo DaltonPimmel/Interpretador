@@ -85,6 +85,16 @@ class Enquanto{
 	// Metodo da Função Break
 	public int Break(int cont, String[] l){
 		int n = cont;
+		int controle = 0;
+		// laço para verificar se o break esta dentro de algum laço.
+		for(int rt = 0; log[rt] != null; rt++){
+			if(cont > log[rt].getInicio() && cont < log[rt].getFim()){
+				controle++;
+				break;
+			}
+		}
+		if(controle == 0) in.erro.Erro1(cont, l[cont]);
+		// procura o primeiro fim enquanto, depois do break.
 		for(int o = cont + 1; o < l.length; o++){	
 			if(l[o].length() > 0 && l[o] != null){
 				n++;  // recebe o primeri fim enquanto
@@ -93,6 +103,7 @@ class Enquanto{
 				if(l[o].equals("fim enquanto")) break;
 			}
 		}
+		// procura até achar o getFim que corresponde ao n.
 		for(int i = 0; log[i] != null; i++){
 			if(log[i].getFim() == n) return log[i].getFim();
 		}

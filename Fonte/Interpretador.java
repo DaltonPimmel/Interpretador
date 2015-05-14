@@ -1,6 +1,7 @@
 // Dalton Luiz Pimmel
 // dalton.cco1@gmail.com
 
+
 // Classe interpretador, recebe todas as linhas do arquivo .Interpreter, e faz a interpretação de linha por linha, chamadas as classes 
 // responsaveis para fazer a interpretação do mesmo.
 

@@ -73,7 +73,7 @@ class Declaracao{
 				else if(n.equals("++")) a.setValor((ses + 1));
 				else inter.erro.Erro3(cont); 
 			}
-			else inter.erro.Erro1();
+			else inter.erro.Erro3(cont);
 		}
 			
 		// criacao de variaveis.
@@ -139,7 +139,7 @@ class Declaracao{
 			//double se = 0, re = 0 ; // poderia calcular chamandos os metodos com os valores, porem nao tem como saber se é uma variavel ou não.
 			String op = linhas[3];
 			Variaveis a = inter.getVariavel(linhas[0]);
-			if(a == null) inter.erro.Erro1();
+			if(a == null) inter.erro.Erro5(linhas[0], cont);
 			if(a.getTipo().equals("int") || a.getTipo().equals("double")){
 				
 				if(inter.TestaString(linhas[2])) ses = Double.parseDouble(linhas[2]);
