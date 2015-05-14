@@ -91,7 +91,11 @@ inicio programa()
 	fim senao
 	
 	enquanto 1 > 0
-		imprime 1
+		imprime 1566554544
+		enquanto 1 > 0
+			imprime 22
+			break
+		fim enquanto
 		break
 	fim enquanto
 	

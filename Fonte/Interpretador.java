@@ -109,7 +109,8 @@ class Interpretador{
 					
 					case "break":
 						if(!con) erro.Erro20("break", cont);
-						cont = enq.Break();	
+						cont = enq.Break(cont, l);	
+						//System.out.println(l[cont]);
 					break;
 					
 					case "continue":

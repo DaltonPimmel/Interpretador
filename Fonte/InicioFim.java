@@ -18,6 +18,7 @@ class InicioFim{
 		String[] linhas;
 		for(int i = 0; i < l.length; i++){  // testa se a primeira linha é o inicio do programa.
 			if(l[i] != null && l[i].length() > 1){
+				l[i] = c.EspacoEmBranco(l[i]);
 				l[i] = l[i].trim();
 				tok = l[i].substring(0, 2); // recebe os dois primeiros caracteres, se for //, ignora a linha.
 				if(tok.equals("//")) continue;
@@ -27,6 +28,8 @@ class InicioFim{
 		}
 		for(int j = 0; j < l.length && l[j] != null; j++){  // testa se a acha o fim do programa.
 			if(l[j].length() > 1){ 
+				l[j] = c.EspacoEmBranco(l[j]);
+				l[j] = l[j].trim();
 				if(l[j].equals("fim programa")){
 					fim = l[j];
 					fi = j;

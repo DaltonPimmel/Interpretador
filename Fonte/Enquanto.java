@@ -12,7 +12,7 @@ class Enquanto{
 	private int cont;
 	boolean h = false;
 	int c = 0, test = 0, fi = 0, lt, ly, r = 0, tt = 0;
-	LogEnq[] log = new LogEnq[5000]; 
+	LogEnq[] log = new LogEnq[1000000]; 
 	
 	public Enquanto(Interpretador i){
 		this.in = i;
@@ -57,13 +57,16 @@ class Enquanto{
 			else e = in.RetornaValor(aux[3], l);
 		
 			boolean t = in.log.Log(aux, d, e);
-
-			for(int gg = 0; gg < log.length; gg++){
+			int gg;
+			for(gg = 0; gg < log.length; gg++){
 				if(log[gg] == null){
 					log[gg] = new LogEnq(l, r, t);
 					break;
-				}
 			}
+			
+				
+				
+		}	
 				if(t) return ly;
 				return r;				
 	}
@@ -79,9 +82,23 @@ class Enquanto{
 		in.erro.Erro19(con);
 		return 0;
 	}
-	public int Break(){
-		return (k + 1);
+	// Metodo da Função Break
+	public int Break(int cont, String[] l){
+		int n = cont;
+		for(int o = cont + 1; o < l.length; o++){	
+			if(l[o].length() > 0 && l[o] != null){
+				n++;  // recebe o primeri fim enquanto
+				l[o] = in.EspacoEmBranco(l[o]);
+				l[o] = l[o].trim();
+				if(l[o].equals("fim enquanto")) break;
+			}
+		}
+		for(int i = 0; log[i] != null; i++){
+			if(log[i].getFim() == n) return log[i].getFim();
+		}
+		return 0;
 	}
+	
 	public int Continue(){
 		return (cont - 1);
 	}
