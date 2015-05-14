@@ -1,0 +1,65 @@
+inicio programa()
+	
+	int b  =   0
+
+	se 0 >                1
+		imprime 'ok'
+	fim   se
+	senao
+		imprime 'ola'
+	fim  senao
+	
+	se 1         >     0
+		imprime 'se'
+		se 1 >   1
+			imprime 'sese'
+		fim se	
+		senao
+			se 1 >       1
+				imprime 'okok1111'
+			fim se
+			senao 
+				imprime 'erro'
+			fim senao
+			imprime 'nnn'		
+		fim     senao
+		
+		imprime 1
+	fim se
+	senao
+		imprime 'ola1'
+	fim    senao
+	
+	imprime 3
+	imprime 4
+	
+	int a
+	a = 10
+	
+	enquanto a   !=   0
+		se a % 2 ==   0
+			imprime a
+			imprime 'par'
+		fim se
+		senao 
+			imprime a
+			imprime 'impar'
+		fim   senao
+		a--
+	fim    enquanto
+	
+	se 1 >  0  // todos tem que ser verdade para imprimir verdadeiro
+		se 2 > 0
+			se 3 > 0
+				se 1 > 0
+				imprime 'verdade'
+				fim se
+			fim se
+		fim se
+	fim se
+	senao	
+		imprime 'falso'
+	fim senao
+	
+fim programa
+
