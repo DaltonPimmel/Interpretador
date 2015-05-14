@@ -79,13 +79,13 @@ class CondicaoSe{
 		}	
 		return 0;
 	}
-	
+	// Metodo do senao
 	public int Senao(String[] linhas, int cont){
 			int l = cont, kk = 0, c = 0;
 			boolean b = false;
 	
 			for(int y = cont + 1; y < linhas.length && linhas[y] != null; y++){
-				linhas[y] = in.EspacoEmBranco(linhas[y]);
+				linhas[y] = in.EspacoEmBranco(linhas[y]); // retirando as linhas em branco
 				linhas[y] = linhas[y].trim();
 			
 				if(linhas[y].length() > 1){
@@ -97,24 +97,24 @@ class CondicaoSe{
 			}
 			if(c == 0) in.erro.Erro14(cont);
 			c = 0;
-			for( int i = 0; i < log.length && log[i] != null; i++){ // se log for null, nao foi utilzado um se antes, retorna erro
+			for( int i = 0; i < log.length && log[i] != null; i++){ // se log na posicao 0 for null, nao foi utilzado um se antes, retorna erro
 				if(cont < log[i].getFim()){
 					for(int t = 0; t < log.length; t++){  // se o log da posicao 1 for null ele pega a 0
 						if(log[t] == null){
-							  b = log[t - 1].getVer();
+							  b = log[t - 1].getVer();  // quando ele for null e estiver dentro de um se principal, ele pega a posicao anterior que seria o se anterior
 							  break;
 						  }	
 					}
 					
 				}else{
-					b = log[0].getVer();
+					b = log[0].getVer();   // se ele estiver fora de uma laço principal, ele pega a condicao da primeira condicao, e depois coloca todos como null de novo.
 					for(int q = 0; log[q] != null; q++) log[q] = null;
 				}
 				 
 				if(b) return (kk - 1);
 				return cont;		
 			}
-			in.erro.Erro15(cont);
+			in.erro.Erro15(cont); // caso a primeira posicao seja null.
 			return 0;		
 	}
 	
