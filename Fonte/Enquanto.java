@@ -11,7 +11,7 @@ class Enquanto{
 	private String[] tok;
 	private int cont;
 	boolean h = false;
-	int c = 0, test = 0, fi = 0, lt, ly, r = 0;
+	int c = 0, test = 0, fi = 0, lt, ly, r = 0, tt = 0;
 	LogEnq[] log = new LogEnq[5000]; 
 	
 	public Enquanto(Interpretador i){
@@ -38,6 +38,7 @@ class Enquanto{
 					if(tok[0].equals("enquanto")) c++;
 					if(linha[k].equals("fim enquanto")){
 						r = pp;
+						tt++;
 						if(c != 0){
 							c--;
 							continue;
@@ -46,8 +47,9 @@ class Enquanto{
 					}
 				}
 			}
-			if(c != 0) in.erro.Erro19(l);	
+			if(tt == 0) in.erro.Erro19(l);	
 			c = 0;
+			tt = 0;
 			if(in.isInt(aux[1]) || in.isDouble(aux[1])) d = Double.parseDouble(aux[1]);		
 			else d = in.RetornaValor(aux[1], l);
 				

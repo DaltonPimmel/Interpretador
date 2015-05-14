@@ -61,5 +61,46 @@ inicio programa()
 		imprime 'falso'
 	fim senao
 	
+	
+	se 1 > 1
+		se 1 > 0
+			se 2 > 0
+				imprime 'okok'
+			fim se
+			se 2 > 2
+				imprime 'ok'
+			fim se
+			senao
+				imprime 'senao'
+			fim senao
+		fim se
+	fim se
+	senao
+		se 1 > 0
+			imprime 'ola'
+			se 1 > 1
+				imprime 'okl'
+			fim se
+			senao
+				imprime 'rrr'
+			fim senao
+		fim se
+	//	senao
+	//		imprime 'ooo'
+	//	fim senao
+	fim senao
+	
+	enquanto 1 > 0
+		imprime 1
+		break
+	fim enquanto
+	
+	int n
+	n = # 100
+	imprime n
+	
+	
+	
+	
 fim programa
 
