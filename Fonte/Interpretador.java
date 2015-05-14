@@ -6,17 +6,17 @@
 
 class Interpretador{
 	
-	private Declaracao d;
-	private Variaveis[] v;
-	private Imprime im;
-	private Operacoes op;
-	private InicioFim t;
-	private Comentarios com;
-	private CondicaoSe se;
-	private Logico log;
-	private Enquanto enq;
-	private LerTeclado ler;
-	private Erros erro;
+	public Declaracao d;
+	public Variaveis[] v;
+	public Imprime im;
+	public Operacoes op;
+	public InicioFim t;
+	public Comentarios com;
+	public CondicaoSe se;
+	public Logico log;
+	public Enquanto enq;
+	public LerTeclado ler;
+	public Erros erro;
 	
 	private boolean con = true, verdadeiro = false;
 	private int cond, p, Lfim = 0;
