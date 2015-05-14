@@ -6,21 +6,19 @@
 
 class Interpretador{
 	
+	private Declaracao d;
+	private Variaveis[] v;
+	private Imprime im;
+	private Operacoes op;
+	private InicioFim t;
+	private Comentarios com;
+	private CondicaoSe se;
+	private Logico log;
+	private Enquanto enq;
+	private LerTeclado ler;
+	private Erros erro;
 	
-	
-	Declaracao d;
-	Variaveis[] v;
-	Imprime im;
-	Operacoes op;
-	InicioFim t;
-	Comentarios com;
-	CondicaoSe se;
-	Logico log;
-	Enquanto enq;
-	LerTeclado ler;
-	Erros erro;
-	
-	public boolean con = true, verdadeiro = false;
+	private boolean con = true, verdadeiro = false;
 	private int cond, p, Lfim = 0;
 	private String[] tok;
 	private String a;
@@ -85,10 +83,8 @@ class Interpretador{
 					break;
 					
 					case "senao":
-						//System.out.println(cont + " senaooo");
 						if(verdadeiro) cont = se.Senao(l, cont); // se verdadeiro for treu, pode-se utilizar o senao	
 						else erro.Erro15(cont);	
-						//System.out.println(l[cont]);	
 					break;
 					
 					case "enquanto":
@@ -110,7 +106,6 @@ class Interpretador{
 					case "break":
 						if(!con) erro.Erro20("break", cont);
 						cont = enq.Break(cont, l);	
-						//System.out.println(l[cont]);
 					break;
 					
 					case "continue":
@@ -129,15 +124,6 @@ class Interpretador{
 			
 		}
 	}
-	
-	// verifica se a variavel existe.
-	public boolean VerificaVariavel(String n){
-		for(int i = 0; v[i] != null; i++){
-			if(v[i].getNome().equals(n)) return true;
-		}
-		return false;
-	}
-	
 	
 	// testa se existe a variavel e retorna a posicao do vetor.
 	public Variaveis getVariavel(String n){
