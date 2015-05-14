@@ -81,8 +81,10 @@ class Interpretador{
 					break;
 					
 					case "senao":
-						if(verdadeiro) cont = se.Se(l, cont, Lfim); // se verdadeiro for treu, pode-se utilizar o senao	
-						else erro.Erro15(cont);		
+						//System.out.println(cont + " senaooo");
+						if(verdadeiro) cont = se.Senao(l, cont); // se verdadeiro for treu, pode-se utilizar o senao	
+						else erro.Erro15(cont);	
+						//System.out.println(l[cont]);	
 					break;
 					
 					case "enquanto":
