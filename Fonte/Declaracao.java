@@ -1,3 +1,8 @@
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com
+
+// Classe responsavel na criação das variaveis, ele tem a classe Variaveis, onde ira armazenar um nome, um tipo e um valor.
+
 
 class Declaracao{
 	

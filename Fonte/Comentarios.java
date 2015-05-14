@@ -1,3 +1,8 @@
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com
+
+// Classe Comentarios, caso n classe interpretador seja encontrado as barras (//) ele chama a classe para verificar a sintaxe,
+//eliminado a linha toda se o // estiver no inicio, ou parcial se estiver no meio da lado. 
 
 class Comentarios{
 	

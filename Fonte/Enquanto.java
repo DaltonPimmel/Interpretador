@@ -1,3 +1,8 @@
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com
+
+// Classe dos laços, recebe as linhas e testas se as condições são verdasdeira ou falsa, e retorna a linha aonde deve -se continuar
+// o cidigo. 
 
 class Enquanto{
 

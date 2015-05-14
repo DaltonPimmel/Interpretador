@@ -1,3 +1,8 @@
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com
+
+// Classe LerTeclado, lê informações do teclado, e verifica a sintaxe e se a variavel que ira arzanenar o valor existe
+
 import java.util.Scanner;
 
 class LerTeclado{

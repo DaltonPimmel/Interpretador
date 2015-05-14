@@ -1,3 +1,8 @@
+//DaltonPimmel
+//dalton.cco1@gmail.com
+
+// Classe LogEnq, armazena as linhas de inicio e fim e a condição das classes Enquanto, e CondiçaoSe.
+
 
 class LogEnq{
 

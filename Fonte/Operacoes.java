@@ -1,3 +1,8 @@
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com
+
+// Possui os operadores matematicos e dois metodos para o calculo do mod e raiz quadrada.
+
 class Operacoes{
 
 	public double operacoes(String n, double a, double b){

@@ -1,5 +1,7 @@
-import java.io.IOException; 
-import java.util.Scanner;
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com
+
+//Possui todos erros que poderam ocorrer durante a processo de interpretação do arquivo, é chamada quando encontra algum erro.
 
 
 class Erros{

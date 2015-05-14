@@ -1,3 +1,7 @@
+// Dalton Luiz Pimmel
+// dalton.cco1@gmail.com
+
+// Classe InicioFim, testa a sintaxe do inicio e o fim programa, retorna a quantidade linhas.
 
 class InicioFim{
 	

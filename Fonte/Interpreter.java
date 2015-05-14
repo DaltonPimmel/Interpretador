@@ -1,3 +1,7 @@
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com
+
+// Classe Interpreter, lê todas as informações do aquivo .interpreter, arquivo em uma string.
 
 import java.util.Scanner;
 import java.io.*;

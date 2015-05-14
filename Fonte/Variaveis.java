@@ -1,3 +1,8 @@
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com]
+
+// Classe Variaveis, possui o nome, o tipo e o valor quando na declaração de uma variavel.
+
 public class Variaveis{
 	
 	

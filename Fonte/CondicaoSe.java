@@ -1,3 +1,9 @@
+//Dalton Luiz Pimmel
+//dalton.cco1@gmail.com
+
+// Classe das condiçoes logicas, teste a sintaxe, e retorna a linha a aonde deve - se continuar o codigo, dependendo da 
+//condição se é verdadeira ou falsa.
+
 
 class CondicaoSe{
 	

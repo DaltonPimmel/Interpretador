@@ -1,3 +1,7 @@
+//Dalton Luiz Pimmel
+// dalton.cco1@gmail.com
+
+// classe imprime, quando chamada verifica a sintaxe para impressão de informações na tela.
 
 class Imprime{
 	
