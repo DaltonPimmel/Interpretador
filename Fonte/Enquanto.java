@@ -21,7 +21,7 @@ class Enquanto{
 	public int Enquan(String[] linha, int l){
 		
 		String rec = " ";
-		c = 1;
+		c = 0;
 		int pp = l;;
 		String nome;
 		double e = 0, d = 0;
@@ -34,13 +34,9 @@ class Enquanto{
 				linha[k] = linha[k].replaceAll("\\s+"," ");
 				linha[k] = linha[k].trim();
 				pp++;
-				if(linha[k].length() > 0 && linha[k] != null){	
-					linha[k] = linha[k].replaceAll("\\s+"," ");
+				if(linha[k].length() > 1 && linha[k] != null){	
 					tok = linha[k].trim().split(" ");
-					if(tok[0].equals("enquanto")){
-						System.out.println(c);
-						 c++;
-					 }
+					if(tok[0].equals("enquanto")) c++;
 					if(linha[k].equals("fim enquanto")){
 						r = pp;
 						tt++;
@@ -52,9 +48,8 @@ class Enquanto{
 					}
 				}
 			}
-			System.out.println(c + "cccccccc");
-			if(c != 0) in.erro.Erro19(l);	
-			c = 1;
+			if(tt == 0) in.erro.Erro19(l);	
+			c = 0;
 			tt = 0;
 			if(in.isInt(aux[1]) || in.isDouble(aux[1])) d = Double.parseDouble(aux[1]);		
 			else d = in.RetornaValor(aux[1], l);
