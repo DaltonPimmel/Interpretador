@@ -1,0 +1,43 @@
+inicio programa()
+
+	int 		a
+	a = #     25
+	imprime      a
+	
+	se 2 % 3 == 0
+		imprime 'par'
+	fim se
+	senao
+		imprime 'impar'
+	fim senao
+	
+	se 1 > 0
+		se 0 > 0
+			se 2 > 0
+				se 2 > 1
+					imprime 22
+				fim se
+				se 1 > 0
+					se 2 > 1
+						imprime 'ok'
+					fim se
+					senao
+						imprime 'okok'
+					fim senao
+					imprime 'ola'
+				fim se
+				imprime 'teste'
+			fim se
+		fim
+		senao
+			imprime 'senao'
+		fim senao
+	fim se
+	senao
+		imprime 'falso'
+	fim senao
+		
+
+
+
+fim programa

@@ -1,0 +1,15 @@
+inicio programa()
+	
+	se 0 > 0
+		imprime 'oi'
+	fim se
+	senao
+		se 1 > 1
+			imprime 'ola'
+		fim se
+		senao
+			imprime 'okok'
+		fim senao
+	fim senao
+	
+fim programa
