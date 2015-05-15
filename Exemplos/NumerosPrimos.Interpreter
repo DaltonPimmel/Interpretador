@@ -1,0 +1,35 @@
+inicio programa()
+	
+	int  k  =              1
+	int i  =  1
+	int p  =  0
+	
+	
+	
+	enquanto k != 0
+		leia k
+	
+		enquanto i <= k
+		
+			se k > 10
+				imprime k
+			fim se
+		
+			se k % i == 0
+				p++
+			fim se
+			i++
+		fim enquanto
+		se p < 3
+			imprime 'primo'
+		fim se
+		senao
+			imprime 'impar'
+		fim senao
+		p = 0
+		i = 1
+	fim enquanto
+	
+	
+	
+fim programa
