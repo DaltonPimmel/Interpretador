@@ -1,25 +1,26 @@
 // Dalton Luiz Pimmel
 // dalton.cco1@gmail.com
 
-
 // Classe interpretador, recebe todas as linhas do arquivo .Interpreter, e faz a interpretação de linha por linha, chamadas as classes 
 // responsaveis para fazer a interpretação do mesmo.
 
 class Interpretador{
 	
-	public Declaracao d;
-	public Variaveis[] v;
-	public Imprime im;
-	public Operacoes op;
-	public InicioFim t;
-	public Comentarios com;
-	public CondicaoSe se;
-	public Logico log;
-	public Enquanto enq;
-	public LerTeclado ler;
-	public Erros erro;
 	
-	private boolean con = true, verdadeiro = false;
+	
+	Declaracao d;
+	Variaveis[] v;
+	Imprime im;
+	Operacoes op;
+	InicioFim t;
+	Comentarios com;
+	CondicaoSe se;
+	Logico log;
+	Enquanto enq;
+	LerTeclado ler;
+	Erros erro;
+	
+	public boolean con = true, verdadeiro = false;
 	private int cond, p, Lfim = 0;
 	private String[] tok;
 	private String a;
@@ -49,7 +50,7 @@ class Interpretador{
 		
 		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){ 
 			
-			l[cont] = l[cont].replaceAll("\\s+"," "); // tirando as linhas em branco
+			l[cont] = EspacoEmBranco(l[cont]);
 			l[cont] = l[cont].trim();
 			
 			if(l[cont].length() > 1 && l[cont] != null){
@@ -84,8 +85,10 @@ class Interpretador{
 					break;
 					
 					case "senao":
+						//System.out.println(cont + " senaooo");
 						if(verdadeiro) cont = se.Senao(l, cont); // se verdadeiro for treu, pode-se utilizar o senao	
 						else erro.Erro15(cont);	
+						//System.out.println(l[cont]);	
 					break;
 					
 					case "enquanto":
@@ -105,11 +108,17 @@ class Interpretador{
 					break;
 					
 					case "break":
-						//if(!con) erro.Erro20("break", cont);
+						if(!con) erro.Erro20("break", cont);
 						cont = enq.Break(cont, l);	
+						//System.out.println(l[cont]);
 					break;
 					
-					default:  
+					case "continue":
+						if(!con) erro.Erro20("continue", cont);
+						cont = enq.Continue();
+					break;
+					
+					default:
 						if(l[cont].equals("inicio programa()") || l[cont].equals("fim se") || l[cont].equals("fim senao") || l[cont].equals("fim enquanto") || l[cont].equals("fim programa")) continue;
 						d.Declarar(l, cont);
 					
@@ -120,6 +129,15 @@ class Interpretador{
 			
 		}
 	}
+	
+	// verifica se a variavel existe.
+	public boolean VerificaVariavel(String n){
+		for(int i = 0; v[i] != null; i++){
+			if(v[i].getNome().equals(n)) return true;
+		}
+		return false;
+	}
+	
 	
 	// testa se existe a variavel e retorna a posicao do vetor.
 	public Variaveis getVariavel(String n){
@@ -190,5 +208,16 @@ class Interpretador{
 		return g;	
 	}
 	
+	// metodo que elemina os espaços em branco
+	public String EspacoEmBranco(String linh){
+		String lin = " ";
+		String[] linha = linh.trim().split(" ");
+		for(int l = 0; l < linha.length; l++){
+			if(linha[l].length() != 0){		
+				lin += " " + linha[l]; 
+			}
+		}
+		return lin;
+	}
 		
 } 
