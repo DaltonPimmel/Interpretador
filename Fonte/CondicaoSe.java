@@ -12,7 +12,7 @@ class CondicaoSe{
 	private double e, f, g;
 	private String[] l, contro;
 	boolean te;
-	LogEnq[] log = new LogEnq[100];
+	LinhaCondicoes[] log = new LinhaCondicoes[100];
 	
 	public CondicaoSe(Interpretador i){
 		this.in = i;
@@ -86,7 +86,7 @@ class CondicaoSe{
 		//System.out.println("mod");
 		for(int rr = 0; rr < log.length; rr++){
 			if(log[rr] == null){
-				log[rr] = new LogEnq(cont, r, te);
+				log[rr] = new LinhaCondicoes(cont, r, te);
 				if(te) return cont;
 				return r;	
 			}

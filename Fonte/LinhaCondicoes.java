@@ -4,13 +4,13 @@
 // Classe LogEnq, armazena as linhas de inicio e fim e a condição das classes Enquanto, e CondiçaoSe.
 
 
-class LogEnq{
+class LinhaCondicoes{
 
 	private int i;
 	private int f;
 	private boolean v;
 	
-	public LogEnq(int t, int a, boolean b){
+	public LinhaCondicoes(int t, int a, boolean b){
 		this.i = t;
 		this.f = a;
 		this.v = b;

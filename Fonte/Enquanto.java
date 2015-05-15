@@ -12,7 +12,7 @@ class Enquanto{
 	private int cont;
 	private boolean h = false;
 	private int c = 0, test = 0, fi = 0, lt, ly, r = 0, tt = 0;
-	public LogEnq[] log = new LogEnq[1000000]; 
+	public LinhaCondicoes[] log = new LinhaCondicoes[1000000]; 
 	
 	public Enquanto(Interpretador i){
 		this.in = i;
@@ -61,7 +61,7 @@ class Enquanto{
 			int gg;
 			for(gg = 0; gg < log.length; gg++){
 				if(log[gg] == null){
-					log[gg] = new LogEnq(l, r, t);
+					log[gg] = new LinhaCondicoes(l, r, t);
 					break;
 			}
 			

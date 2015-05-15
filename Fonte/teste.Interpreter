@@ -1,6 +1,6 @@
 inicio programa()
 
-	int 		a
+int      a
 	a = #     25
 	imprime      a
 	
@@ -12,7 +12,7 @@ inicio programa()
 	fim senao
 	
 	se 1 > 0
-		se 0 > 0
+		se 1 > 0
 			se 2 > 0
 				se 2 > 1
 					imprime 22
