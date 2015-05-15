@@ -16,7 +16,7 @@ class LerTeclado{
 	public void Leia(String[] linhas, int cont){
 		Scanner in = new Scanner(System.in);
 		
-		String rec = i.EspacoEmBranco(linhas[cont]);
+		String rec = linhas[cont].replaceAll("\\s+"," ");
 		linhas = rec.trim().split(" ");
 	
 		

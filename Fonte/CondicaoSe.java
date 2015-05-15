@@ -20,14 +20,14 @@ class CondicaoSe{
 
 	public int Se(String[] linhas, int cont, int fim){
 		
-		String lin = in.EspacoEmBranco(linhas[cont]); // retirando os espaços em branco
+		String lin = linhas[cont].replaceAll("\\s+"," "); // retirando os espaços em branco
 		l = lin.trim().split(" ");
 		pp = cont;
 		
 			for(k = cont + 1; k < linhas.length && linhas[k] != null; k++){
 				
 				if(linhas[k].length() > 1 && linhas[k] != null){
-					linhas[k] = in.EspacoEmBranco(linhas[k]);
+					linhas[k] = linhas[k].replaceAll("\\s+"," ");
 					linhas[k] = linhas[k].trim();
 					pp++;
 					contro = linhas[k].trim().split(" ");
@@ -56,7 +56,20 @@ class CondicaoSe{
 			 if(in.TestaString(l[5])) e = Double.parseDouble(l[5]);		 
 			 else e = in.RetornaValor(l[5], cont);
 			 
-			 te = in.op.Mod(f, g, e);		
+			 te = in.op.Mod(f, g, e);
+			 // caso não haja um senao na proxima linha, ele não cria o obejto.
+			 for(int kg = r + 1; kg < linhas.length; kg++){
+				 linhas[kg] = linhas[kg].replaceAll("\\s+"," ");
+				 if(linhas[kg].length() > 1){
+					 linhas[kg] = linhas[kg].trim();
+					 if(!linhas[kg].equals("senao")){
+						 if(te) return cont;
+						 return r;
+					 }
+					 break;
+				 }
+			 }
+			 		
 		}
 		// verifica se o se é verdade ou nao.
 		else if(l.length > 3 && l.length < 5 && l[2].equals("==") || l[2].equals(">=") || l[2].equals("<=") || l[2].equals(">") || l[2].equals("<") || l[2].equals("!=")){ 
@@ -70,6 +83,7 @@ class CondicaoSe{
 			
 		}else in.erro.Erro3(cont); // erro
 		
+		//System.out.println("mod");
 		for(int rr = 0; rr < log.length; rr++){
 			if(log[rr] == null){
 				log[rr] = new LogEnq(cont, r, te);
@@ -85,7 +99,7 @@ class CondicaoSe{
 			boolean b = false;
 	
 			for(int y = cont + 1; y < linhas.length && linhas[y] != null; y++){
-				linhas[y] = in.EspacoEmBranco(linhas[y]); // retirando as linhas em branco
+				linhas[y] = linhas[y].replaceAll("\\s+"," "); // retirando as linhas em branco
 				linhas[y] = linhas[y].trim();
 			
 				if(linhas[y].length() > 1){

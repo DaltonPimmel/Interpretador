@@ -49,7 +49,7 @@ class Interpretador{
 		
 		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){ 
 			
-			l[cont] = EspacoEmBranco(l[cont]);
+			l[cont] = l[cont].replaceAll("\\s+"," "); // tirando as linhas em branco
 			l[cont] = l[cont].trim();
 			
 			if(l[cont].length() > 1 && l[cont] != null){
@@ -105,16 +105,11 @@ class Interpretador{
 					break;
 					
 					case "break":
-						if(!con) erro.Erro20("break", cont);
+						//if(!con) erro.Erro20("break", cont);
 						cont = enq.Break(cont, l);	
 					break;
 					
-					case "continue":
-						if(!con) erro.Erro20("continue", cont);
-						cont = enq.Continue();
-					break;
-					
-					default:
+					default:  
 						if(l[cont].equals("inicio programa()") || l[cont].equals("fim se") || l[cont].equals("fim senao") || l[cont].equals("fim enquanto") || l[cont].equals("fim programa")) continue;
 						d.Declarar(l, cont);
 					
@@ -195,16 +190,5 @@ class Interpretador{
 		return g;	
 	}
 	
-	// metodo que elemina os espaços em branco
-	public String EspacoEmBranco(String linh){
-		String lin = " ";
-		String[] linha = linh.trim().split(" ");
-		for(int l = 0; l < linha.length; l++){
-			if(linha[l].length() != 0){		
-				lin += " " + linha[l]; 
-			}
-		}
-		return lin;
-	}
 		
 } 

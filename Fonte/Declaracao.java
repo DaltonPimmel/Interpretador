@@ -12,16 +12,18 @@ class Declaracao{
 		this.inter = i;
 	}
 
-	public void Declarar(String[] linhas, int cont){
+	public void Declarar(String[] linha, int cont){
 
 		String tipo, nome;
 		Object valor = new Object();
 		double qe = 0, ses = 0;
 		int p = 0;
-		//String[] linhas;
-
+		String[] linhas;
+		
+		//linha[cont] = linha[cont].replaceAll("\\s+"," ");
 		//linha[cont] = inter.EspacoEmBranco(linha[cont]); // retirando os espaços em branco.
-		linhas = linhas[cont].trim().split(" ");
+		linhas = linha[cont].trim().split(" ");
+		
 		
 		if(linhas.length < 4 && linhas.length > 1 && linhas[1].equals("=")){
 			nome = linhas[0];

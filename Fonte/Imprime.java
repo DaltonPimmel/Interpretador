@@ -6,7 +6,7 @@
 class Imprime{
 	
 	Interpretador in;
-	String nome;
+	String[] linhas;
 	Object o = new Object();
 	
 	public Imprime(Interpretador i){
@@ -14,9 +14,9 @@ class Imprime{
 	}
 		
 	public void Imprimir(String[] linha, int cont){
-		
-		String rec = in.EspacoEmBranco(linha[cont]);
-		String[] linhas = rec.trim().split(" ");
+		String rec = linha[cont];
+		//rec = rec.replaceAll("\\s+"," "); 
+		linhas = rec.trim().split(" ");
 		
 		// imprimindo Strings.
 		if(linhas.length > 1 && linhas[1].contains("'") ){ 

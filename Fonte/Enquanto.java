@@ -10,9 +10,9 @@ class Enquanto{
 	private int k;
 	private String[] tok;
 	private int cont;
-	boolean h = false;
-	int c = 0, test = 0, fi = 0, lt, ly, r = 0, tt = 0;
-	LogEnq[] log = new LogEnq[1000000]; 
+	private boolean h = false;
+	private int c = 0, test = 0, fi = 0, lt, ly, r = 0, tt = 0;
+	public LogEnq[] log = new LogEnq[1000000]; 
 	
 	public Enquanto(Interpretador i){
 		this.in = i;
@@ -21,16 +21,17 @@ class Enquanto{
 	public int Enquan(String[] linha, int l){
 		
 		String rec = " ";
-		rec = in.EspacoEmBranco(linha[l]); // metodo para tirar os espaços em branco
 		c = 0;
 		int pp = l;;
 		String nome;
 		double e = 0, d = 0;
 		String[] aux;
+		rec = linha[l].replaceAll("\\s+"," ");
 		aux = rec.trim().split(" ");
+		
 		ly = l;
 			for(k = l + 1; k < linha.length && linha[k] != null; k++){
-				linha[k] = in.EspacoEmBranco(linha[k]); // passa no laço retirando os espaçoes em branco.
+				linha[k] = linha[k].replaceAll("\\s+"," ");
 				linha[k] = linha[k].trim();
 				pp++;
 				if(linha[k].length() > 1 && linha[k] != null){	
@@ -82,6 +83,7 @@ class Enquanto{
 		in.erro.Erro19(con);
 		return 0;
 	}
+	
 	// Metodo da Função Break
 	public int Break(int cont, String[] l){
 		int n = cont;
@@ -98,20 +100,17 @@ class Enquanto{
 		for(int o = cont + 1; o < l.length; o++){	
 			if(l[o].length() > 0 && l[o] != null){
 				n++;  // recebe o primeri fim enquanto
-				l[o] = in.EspacoEmBranco(l[o]);
+				l[o] = l[o].replaceAll("\\s+"," ");
 				l[o] = l[o].trim();
 				if(l[o].equals("fim enquanto")) break;
 			}
 		}
-		// procura até achar o getFim que corresponde ao n.
+		// procura até achar o getFim que corresponde ao n, se nao ele termina todos os laços.
 		for(int i = 0; log[i] != null; i++){
 			if(log[i].getFim() == n) return log[i].getFim();
 		}
 		return 0;
 	}
 	
-	public int Continue(){
-		return (cont - 1);
-	}
 
 }
