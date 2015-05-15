@@ -37,7 +37,14 @@ int      a
 		imprime 'falso'
 	fim senao
 		
-
+	enquanto 1 >     0
+		enquanto 1 > 0
+			imprime 'ola'
+			//break
+		//fim enquanto
+		imprime 1
+		break
+	fim enquanto
 
 
 fim programa
