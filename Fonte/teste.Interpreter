@@ -4,119 +4,34 @@ inicio programa()
 	
 	int  k  =              1
 	int i  =  1
-	int p  =  1
+	int p  =  0
 	
 	
-	enquanto    p ==     k
-		imprime 'oi'
-		p--
-		imprime p
-	fim     enquanto
 	
+	enquanto k != 0
+		leia k
 	
-	imprime 1
-	imprime 2
-	
-	
-	imprime 22
-	int q =    5
-	
-	enquanto q != 0 
-		imprime 'ola'
-		q--
-	fim enquanto
-	
-	int y =    2
-	enquanto y != 0
-		imprime 'esta funcionado uhu'
-		y--
-	fim enquanto
-	int w = 2
-	enquanto w != 0
-		se w %   2              == 0
-			imprime 'par'
+		enquanto i <= k
+		
+			se k > 10
+				imprime k
+			fim se
+		
+			se k % i == 0
+				p++
+			fim se
+			i++
+		fim enquanto
+		se p < 3
+			imprime 'primo'
 		fim se
 		senao
 			imprime 'impar'
-		fim      senao
-		w--
+		fim senao
+		p = 0
+		i = 1
 	fim enquanto
 	
-	int h    =   2
-	int     m = 1
-	
-	enquanto h != 0
-		imprime 'h'
-		enquanto m != 0
-			imprime 'm'
-			m--
-		fim enquanto
-		h--
-	fim enquanto	
-	
-	string ss = 'oi'
-	imprime ss
-	ss = + 					'ola'
-	imprime ss
-	string rr = 'oi ola oi'
-	ss = + rr
-	imprime ss
-	imprime h + 1
-	rr = + 1
-	imprime rr
-	
-	int j = 				10
-	double jj = 20
-	imprime j + jj
-	imprime j - jj
-	imprime j + j
-
-	int g
-	g = 5
-	int qq = 2
-	int yyy = 3
-	int fg = 2
-	double ii = 3
-	double a = 0
-	string lp = 'ok'
-	
-	// uhu funcionando
-	
-	enquanto g != 0
-		imprime 'oi'
-		enquanto qq != 0
-			imprime 'ola'		
-			enquanto yyy != 0  
-				imprime 'okok'
-				yyy = yyy - 1
-					
-			fim enquanto
-			//enquanto lp > 0  // erro lp é uma string
-			//	imprime 'erro'
-			//fim enquanto
-			enquanto ii > 0
-				imprime 'ii'
-				enquanto  a < 2
-					imprime 'aa'
-					
-					enquanto yyy < 2
-						se yyy % 2 == 0
-							imprime 'yyy'
-						fim se
-						senao
-							imprime 'impar'
-						fim senao
-						yyy = yyy + 1
-					fim enquanto
-					
-					a++
-				fim enquanto
-				ii = ii - 1
-			fim enquanto
-			qq = qq - 1
-		fim enquanto
-		g--
-	fim enquanto
 	
 	
 fim programa

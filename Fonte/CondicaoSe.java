@@ -57,18 +57,7 @@ class CondicaoSe{
 			 else e = in.RetornaValor(l[5], cont);
 			 
 			 te = in.op.Mod(f, g, e);
-			 // caso não haja um senao na proxima linha, ele não cria o obejto.
-			 for(int kg = r + 1; kg < linhas.length; kg++){
-				 linhas[kg] = linhas[kg].replaceAll("\\s+"," ");
-				 if(linhas[kg].length() > 1){
-					 linhas[kg] = linhas[kg].trim();
-					 if(!linhas[kg].equals("senao")){
-						 if(te) return cont;
-						 return r;
-					 }
-					 break;
-				 }
-			 }
+			 
 			 		
 		}
 		// verifica se o se é verdade ou nao.
@@ -82,6 +71,20 @@ class CondicaoSe{
 			te = in.log.Log(l, f, g);
 			
 		}else in.erro.Erro3(cont); // erro
+		
+		
+		 //caso não haja um senao na proxima linha, ele não cria o obejto.
+			 for(int kg = r + 1; kg < linhas.length; kg++){
+				 linhas[kg] = linhas[kg].replaceAll("\\s+"," ");
+				 if(linhas[kg].length() > 1){
+					 linhas[kg] = linhas[kg].trim();
+					 if(!linhas[kg].equals("senao")){
+						 if(te) return cont;
+						 return r;
+					 }
+					 break;
+				 }
+			 }
 		
 		//System.out.println("mod");
 		for(int rr = 0; rr < log.length; rr++){
