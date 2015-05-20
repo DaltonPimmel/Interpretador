@@ -5,34 +5,23 @@ inicio programa()
 	int  k  =              1
 	int i  =  1
 	int p  =  0
-	
-	
-	
-	enquanto k != 0
-		leia k
-	
-		enquanto i <= k
+	int yy
 		
-			se k > 10
-				imprime k
-			fim se
-		
-			se k % i == 0
-				p++
-			fim se
-			i++
-		fim enquanto
-		se p < 3
-			imprime 'primo'
-		fim se
-		senao
-			imprime 'impar'
-		fim senao
-		p = 0
-		i = 1
-	fim enquanto
+	yy = 20
+	p = 2
+	imprime p
+	p = p + 3
+	imprime p
+	p++
+	imprime p
+	p--
+	imprime p
+	p = k
+	imprime p
 	
-	
+	p = # 25
+	imprime p
+	imprime yy
 	
 fim programa
 	

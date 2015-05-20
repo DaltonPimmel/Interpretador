@@ -21,7 +21,8 @@ class Enquanto{
 	public int Enquan(String[] linha, int l){
 		
 		String rec = " ";
-		rec = in.EspacoEmBranco(linha[l]); // metodo para tirar os espaços em branco
+		rec = linha[l].replaceAll("\\s+"," ");
+		//rec = in.EspacoEmBranco(linha[l]); // metodo para tirar os espaços em branco
 		c = 0;
 		int pp = l;;
 		String nome;
@@ -30,7 +31,8 @@ class Enquanto{
 		aux = rec.trim().split(" ");
 		ly = l;
 			for(k = l + 1; k < linha.length && linha[k] != null; k++){
-				linha[k] = in.EspacoEmBranco(linha[k]); // passa no laço retirando os espaçoes em branco.
+				linha[k] = linha[k].replace("\\s+"," ");
+				//linha[k] = in.EspacoEmBranco(linha[k]); // passa no laço retirando os espaçoes em branco.
 				linha[k] = linha[k].trim();
 				pp++;
 				if(linha[k].length() > 1 && linha[k] != null){	
@@ -97,7 +99,8 @@ class Enquanto{
 		for(int o = cont + 1; o < l.length; o++){	
 			if(l[o].length() > 0 && l[o] != null){
 				n++;  // recebe o primeri fim enquanto
-				l[o] = in.EspacoEmBranco(l[o]);
+				l[o] = l[o].replaceAll("\\s+"," ");
+			//	l[o] = in.EspacoEmBranco(l[o]);
 				l[o] = l[o].trim();
 				if(l[o].equals("fim enquanto")) break;
 			}

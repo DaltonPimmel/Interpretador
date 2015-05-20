@@ -8,23 +8,25 @@ class Interpretador{
 	
 	
 	
-	Declaracao d;
-	Variaveis[] v;
-	Imprime im;
-	Operacoes op;
-	InicioFim t;
-	Comentarios com;
-	CondicaoSe se;
-	Logico log;
-	Enquanto enq;
-	LerTeclado ler;
-	Erros erro;
+	public Declaracao d;
+	public Variaveis[] v;
+	public Imprime im;
+	public Operacoes op;
+	public InicioFim t;
+	public Comentarios com;
+	public CondicaoSe se;
+	public Logico log;
+	public Enquanto enq;
+	public LerTeclado ler;
+	public Erros erro;
+	public AtribuicoesVariaveis atri;
 	
 	public boolean con = true, verdadeiro = false;
 	private int cond, p, Lfim = 0;
 	private String[] tok;
 	private String a;
 	
+	// Constrututo da classe Interpretador
 	public Interpretador(){
 		this.d = new Declaracao(this);
 		this.v = new Variaveis[1000];
@@ -37,6 +39,7 @@ class Interpretador{
 		this.enq = new Enquanto(this);
 		this.ler = new LerTeclado(this);
 		this.erro = new Erros();
+		this.atri = new AtribuicoesVariaveis(this);
 	}
 	
     public void interpreta(String l[]) {	
@@ -50,7 +53,7 @@ class Interpretador{
 		
 		for(int cont = 0; cont <= l.length && l[cont] != null; cont++){ 
 			
-			l[cont] = EspacoEmBranco(l[cont]);
+			l[cont] = l[cont].replaceAll("\\s+"," ");
 			l[cont] = l[cont].trim();
 			
 			if(l[cont].length() > 1 && l[cont] != null){
@@ -85,10 +88,8 @@ class Interpretador{
 					break;
 					
 					case "senao":
-						//System.out.println(cont + " senaooo");
 						if(verdadeiro) cont = se.Senao(l, cont); // se verdadeiro for treu, pode-se utilizar o senao	
 						else erro.Erro15(cont);	
-						//System.out.println(l[cont]);	
 					break;
 					
 					case "enquanto":
@@ -110,7 +111,6 @@ class Interpretador{
 					case "break":
 						if(!con) erro.Erro20("break", cont);
 						cont = enq.Break(cont, l);	
-						//System.out.println(l[cont]);
 					break;
 					
 					case "continue":
@@ -130,14 +130,6 @@ class Interpretador{
 		}
 	}
 	
-	// verifica se a variavel existe.
-	public boolean VerificaVariavel(String n){
-		for(int i = 0; v[i] != null; i++){
-			if(v[i].getNome().equals(n)) return true;
-		}
-		return false;
-	}
-	
 	
 	// testa se existe a variavel e retorna a posicao do vetor.
 	public Variaveis getVariavel(String n){
@@ -146,13 +138,7 @@ class Interpretador{
 		}
 		return null;
 	}
-	
-	public Variaveis PosicaVetor(){
-		for(int i = 0; i < v.length; i++){
-			if(v[i] == null) return v[i];
-		}
-		return null;
-	}
+
 	// cria a variavel.
 	public void AdicionaVar(Variaveis a){
 		for(int i = 0; i < v.length; i++){
@@ -208,16 +194,5 @@ class Interpretador{
 		return g;	
 	}
 	
-	// metodo que elemina os espaços em branco
-	public String EspacoEmBranco(String linh){
-		String lin = " ";
-		String[] linha = linh.trim().split(" ");
-		for(int l = 0; l < linha.length; l++){
-			if(linha[l].length() != 0){		
-				lin += " " + linha[l]; 
-			}
-		}
-		return lin;
-	}
 		
 } 

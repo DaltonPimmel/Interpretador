@@ -86,7 +86,7 @@ class CondicaoSe{
 				 }
 			 }
 		
-		//System.out.println("mod");
+		//cria objeto da clase LinhaCondicoes, que possui a linha de inicio, fim e condição.
 		for(int rr = 0; rr < log.length; rr++){
 			if(log[rr] == null){
 				log[rr] = new LinhaCondicoes(cont, r, te);
