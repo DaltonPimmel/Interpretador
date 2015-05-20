@@ -42,7 +42,7 @@ class Interpretador{
 		this.atri = new AtribuicoesVariaveis(this);
 	}
 	
-    public void interpreta(String l[]) {	
+    public void Interpreta(String l[]) {	
 		
 		Interpretador in = new Interpretador();
 		
