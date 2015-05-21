@@ -118,9 +118,9 @@ class Interpretador{
 						cont = enq.Continue();
 					break;
 					
-					default:
+					default: // se cair no default vai testar as atribuições de variaveis.
 						if(l[cont].equals("inicio programa()") || l[cont].equals("fim se") || l[cont].equals("fim senao") || l[cont].equals("fim enquanto") || l[cont].equals("fim programa")) continue;
-						d.Declarar(l, cont);
+						atri.Atribuicoes(l, cont);
 					
 					break;
 					

@@ -9,7 +9,6 @@
 class Declaracao{
 	
 	Interpretador inter;
-	AtribuicoesVariaveis atri;
 	
 	public Declaracao(Interpretador i){
 		this.inter = i;
@@ -84,10 +83,6 @@ class Declaracao{
 				}else inter.erro.Erro3(cont);
 			}
 		}
-		else{  // caso não seje uma declaração, teste as atribuições.
-			atri = new AtribuicoesVariaveis(inter);
-			atri.Atribuicoes(linha, cont);
-		}	
 	
 	}
 }

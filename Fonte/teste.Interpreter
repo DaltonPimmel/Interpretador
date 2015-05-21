@@ -23,5 +23,13 @@ inicio programa()
 	imprime p
 	imprime yy
 	
+	se 1 > 1
+		imprime 'oi'
+	fim se
+	senao
+		imprime 'ola'
+	fim senao
+			
+	
 fim programa
 	

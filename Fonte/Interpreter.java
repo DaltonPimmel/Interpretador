@@ -29,7 +29,7 @@ class Interpreter {
             i++;
         }
 		
-        b.interpreta(linhas);  // chamado o metodo do interpretador com a quantidade de linhas para imprimir.
+        b.Interpreta(linhas);  // chamado o metodo do interpretador com a quantidade de linhas para imprimir.
     }
     
     
