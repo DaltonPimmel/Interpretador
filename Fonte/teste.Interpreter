@@ -29,6 +29,13 @@ inicio programa()
 	senao
 		imprime 'ola'
 	fim senao
+	
+	int a = 2
+	
+	enquanto a != 0
+		imprime a
+		a--
+	fim enquanto
 			
 	
 fim programa

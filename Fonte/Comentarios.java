@@ -7,7 +7,7 @@
 class Comentarios{
 	
 	private String ch;
-	private int qa;
+	private int posicao;
 	
 	public String Comentario(String l){
 		if(l.contains("//")){	
@@ -15,8 +15,8 @@ class Comentarios{
 			if(ch.equals("//")){
 				return l ;
 			}	
-			qa = l.indexOf("//"); // se o comentario estiver no meio da linha.
-			l = l.substring(0, qa);
+			posicao = l.indexOf("//"); // se o comentario estiver no meio da linha.
+			l = l.substring(0, posicao);
 			return l;
 		}
 		return l;

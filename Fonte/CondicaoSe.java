@@ -11,7 +11,7 @@ class CondicaoSe{
 	private int  c = 0, k,  y, pp = 0, r;
 	private double e, f, g;
 	private String[] l, contro;
-	boolean te;
+	private boolean te;
 	LinhaCondicoes[] log = new LinhaCondicoes[100];
 	
 	public CondicaoSe(Interpretador i){

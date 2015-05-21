@@ -7,11 +7,10 @@
 class Enquanto{
 
 	Interpretador in;
-	private int k;
-	private String[] tok;
+	private String[] tok, aux;
 	private int cont;
-	boolean h = false;
-	int c = 0, test = 0, fi = 0, lt, ly, r = 0, tt = 0;
+	private boolean h = false;
+	private int c = 0, ly, r = 0, controle = 0, k;
 	LinhaCondicoes[] log = new LinhaCondicoes[1000000]; 
 	
 	public Enquanto(Interpretador i){
@@ -20,27 +19,25 @@ class Enquanto{
 	
 	public int Enquan(String[] linha, int l){
 		
-		String rec = " ";
+		String rec = " "; // recebe a linha do enquanto
 		rec = linha[l].replaceAll("\\s+"," ");
-		//rec = in.EspacoEmBranco(linha[l]); // metodo para tirar os espaços em branco
 		c = 0;
-		int pp = l;;
-		String nome;
-		double e = 0, d = 0;
-		String[] aux;
+		int QuantLinhas = l;;
+		double e = 0, d = 0; // recebe os valores das condições.
 		aux = rec.trim().split(" ");
-		ly = l;
+		ly = l; // recebe a linha atual, onde achou o enqunato, controle do laço.
+		
 			for(k = l + 1; k < linha.length && linha[k] != null; k++){
 				linha[k] = linha[k].replace("\\s+"," ");
 				//linha[k] = in.EspacoEmBranco(linha[k]); // passa no laço retirando os espaçoes em branco.
 				linha[k] = linha[k].trim();
-				pp++;
+				QuantLinhas++;
 				if(linha[k].length() > 1 && linha[k] != null){	
 					tok = linha[k].trim().split(" ");
 					if(tok[0].equals("enquanto")) c++;
 					if(linha[k].equals("fim enquanto")){
-						r = pp;
-						tt++;
+						r = QuantLinhas; // r recebe a linha aonde achou o fim enquanto
+						controle++;
 						if(c != 0){
 							c--;
 							continue;
@@ -58,9 +55,10 @@ class Enquanto{
 					}
 				}
 			}
-			if(tt == 0) in.erro.Erro19(l);	
+			if(controle == 0) in.erro.Erro19(l);	
 			c = 0;
-			tt = 0;
+			controle = 0;
+			
 			if(in.isInt(aux[1]) || in.isDouble(aux[1])) d = Double.parseDouble(aux[1]);		
 			else d = in.RetornaValor(aux[1], l);
 				
@@ -98,9 +96,8 @@ class Enquanto{
 		int n = cont;
 		for(int o = cont + 1; o < l.length; o++){	
 			if(l[o].length() > 0 && l[o] != null){
-				n++;  // recebe o primeri fim enquanto
+				n++;  // recebe o primeiro fim enquanto
 				l[o] = l[o].replaceAll("\\s+"," ");
-			//	l[o] = in.EspacoEmBranco(l[o]);
 				l[o] = l[o].trim();
 				if(l[o].equals("fim enquanto")) break;
 			}

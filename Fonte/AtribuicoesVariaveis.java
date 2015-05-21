@@ -10,9 +10,9 @@ class AtribuicoesVariaveis{
 	public void Atribuicoes(String[] linha, int cont){
 		
 		String tipo, nome;
-		Object valor = new Object();
-		double qe = 0, ses = 0;
-		int p = 0;
+		Object valor = new Object(); // // recebe o valor para armazenar nas variaveis
+		double qe = 0, ses = 0; // recebe os valore das atribuições, podendo ser um numero ou o valor de uma variavel
+		int p = 0; // variavel auxiliar para auxilio nas conversoes
 		String[] linhas;
 		
 		linhas = linha[cont].trim().split(" ");
@@ -29,26 +29,26 @@ class AtribuicoesVariaveis{
 					valor = p;
 				}else if(a.getTipo().equals("double")) valor = qe;	 // se for um double	
 				else valor = linhas[2];	 // se for uma string recebe qualquer valor.
-					a.setValor(valor);
-				}else { // caso seja uma variavel na atriução.
-					Variaveis b = inter.getVariavel(linhas[2]); // testa se a variavel existe
-					if(b == null) inter.erro.Erro5(nome, cont); 
-					else if(a.getTipo().equals(b.getTipo())) valor = b.getValor(); // teste para ver os parametros de atribuicao,
-					else if(a.getTipo().equals("int") && b.getTipo().equals("double")) valor = b.getValor();
-					else if(a.getTipo().equals("double") && b.getTipo().equals("int")) valor = b.getValor();
-					else if(a.getTipo().equals("string")) valor = b.getValor(); // recebe quanquer coisa
-					else inter.erro.Erro17(cont);  // se nao for esses parametros da erro.
-					if(valor instanceof Integer && a.getTipo().equals("int")) a.setValor(valor); 
-					if(valor instanceof Double && a.getTipo().equals("double")) a.setValor(valor);
-					if(valor instanceof Integer && a.getTipo().equals("double")){ // conversões de valores para tipos diferentes.
-						p = (int)valor;
-						qe = (double)p; a.setValor(qe);
-					}else if(valor instanceof Double && a.getTipo().equals("int")){
-						qe = (double)valor;
-						p = (int)qe; a.setValor(p);
-					}else if(a.getTipo().equals("string")) a.setValor(valor);// uma string recebe qualquer valor, nao precisa de parametros.		
-				}
+				a.setValor(valor);
+			}else { // caso seja uma variavel na atriução.
+				Variaveis b = inter.getVariavel(linhas[2]); // testa se a variavel existe
+				if(b == null) inter.erro.Erro5(nome, cont); 
+				else if(a.getTipo().equals(b.getTipo())) valor = b.getValor(); // teste para ver os parametros de atribuicao,
+				else if(a.getTipo().equals("int") && b.getTipo().equals("double")) valor = b.getValor();
+				else if(a.getTipo().equals("double") && b.getTipo().equals("int")) valor = b.getValor();
+				else if(a.getTipo().equals("string")) valor = b.getValor(); // recebe quanquer coisa
+				else inter.erro.Erro17(cont);  // se nao for esses parametros da erro.
+				if(valor instanceof Integer && a.getTipo().equals("int")) a.setValor(valor); 
+				if(valor instanceof Double && a.getTipo().equals("double")) a.setValor(valor);
+				if(valor instanceof Integer && a.getTipo().equals("double")){ // conversões de valores para tipos diferentes.
+					p = (int)valor;
+					qe = (double)p; a.setValor(qe);
+				}else if(valor instanceof Double && a.getTipo().equals("int")){
+					qe = (double)valor;
+					p = (int)qe; a.setValor(p);
+				}else if(a.getTipo().equals("string")) a.setValor(valor);// uma string recebe qualquer valor, nao precisa de parametros.		
 			}
+		}
 			// Atruição de variavel, ex: a--, a++
 		else if(linhas.length > 0 && linhas.length < 2){
 			p = linhas[0].length(); // recebe o tamanho da string.

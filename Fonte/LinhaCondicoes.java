@@ -35,7 +35,5 @@ class LinhaCondicoes{
 	public boolean getVer(){
 		return this.v;
 	}
-	
-	
 
 }
